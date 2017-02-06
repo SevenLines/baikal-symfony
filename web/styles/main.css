@@ -1,0 +1,145 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #f0c200; }
+
+#menu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  box-shadow: 0 0 10px silver; }
+  #menu ul {
+    list-style: none;
+    padding: 1em;
+    margin: 0;
+    width: 300px;
+    text-align: center; }
+    #menu ul li {
+      transition: all 0.2s;
+      display: block;
+      margin: 0.25em 0;
+      padding: 0.25em;
+      border-width: 4px;
+      border-style: dashed;
+      border-color: transparent; }
+      #menu ul li.active {
+        border-color: #f0c200; }
+      #menu ul li:hover {
+        border-color: rgba(240, 194, 0, 0.5); }
+      #menu ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 1.5em;
+        padding: 0.5em 0;
+        display: block; }
+
+#content {
+  padding: 1em;
+  font-size: 1.5em;
+  position: relative;
+  background-color: #ffdf57;
+  box-shadow: 0 0 8px #8a7000; }
+  #content .description {
+    overflow: hidden;
+    padding: 1em; }
+    #content .description .calculate {
+      margin-top: 1em;
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      background-color: white;
+      float: right; }
+    #content .description .full-description {
+      max-height: 500px;
+      overflow: hidden;
+      -webkit-transition: all 0.1s;
+      -moz-transition: all 0.1s;
+      -ms-transition: all 0.1s;
+      -o-transition: all 0.1s;
+      transition: all 0.1s; }
+    #content .description .short-description {
+      font-weight: bold;
+      font-size: 2em; }
+    #content .description.scroll .full-description {
+      max-height: 0; }
+
+#bottom-menu {
+  position: fixed;
+  bottom: 0;
+  right: 300px;
+  font-size: 2em;
+  padding-bottom: 1em; }
+  #bottom-menu ul {
+    list-style: none; }
+    #bottom-menu ul li {
+      display: block;
+      float: left;
+      margin-right: 0.5em; }
+      #bottom-menu ul li a {
+        background-color: white;
+        border-radius: 0.5em;
+        display: block;
+        padding: 0.25em 1em; }
+
+.wrapper {
+  margin-right: 300px;
+  padding: 1em; }
+
+.portfolio {
+  padding: 1em;
+  background-color: #ffdf57;
+  box-shadow: 0 0 8px #8a7000;
+  overflow: hidden;
+  margin: 1em 0; }
+  .portfolio .items .item {
+    max-width: 20%;
+    border: 6px solid #ffdf57;
+    float: left;
+    background-color: white;
+    position: relative; }
+    .portfolio .items .item div {
+      overflow: hidden; }
+      .portfolio .items .item div img {
+        max-height: 300px; }
+    .portfolio .items .item .info {
+      position: absolute;
+      top: 0;
+      overflow: hidden;
+      left: 0;
+      right: 0;
+      text-align: center; }
+      .portfolio .items .item .info .title, .portfolio .items .item .info .description {
+        background-color: rgba(255, 255, 255, 0.85); }
+      .portfolio .items .item .info .title {
+        padding: 1em;
+        box-shadow: 0 0 5px silver; }
+      .portfolio .items .item .info .description {
+        padding: 0 1em;
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        -ms-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        transition: all 0.2s;
+        max-height: 0; }
+    .portfolio .items .item:hover .description {
+      border-top: 1px solid black;
+      max-height: 100px;
+      padding-bottom: 1em; }
+
+.gallery {
+  width: 100%; }
+  .gallery .image {
+    height: 250px;
+    float: left;
+    padding: 1em; }
+    .gallery .image div {
+      overflow: hidden;
+      height: 300px;
+      width: 100%;
+      background-color: white; }
+    .gallery .image img {
+      border: 4px solid white;
+      height: 100%; }
+
+/*# sourceMappingURL=main.css.map */
