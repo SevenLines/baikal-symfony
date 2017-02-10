@@ -1,3 +1,4 @@
+{% set menu = dicts.getAll() %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,106 +16,32 @@
 <body>
 
 
-{#<div class="wrapper">#}
-{#<div id="content">#}
-{#<div class="description">#}
-{#<div class="short-description">#}
-{#Качественно и в установленный срок проведем работы по мелкому и капитальному ремонту помещений#}
-{#</div>#}
-{#<div class="full-description">#}
-{#Все хотят жить в комфортных условиях и бедный и богатый, мы даем эту возможность каждому. Сделаем#}
-{#ремонтные работы на высоком уровне не смотря на Ваше материальное положение. Подберем идеальный для Вас#}
-{#вариант работ, чтобы Вы остались довольны. Так же наш мастер выполнит любые мелкие работы (оплата#}
-{#почасовая). Приемлемые цены, порядочный подход к договоренностям, за качество отвечаем.#}
-{#</div>#}
-{#<!--<a href="" class="calculate">рассчитать</a>-->#}
-{#</div>#}
-
-{#</div>#}
-{#<div class="portfolio">#}
-{#<div class="items">#}
-{#<div class="item">#}
-{#<div style="text-align: center">#}
-{#<img src="images/image1_400px.jpg" alt="">#}
-{#</div>#}
-{#<div class="info">#}
-{#<div class="title">Установка видеонаблюдения</div>#}
-{#<!--<div class="description">В данной работе мы кстанавили 2 камеры</div>-->#}
-{#</div>#}
-{#</div>#}
-
-{#<div class="item">#}
-{#<div style="text-align: center">#}
-{#<img src="images/image1_400px.jpg" alt="">#}
-{#</div>#}
-{#<div class="info">#}
-{#<div class="title">Установка видеонаблюдения</div>#}
-{#<!--<div class="description">В данной работе мы кстанавили 2 камеры</div>-->#}
-{#</div>#}
-{#</div>#}
-
-{#<div class="item">#}
-{#<div style="text-align: center">#}
-{#<img src="images/image1_400px.jpg" alt="">#}
-{#</div>#}
-{#<div class="info">#}
-{#<div class="title">Установка видеонаблюдения</div>#}
-{#<!--<div class="description">В данной работе мы кстанавили 2 камеры</div>-->#}
-{#</div>#}
-{#</div>#}
-{#<div class="item">#}
-{#<div style="text-align: center">#}
-{#<img src="images/image1_400px.jpg" alt="">#}
-{#</div>#}
-{#<div class="info">#}
-{#<div class="title">Установка видеонаблюдения</div>#}
-{#<!--<div class="description">В данной работе мы кстанавили 2 камеры</div>-->#}
-{#</div>#}
-{#</div>#}
-{#<div class="item">#}
-{#<div style="text-align: center">#}
-{#<img src="images/image1_400px.jpg" alt="">#}
-{#</div>#}
-{#<div class="info">#}
-{#<div class="title">Установка видеонаблюдения</div>#}
-{#<!--<div class="description">В данной работе мы кстанавили 2 камеры</div>-->#}
-{#</div>#}
-{#</div>#}
-{#<div class="item">#}
-{#<div style="text-align: center">#}
-{#<img src="images/image1_400px.jpg" alt="">#}
-{#</div>#}
-{#<div class="info">#}
-{#<div class="title">Установка видеонаблюдения</div>#}
-{#<!--<div class="description">В данной работе мы кстанавили 2 камеры</div>-->#}
-{#</div>#}
-{#</div>#}
-{#<div class="item">#}
-{#<div style="text-align: center">#}
-{#<img src="images/image1_400px.jpg" alt="">#}
-{#</div>#}
-{#<div class="info">#}
-{#<div class="title">Установка видеонаблюдения</div>#}
-{#<!--<div class="description">В данной работе мы кстанавили 2 камеры</div>-->#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-
-{#</div>#}
-
-{#<div id="bottom-menu">#}
-{#<ul>#}
-{#<!--<li><a href="#">описание</a></li>-->#}
-{#<!--<li><a href="#">фото</a></li>-->#}
-{#<!--<li><a href="#">оставить заявку</a></li>-->#}
-{#</ul>#}
-{#</div>#}
-{#</div>#}
-
-<div id="menu">
+<div class="wrapper">
+    {% block body %}{% endblock %}
 </div>
 
-{% block body %}{% endblock %}
+<div id="menu">
+    <div class="">
+        <ul>
+            {% for item in menu['menu'] %}
+                <li class="{% if job is defined and job.id == item.id or job is not defined and item.id == 0 %}active{% endif %}">
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <div style="padding: 1em">
+            <div>
+                Почта: <a href="mailto:{{ menu['email'] }}">{{ menu['email'] }}</a>
+            </div>
+            <div>
+                Телефон: {{ menu['phone'] }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
 
 {% block javascripts %}
     <!-- jQuery -->
@@ -122,17 +49,17 @@
     <!-- Bootstrap JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>#}
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>#}
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>#}
 
-    <script type="text/babel" src="{{ asset('app/menu.react.js') }}"></script>
-    <script type="text/babel">
-        ReactDOM.render(
-                <MenuSection url="{{ path("api_menu") }}"/>,
-            document.getElementById("menu")
-        )
-    </script>
+    {#<script type="text/babel" src="{{ asset('app/menu.react.js') }}"></script>#}
+    {#<script type="text/babel">#}
+    {#ReactDOM.render(#}
+    {#<MenuSection url="{{ path("api_menu") }}"/>,#}
+    {#document.getElementById("menu")#}
+    {#)#}
+    {#</script>#}
 {% endblock %}
 
 </body>

@@ -42,6 +42,10 @@ class Job implements \JsonSerializable
      */
     private $shortDescription;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductCategory", mappedBy="products")
+     */
+    private $productCategories;
 
     /**
      * Get id
@@ -140,5 +144,46 @@ class Job implements \JsonSerializable
             "short_description" => $this->getShortDescription(),
             "id" => $this->getId(),
         ];
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->productCategories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add productCategory
+     *
+     * @param \AppBundle\Entity\ProductCategory $productCategory
+     *
+     * @return Job
+     */
+    public function addProductCategory(\AppBundle\Entity\ProductCategory $productCategory)
+    {
+        $this->productCategories[] = $productCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove productCategory
+     *
+     * @param \AppBundle\Entity\ProductCategory $productCategory
+     */
+    public function removeProductCategory(\AppBundle\Entity\ProductCategory $productCategory)
+    {
+        $this->productCategories->removeElement($productCategory);
+    }
+
+    /**
+     * Get productCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductCategories()
+    {
+        return $this->productCategories;
     }
 }
