@@ -11,6 +11,18 @@
             </div>
         </div>
     </div>
+
+    <ul>
+        {% for category in job.productCategories %}
+            <li>{{ category.title }}
+                <ul>
+                    {% for product in category.products %}
+                        <li>{{ product.title }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
 
 {% block javascripts %}

@@ -31,16 +31,19 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="unit", type="text")
+     * @ORM\Column(name="unit", type="text", nullable=true)
      */
     private $unit;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="price", type="decimal", precision=2, scale=0)
+     * @ORM\Column(name="price_min", type="decimal", precision=10, scale=0, nullable=true)
      */
-    private $price;
+    private $price_min;
+
+    /**
+     * @ORM\Column(name="price_max", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $price_max;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ProductCategory", inversedBy="products")
@@ -116,19 +119,10 @@ class Product
      */
     public function setPrice($price)
     {
-        $this->price = $price;
+        $this->price_min = $price;
+        $this->price_max = $price;
 
         return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
@@ -153,5 +147,53 @@ class Product
     public function getProductCategory()
     {
         return $this->productCategory;
+    }
+
+    /**
+     * Set priceMin
+     *
+     * @param string $priceMin
+     *
+     * @return Product
+     */
+    public function setPriceMin($priceMin)
+    {
+        $this->price_min = $priceMin;
+
+        return $this;
+    }
+
+    /**
+     * Get priceMin
+     *
+     * @return string
+     */
+    public function getPriceMin()
+    {
+        return $this->price_min;
+    }
+
+    /**
+     * Set priceMax
+     *
+     * @param string $priceMax
+     *
+     * @return Product
+     */
+    public function setPriceMax($priceMax)
+    {
+        $this->price_max = $priceMax;
+
+        return $this;
+    }
+
+    /**
+     * Get priceMax
+     *
+     * @return string
+     */
+    public function getPriceMax()
+    {
+        return $this->price_max;
     }
 }

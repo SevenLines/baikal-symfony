@@ -15,13 +15,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class JobController extends Controller
 {
     /**
-     * @Route("jobs/{job_id}", name="job_description")
-     * @param $job_id
+     * @Route("j/{job_id}/{title}", name="job_description")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function job($job_id)
     {
-        $job = $this->getDoctrine()->getRepository("AppBundle:Job")->find($job_id);
+        $repo = $this->getDoctrine()->getRepository("AppBundle:Job");
+        $job = $repo->createQueryBuilder("j")
+            ->leftJoin("j.productCategories", "c")
+            ->leftJoin("c.products", "p")
+            ->setParameter("job_id", $job_id)
+            ->where("j.id = :job_id")
+            ->addSelect("c", "p")
+            ->getQuery()->getOneOrNullResult();
 
         return $this->render("web/job.html.twig", ["job" => $job]);
 

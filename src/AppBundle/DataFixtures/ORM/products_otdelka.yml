@@ -1,0 +1,848 @@
+- title: Стены   
+  items:  
+  - title: Обшивка стен пластиковыми панелями 
+    price_from:   
+    price_to: 250 
+    unit: м2
+  - title: Снятие старых обоев 
+    price_from:   
+    price_to: 50 
+    unit: м2
+  - title: Демонтаж не несущих перегородок (7 см) 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Устройство проемов в кирпичной стене 
+    price_from:   
+    price_to: 3000 
+    unit: м2
+  - title: Устройство проемов в бетонной стене 
+    price_from:   
+    price_to: 4500 
+    unit: м2
+  - title: Отбивка старой штукатурки 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Штукатурка откосов  
+    price_from: 250 
+    price_to: 400 
+    unit: м2
+  - title: Штукатурка стен криволинейной формы 
+    price_from: 250 
+    price_to: 500 
+    unit: м2
+  - title: Выравнивание штукатурной смесью 
+    price_from: 200 
+    price_to: 350 
+    unit: м2
+  - title: Установка штукатурных маяков 
+    price_from:   
+    price_to: 60 
+    unit: шт
+  - title: Установка уголков в штукатурку 
+    price_from:   
+    price_to: 90 
+    unit: п/м
+  - title: Заделка стыков, шурупов на ГКЛ с проклейкой стыков сеткой 
+    price_from:   
+    price_to: 70 
+    unit: п/м
+  - title: Зашивка стояков отопления ГКЛ цена от: 
+    price_from: 1500 
+    price_to: 2500 
+    unit: шт
+  - title: Выравнивание по маякам штукатурной смесью 
+    price_from: 250 
+    price_to: 500 
+    unit: м2
+  - title: Устройство ниш, арок и других декоративных элементов 
+    price_from:   
+    price_to: 2800 
+    unit: шт
+  - title: Устройство звукоизоляции 
+    price_from:   
+    price_to: 150 
+    unit: м2
+  - title: Выравнивание стен ГКЛ с установкой каркаса 
+    price_from:   
+    price_to: 300 
+    unit: м2
+  - title: Устройство перегородок из ГКЛ одна сторона 1 слой 
+    price_from:   
+    price_to: 300 
+    unit: м2
+  - title: Сплошная шпатлевка (2 раза) 
+    price_from: 200 
+    price_to: 300 
+    unit: м2
+  - title: Шпаклевка стен по штукатурке под покраску за два раза 
+    price_from: 200 
+    price_to: 250 
+    unit: м2
+  - title: Шпаклевка стен по штукатурке под обои за два раза 
+    price_from:   
+    price_to: 250 
+    unit: м2
+  - title: Шпаклевка стен по гипсокартону под обои за два раза 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Шпаклевка стен по гипсокартону под покраску за два раза 
+    price_from:   
+    price_to: 300 
+    unit: м2
+  - title: Ошкуривание стен 
+    price_from:   
+    price_to: 50 
+    unit: м2
+  - title: Грунтовка стен в один слой 
+    price_from:   
+    price_to: 50 
+    unit: м2
+  - title: Наклейка штукатурной сетки 
+    price_from:   
+    price_to: 60 
+    unit: м2
+  - title: Набивка штукатурной сетки 
+    price_from:   
+    price_to: 65 
+    unit: м2
+  - title: Наклейка стеклоткани на стену под шпаклевку 
+    price_from:   
+    price_to: 45 
+    unit: м2
+  - title: Нанесение декоративной штукатурки 
+    price_from: 600 
+    price_to: 900 
+    unit: м2
+  - title: Выравнивание стен под плитку 
+    price_from: 180 
+    price_to: 300 
+    unit: м2
+  - title: Набивка металлической сетки 
+    price_from:   
+    price_to: 80 
+    unit: м2
+  - title: монтаж короба в с/у из гкл 
+    price_from: 350 
+    price_to: 700 
+    unit: п/м
+  - title: Монтаж вагонки из дерева 
+    price_from: 250 
+    price_to: 400 
+    unit: м2
+  - title: Обшивка стен пластиковой вагонкой 
+    price_from: 200 
+    price_to: 300 
+    unit: м2
+  - title: монтаж короба в комнатах (закрытие труб и проч) 
+    price_from: 300 
+    price_to: 800 
+    unit: м2
+  - title: Окраска стояка отопления 
+    price_from:   
+    price_to: 350 
+    unit: шт
+  - title: Облицовка стен декоративным камнем 
+    price_from: 500 
+    price_to: 1000 
+    unit: м2
+  - title: Покраска стен по подготовленной поверхности, один слой 
+    price_from: 75 
+    price_to: 150 
+    unit: м2
+  - title: Покраска стен по обоям (1 слой) 
+    price_from: 80 
+    price_to: 150 
+    unit: м2
+  - title: Поклейка стен стеклохолстом 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Укладка пазогребневых, пенобетонных плит 
+    price_from: 350 
+    price_to: 550 
+    unit: м2
+  - title: Поклейка стен обоями с текстурой и рисунком 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Оклейка стен обоями под покраску 
+    price_from:   
+    price_to: 150 
+    unit: м2
+  - title: Оклейка стен комбинированными обоями 
+    price_from:   
+    price_to: 150 
+    unit: м2
+  - title: Наклейка бордюра (без врезки) 
+    price_from:   
+    price_to: 80 
+    unit: п/м
+- title: Потолок   
+  items: 
+  - title: Грунтовка потолка в один слой 
+    price_from:   
+    price_to: 60 
+    unit: м2
+  - title: Выравнивание штукатурной смесью 
+    price_from:   
+    price_to: 350 
+    unit: м2
+  - title: Размывка, зачистка потолка 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Оклейка флизелиновыми обоями 
+    price_from:   
+    price_to: 180 
+    unit: м2
+  - title: Сплошная шпаклевка в два слоя 
+    price_from:   
+    price_to: 220 
+    unit: м2
+  - title: Ошкуривание потолка 
+    price_from:   
+    price_to: 70 
+    unit: м2
+  - title: Покраска потолков в 1 слой 
+    price_from: 70 
+    price_to: 140 
+    unit: м2
+  - title: Штукатурка рустов на потолке 
+    price_from:   
+    price_to: 70 
+    unit: п/м
+  - title: Отбивка штукатурки 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Устройство подвесного потолка из ГКЛ один уровень 
+    price_from:   
+    price_to: 350 
+    unit: м2
+  - title: Устройство подвесного потолка из ГКЛ в 2 уровня 
+    price_from:   
+    price_to: 500 
+    unit: м2
+  - title: Устройство изгибов потолка по радиусам 
+    price_from:   
+    price_to: 1100 
+    unit: п/м
+  - title: Заделка стыков, шурупов с проклейкой сеткой 
+    price_from:   
+    price_to: 70 
+    unit: м2
+  - title: Устройство карнизов для подсветки и др. 
+    price_from:   
+    price_to: 900 
+    unit: п/м
+  - title: Монтаж потолочной плитки пвх 
+    price_from:   
+    price_to: 130 
+    unit: м2
+  - title: Установка подвесных/реечных потолков от 10 кв.м. 
+    price_from:   
+    price_to: 300 
+    unit: м2
+  - title: Установка подвесных/реечных потолков до 10 кв.м. 
+    price_from:   
+    price_to: 400 
+    unit: м2
+  - title: Установка галтелей 
+    price_from:   
+    price_to: 80 
+    unit: м2
+  - title: Монтаж потолка типа «Армстронг» от 10 кв.м. 
+    price_from:   
+    price_to: 300 
+    unit: м2
+  - title: Монтаж потолка типа «Армстронг» до 10 кв.м. 
+    price_from:   
+    price_to: 350 
+    unit: м2
+  - title: Монтаж реечного потолка от 100 кв 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Поклейка потолков стеклохолстом 
+    price_from:   
+    price_to: 120 
+    unit: м2
+  - title: Монтаж металлической сетки на потолок 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Обшивка потолков деревянной вагонкой 
+    price_from: 350 
+    price_to: 500 
+    unit: м2
+  - title: Обшивка потолков пластиковой вагонкой 
+    price_from: 200 
+    price_to: 380 
+    unit: м2
+  - title: Шпаклевка потолков по штукатурке под покраску за два раза 
+    price_from:   
+    price_to: 240 
+    unit: м2
+  - title: Шпаклевка потолков по штукатурке под обои за два раза 
+    price_from:   
+    price_to: 220 
+    unit: м2
+  - title: Шпаклевка потолков по гипсокартону под покраску за два раза 
+    price_from:   
+    price_to: 230 
+    unit: м2
+  - title: Шпаклевка потолков по гипсокартону под обои за два раза 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Грунтовка потолков 
+    price_from:   
+    price_to: 60 
+    unit: м2
+- title: Двери   
+  items: 
+  - title: Установка дверного блока 
+    price_from:   
+    price_to: 1500 
+    unit: шт
+  - title: Демонтаж двери 
+    price_from:   
+    price_to: 180 
+    unit: шт
+  - title: Сборка дверной коробки 
+    price_from:   
+    price_to: 500 
+    unit: шт
+  - title: Монтаж доборной планки (до 5 см.) 
+    price_from:   
+    price_to: 80 
+    unit: п/м
+  - title: Установка готовой арки 
+    price_from:   
+    price_to: 1600 
+    unit: шт
+  - title: Устройство арочного проема из ГКЛ 
+    price_from:   
+    price_to: 2800 
+    unit: шт
+  - title: Установка замка 
+    price_from:   
+    price_to: 600 
+    unit: шт
+  - title: Установка наличника 
+    price_from:   
+    price_to: 70 
+    unit: п/м
+  - title: Демонтаж наличника 
+    price_from:   
+    price_to: 20 
+    unit: п/м
+- title: Окна   
+  items: 
+  - title: монтаж пластикового окна (поворотно-откидное) с сеткой 
+    price_from: 7000 
+    price_to: 9000 
+    unit: шт
+  - title: Балконная группа 
+    price_from: 12000 
+    price_to: 16000 
+    unit: шт
+  - title: Устройство оконного откоса из ГКЛ 
+    price_from:   
+    price_to: 1500 
+    unit: шт
+  - title: Устройство оконного откоса штукатуркой 
+    price_from:   
+    price_to: 1800 
+    unit: шт
+  - title: Шпаклевка и покраска оконного откоса (одно окно) 
+    price_from:   
+    price_to: 1000 
+    unit: шт
+  - title: Установка пластикового откоса и подокойника 
+    price_from: 1000 
+    price_to: 1700 
+    unit: шт
+- title: Полы   
+  items: 
+  - title: Декоративные полы из маналитного бетона 
+    price_from: 1200 
+    price_to: 3500 
+    unit: м2
+  - title: Демонтаж деревянных (паркетных) полов 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Демонтаж черного пола 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Демонтаж цементно-песчаной стяжки 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Демонтаж кафельной плитки 
+    price_from:   
+    price_to: 150 
+    unit: м2
+  - title: Грунтовка пола в один слой 
+    price_from:   
+    price_to: 50 
+    unit: м2
+  - title: Цементно-песчаная стяжка толщиной до 70 мм 
+    price_from: 250 
+    price_to: 300 
+    unit: м2
+  - title: Установка маяков 
+    price_from:   
+    price_to: 50 
+    unit: м2
+  - title: Укладка армирующей сетки в стяжку 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Заливка полов само выравнивающимся раствором толщиной до 10 мм 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Устройство гидроизоляции пола (обмазачная) 
+    price_from:   
+    price_to: 100 
+    unit: м2
+  - title: Устройство гидроизоляции пола (наплавляемое) 
+    price_from:   
+    price_to: 300 
+    unit: м2
+  - title: Настил фанеры на дощатый пол (без выравнивания) 
+    price_from:   
+    price_to: 130 
+    unit: м2
+  - title: Настил фанеры на бетонный пол 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Настил линолеума, ковролина 
+    price_from:   
+    price_to: 150 
+    unit: м2
+  - title: Сварка шва линолеума холодная (скотч, клей) 
+    price_from:   
+    price_to: 300 
+    unit: п/м
+  - title: Настил паркета штучного на клей и на гвозди (на готовое основание) 
+    price_from:   
+    price_to: 550 
+    unit: м2
+  - title: Настил ламината на подложку 
+    price_from: 200 
+    price_to: 250 
+    unit: м2
+  - title: Настил паркетной доски 
+    price_from: 240 
+    price_to: 300 
+    unit: м2
+  - title: Циклевка паркета (под старым лаком). 
+    price_from:   
+    price_to: 200 
+    unit: м2
+  - title: Шпаклевка паркета 
+    price_from:   
+    price_to: 170 
+    unit: м2
+  - title: Покрытие паркета лаком в один слой 
+    price_from:   
+    price_to: 150 
+    unit: м2
+  - title: Монтаж плинтуса деревянного 
+    price_from:   
+    price_to: 90 
+    unit: п/м
+  - title: Монтаж плинтуса пластикового-бетон 
+    price_from:   
+    price_to: 100 
+    unit: п/м
+  - title: Монтаж плинтуса пластикового-гкл, дерово и т.п 
+    price_from:   
+    price_to: 70 
+    unit: п/м
+  - title: Монтаж профильных порожков 
+    price_from:   
+    price_to: 380 
+    unit: п/м
+  - title: настил фанеры бетонный пол 
+    price_from:   
+    price_to: 170 
+    unit: м2
+- title: Облицовка кафельной плиткой   
+  items: 
+  - title: Укладка кафельной плитки (классика - через бордюр) 
+    price_from: 500 
+    price_to: 750 
+    unit: м2
+  - title: Укладка кафельной плитки (по дизайн проекту) 
+    price_from: 800 
+    price_to: 1300 
+    unit: м2
+  - title: Укладка мозаики (на подготовленное основание) 
+    price_from: 1000 
+    price_to: 1200 
+    unit: м2
+  - title: Запил плитки под 45 градусов (керамическая) 
+    price_from:   
+    price_to: 500 
+    unit: п/м
+  - title: Подготовка поверхности (зачистка) 
+    price_from:   
+    price_to: 50 
+    unit: м2
+  - title: Установка бардюра 
+    price_from:   
+    price_to: 170 
+    unit: п/м
+  - title: Запил плитки под 45 градусов (керамогранит) 
+    price_from:   
+    price_to: 800 
+    unit: п/м
+  - title: Затирка шва 
+    price_from:   
+    price_to: 70 
+    unit: м2
+  - title: Сверление отверстий в кафеле, под трубы 
+    price_from:   
+    price_to: 230 
+    unit: шт
+- title: Сантехника   
+  items: 
+  - title: Демонтаж сантехнических приборов 
+    price_from:   
+    price_to: 400 
+    unit: шт
+  - title: Демонтаж ванны с выносом 
+    price_from:   
+    price_to: 1000 
+    unit: шт
+  - title: Демонтаж фановых, водопроводных труб 
+    price_from:   
+    price_to: 300 
+    unit: п/м
+  - title: Установка фановых труб 
+    price_from:   
+    price_to: 300 
+    unit: п/м
+  - title: Монтаж стояков до 32мм с переврезкой (длина до 3 м) 
+    price_from:   
+    price_to: 2800 
+    unit: шт
+  - title: Монтаж стояков до 32мм с переврезкой и установкой полотенцесушителя 
+    price_from:   
+    price_to: 3500 
+    unit: шт
+  - title: Монтаж труб водоснабжения 
+    price_from:   
+    price_to: 230 
+    unit: п/м
+  - title: Врезка фитингов в действующую подводку 
+    price_from:   
+    price_to: 300 
+    unit: шт
+  - title: Врезка кранов в трубы отопления 
+    price_from:   
+    price_to: 250 
+    unit: шт
+  - title: Штробление кирпича, гипса под разводку труб 
+    price_from:   
+    price_to: 200 
+    unit: п/м
+  - title: Штробление бетона под разводку труб 
+    price_from:   
+    price_to: 300 
+    unit: п/м
+  - title: Установка расширительного бака 
+    price_from:   
+    price_to: 800 
+    unit: шт
+  - title: Установка сливного трапа 
+    price_from: 500 
+    price_to: 1500 
+    unit: шт
+  - title: Установка фильтра грубой очистки воды 
+    price_from:   
+    price_to: 200 
+    unit: шт
+  - title: Установка фильтра средней очистки воды (колбы) 
+    price_from:   
+    price_to: 700 
+    unit: шт
+  - title: Устройство узла разводки водоснабжения 
+    price_from:   
+    price_to: 2600 
+    unit: шт
+  - title: Установка отсекающего вентиля 
+    price_from:   
+    price_to: 400 
+    unit: шт
+  - title: Установка водомерного счетчика 
+    price_from:   
+    price_to: 600 
+    unit: шт
+  - title: Установка полотенцесушителя на штатное место 
+    price_from:   
+    price_to: 900 
+    unit: шт
+  - title: Установка раковины со смесителем 
+    price_from:   
+    price_to: 1200 
+    unit: шт
+  - title: Установка смесителя с душем для ванной комнаты 
+    price_from:   
+    price_to: 600 
+    unit: шт
+  - title: Установка душевой штанги 
+    price_from:   
+    price_to: 200 
+    unit: шт
+  - title: Установка смесителя терморегулирующего 
+    price_from:   
+    price_to: 750 
+    unit: шт
+  - title: Установка электронного смесителя 
+    price_from:   
+    price_to: 1300 
+    unit: шт
+  - title: Установка смесителя для биде 
+    price_from:   
+    price_to: 750 
+    unit: шт
+  - title: Установка смесителя типа «елочка» 
+    price_from:   
+    price_to: 400 
+    unit: шт
+  - title: Установка мойки 
+    price_from:   
+    price_to: 400 
+    unit: шт
+  - title: Подключение мойки простая 
+    price_from:   
+    price_to: 300 
+    unit: шт
+  - title: Подключение мойки сложная 
+    price_from:   
+    price_to: 800 
+    unit: шт
+  - title: Установка унитаза (компакт) 
+    price_from:   
+    price_to: 1500 
+    unit: шт
+  - title: Установка навесного/встроенного унитаза 
+    price_from:   
+    price_to: 2200 
+    unit: шт
+  - title: Установка биде 
+    price_from:   
+    price_to: 1700 
+    unit: шт
+  - title: Установка ванн сталь,чугун 
+    price_from:   
+    price_to: 1700 
+    unit: шт
+  - title: Установка ванн прямоугольных (акрил на металлическом каркасе) без гидромассажа 
+    price_from:   
+    price_to: 1900 
+    unit: шт
+  - title: Установка ванн нестандартных размеров (акрил на металлическом каркасе) без гидромассажа 
+    price_from:   
+    price_to: 2400 
+    unit: шт
+  - title: Монтаж обвязки (слив-перелив) 
+    price_from:   
+    price_to: 300 
+    unit: шт
+  - title: Установка душевой кабинки 
+    price_from: 1800 
+    price_to: 3500 
+    unit: шт
+  - title: Установка радиатора отопления 
+    price_from: 800 
+    price_to: 1200 
+    unit: шт
+  - title: Установка радиатора отопления с переврезкой встояк 
+    price_from:   
+    price_to: 3900 
+    unit: шт
+  - title: Установка электро-водонагревательных приборов 
+    price_from:   
+    price_to: 1650 
+    unit: шт
+  - title: Разводка медная(с.у. совмещен)+монтаж санфоянса 
+    price_from:   
+    price_to: 8000 
+    unit: шт
+  - title: Разводка медная(с.у. раздельный)+монтаж санфоянса 
+    price_from:   
+    price_to: 10000 
+    unit: шт
+  - title: Разводка медная(с.у. совмещен+кухня)+монтаж санфоянса 
+    price_from:   
+    price_to: 12000 
+    unit: шт
+  - title: Разводка медная(с.у. раздельный+кухня)+монтаж санфоянса 
+    price_from:   
+    price_to: 14000 
+    unit: шт
+  - title: Установка отопительных приборов 
+    price_from:   
+    price_to: 1800 
+    unit: шт
+  - title: Монтаж пластиковых труб 
+    price_from:   
+    price_to: 200 
+    unit: п/м
+  - title: Монтаж канализационных труб ПВХ 
+    price_from:   
+    price_to: 220 
+    unit: п/м
+- title: Электромонтаж   
+  items: 
+  - title: Установка электросчетчика (без настройки) 
+    price_from:   
+    price_to: 850 
+    unit: шт
+  - title: Углубление электрощита 
+    price_from:   
+    price_to: 1650 
+    unit: шт
+  - title: Установка Автомата электрического двуполюсного 
+    price_from:   
+    price_to: 400 
+    unit: шт
+  - title: установка Автомата электрического однополюсного 
+    price_from:   
+    price_to: 300 
+    unit: шт
+  - title: Автомата электрического трехполюсного 
+    price_from:   
+    price_to: 500 
+    unit: шт
+  - title: установка Бокса наружного под электроавтоматы 
+    price_from:   
+    price_to: 900 
+    unit: шт
+  - title: установка Бокса под электроавтоматы на 6 модулей врезка в бетон 
+    price_from:   
+    price_to: 2800 
+    unit: шт
+  - title: Бокса под электроавтоматы на 6 модулей врезка в гипсокартон 
+    price_from:   
+    price_to: 1200 
+    unit: шт
+  - title: Бокса под электроавтоматы на 6 модулей врезка в кирпич 
+    price_from:   
+    price_to: 1800 
+    unit: шт
+  - title: Бокса под электроавтоматы на 12 модулей врезка в бетон 
+    price_from:   
+    price_to: 3300 
+    unit: шт
+  - title: Бокса под электроавтоматы на 12 модулей врезка в гипсокартон 
+    price_from:   
+    price_to: 1600 
+    unit: шт
+  - title: Бокса под электроавтоматы на 12 модулей врезка в кирпич 
+    price_from:   
+    price_to: 2200 
+    unit: шт
+  - title: Бокса под электроавтоматы на 36 модулей врезка в бетон 
+    price_from:   
+    price_to: 4900 
+    unit: шт
+  - title: Бокса под электроавтоматы на 36 модулей врезка в гипсокартон 
+    price_from:   
+    price_to: 2800 
+    unit: шт
+  - title: Кабельканала шириной до 25 мм. на бетонной поверхности монтаж 
+    price_from:   
+    price_to: 150 
+    unit: п/м
+  - title: Кабельканала шириной до 25 мм. на гипсолите, гипсокартоне, дереве монтаж 
+    price_from:   
+    price_to: 100 
+    unit: п/м
+  - title: Прокладка электропровода силового 
+    price_from:   
+    price_to: 50 
+    unit: м2
+  - title: Прокладка электропровода слаботочного 
+    price_from:   
+    price_to: 40 
+    unit: м2
+  - title: Установка монтажных коробок в кирпичных стенах 
+    price_from:   
+    price_to: 100 
+    unit: шт
+  - title: Установка монтажных коробок в бетонных стенах 
+    price_from:   
+    price_to: 140 
+    unit: шт
+  - title: Установка монтажных коробок в стенах из гипсокартона 
+    price_from:   
+    price_to: 100 
+    unit: шт
+  - title: Монтаж напольных электрических лючков 
+    price_from:   
+    price_to: 500 
+    unit: шт
+  - title: Установка коробок распределительных 
+    price_from:   
+    price_to: 100 
+    unit: шт
+  - title: Установка розеток, выключателей 
+    price_from:   
+    price_to: 200 
+    unit: шт
+  - title: Установка компьютерных, телефонных розеток 
+    price_from:   
+    price_to: 300 
+    unit: шт
+  - title: Монтаж светильника точечного 
+    price_from:   
+    price_to: 300 
+    unit: шт
+  - title: Монтаж люминесцентного светильника 
+    price_from:   
+    price_to: 280 
+    unit: шт
+  - title: Монтаж люстры 
+    price_from:   
+    price_to: 400 
+    unit: шт
+  - title: Установка домофона 
+    price_from:   
+    price_to: 450 
+    unit: шт
+  - title: Монтаж электрощита на 12 групп 
+    price_from:   
+    price_to: 1800 
+    unit: шт
+  - title: Установка групповых автоматов защиты 
+    price_from:   
+    price_to: 400 
+    unit: шт
+  - title: Установка вводного автомата защиты 
+    price_from:   
+    price_to: 280 
+    unit: шт
+  - title: Установка электровентиляторов 
+    price_from:   
+    price_to: 500 
+    unit: шт
+  - title: Пробивка штробы в кирпичной стене под электропроводку 
+    price_from:   
+    price_to: 150 
+    unit: шт
+  - title: Пробивка штробы в бетонной стене под электропроводку 
+    price_from:   
+    price_to: 160 
+    unit: п/м

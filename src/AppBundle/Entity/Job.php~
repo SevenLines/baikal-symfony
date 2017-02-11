@@ -43,7 +43,7 @@ class Job implements \JsonSerializable
     private $shortDescription;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductCategory", mappedBy="products")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductCategory", mappedBy="job")
      */
     private $productCategories;
 

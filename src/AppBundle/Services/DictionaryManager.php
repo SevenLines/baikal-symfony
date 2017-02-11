@@ -30,7 +30,10 @@ class DictionaryManager
             return [
                 "title" => $job->getTitle(),
                 "id" => $job->getId(),
-                "url" => $this->router->generate("job_description", ["job_id" => $job->getId()]),
+                "url" => $this->router->generate("job_description", [
+                    "job_id" => $job->getId(),
+                    "title" => $job->getTitle()
+                ]),
             ];
         }, $this->doctrine->getRepository("AppBundle:Job")->findAll());
 
