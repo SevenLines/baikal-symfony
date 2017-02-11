@@ -1,5 +1,6 @@
-$color: white;
-$menu-color: #f0c200;
+@import "variables";
+@import "../assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap";
+
 
 body {
   font-family: 'Noto Sans', sans-serif;
@@ -17,7 +18,7 @@ body {
     list-style: none;
     padding: 1em;
     margin: 0;
-    width: 300px;
+    width: $menu-width;
     text-align: center;
     li {
       transition: all 0.2s;
@@ -48,45 +49,25 @@ body {
   }
 }
 
-#content {
+
+.content-block {
   padding: 1em;
-  font-size: 1.5em;
+  font-size: 1.15em;
   position: relative;
   background-color: lighten($color, 20);
   box-shadow: 0 0 8px darken($color, 20);
-
-  .description {
-    overflow: hidden;
-    padding: 1em;
-
-    .calculate {
-      margin-top: 1em;
-      padding: 0.5em 1em;
-      border-radius: 0.5em;
-      background-color: white;
-      float: right;
-    }
-
-    .full-description {
-      max-height: 500px;
-      overflow: hidden;
-      -webkit-transition: all 0.1s;
-      -moz-transition: all 0.1s;
-      -ms-transition: all 0.1s;
-      -o-transition: all 0.1s;
-      transition: all 0.1s;
-    }
-
-    .short-description {
-      font-weight: bold;
-      font-size: 2em;
-    }
-    &.scroll {
-      .full-description {
-        max-height: 0;
-      }
-    }
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 1em;
+    right: 0;
+    z-index: 100;
+    margin-right: calc($menu-width + 1em);
   }
+}
+
+.fake-block {
+  visibility: hidden;
 }
 
 #bottom-menu {
@@ -112,97 +93,25 @@ body {
 }
 
 .wrapper {
-  margin-right: 300px;
+  margin-right: $menu-width;
   padding: 1em;
+  position: relative;
 }
 
-.portfolio {
-  padding: 1em;
-  background-color: lighten($color, 20);
-  box-shadow: 0 0 8px darken($color, 20);
-  overflow: hidden;
-  margin: 1em 0;
-  .title {
-
-  }
-  .items {
-    .item {
-      max-width: 20%;
-      border: 6px solid lighten($color, 20);;
-      float: left;
-      background-color: white;
-      position: relative;
-      div {
-        overflow: hidden;
-        img {
-          max-height: 300px;
-        }
-      }
-      .info {
-        position: absolute;
-        top: 0;
-        overflow: hidden;
-        left: 0;
-        right: 0;
-        text-align: center;
-
-        .title, .description {
-          background-color: rgba(white, 0.85);
-        }
-
-        .title {
-          padding: 1em;
-          box-shadow: 0 0 5px silver;
-        }
-
-        .description {
-          padding: 0 1em;
-          -webkit-transition: all 0.2s;
-          -moz-transition: all 0.2s;
-          -ms-transition: all 0.2s;
-          -o-transition: all 0.2s;
-          transition: all 0.2s;
-          max-height: 0;
-        }
-
-      }
-      &:hover {
-        .description {
-          border-top: 1px solid black;
-
-          max-height: 100px;
-          padding-bottom: 1em;
-
-        }
-      }
-    }
-  }
+a {
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
-.gallery {
-  width: 100%;
-  .image {
-    height: 250px;
-    float: left;
-    padding: 1em;
-    div {
-      overflow: hidden;
-      height: 300px;
-      width: 100%;
-      background-color: white;
-    }
-    img {
-      border: 4px solid white;
-      height: 100%;
-    }
-  }
-  // div {
-  //   float: left;
-  //   display: inline-block;
-  //   padding-right: 1em;
-  //   max-width: 200px;
-  //
+.nav-pills li a:hover {
+  background-color: lighten($nav-pills-active-link-hover-bg, 10);
+}
 
-  // }
-
+.header-fixed {
+  position: fixed;
+  top: 0px; display:none;
+  background-color:white;
 }

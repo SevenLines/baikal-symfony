@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  */
-class Product
+class Product implements \JsonSerializable
 {
     /**
      * @var int
@@ -195,5 +195,22 @@ class Product
     public function getPriceMax()
     {
         return $this->price_max;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return [
+            "title" => $this->getTitle(),
+            "category_id" => $this->getProductCategory()->getId(),
+            "price" => $this->getPriceMax() ?: $this->getPriceMin(),
+            "unit" => $this->getUnit(),
+        ];
     }
 }

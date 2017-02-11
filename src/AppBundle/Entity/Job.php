@@ -143,6 +143,7 @@ class Job implements \JsonSerializable
             "description" => $this->getDescription(),
             "short_description" => $this->getShortDescription(),
             "id" => $this->getId(),
+            "productCategories"=> $this->getProductCategories(),
         ];
     }
     /**
