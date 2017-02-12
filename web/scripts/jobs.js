@@ -43,7 +43,12 @@
                 basket = Cookies.getJSON('basket');
 
                 return {
-                    categories: categories,
+                    categories: _.sortBy(categories, function (o) {
+                        if (o.id == -1) {
+                            return '!'
+                        }
+                        return o.title;
+                    }),
                     products: _.flatten(_.map(data, function (category) {
                         return _.map(category.products, function (item) {
                             item.category_id = category.id;
@@ -52,7 +57,15 @@
                         });
                     })),
                     productQuery: '',
-                    activeCategories: categories.length > 1 ? [categories[1].id] : [],
+                    activeCategories: [],
+                    realCategories: []
+                }
+            },
+            watch: {
+                productQuery: function (newProductQuery) {
+                    if (newProductQuery == "") {
+                        this.activeCategories = this.realCategories.slice();
+                    }
                 }
             },
             computed: {
@@ -62,9 +75,12 @@
                     products = this.products;
 
                     if (filterKey != "") {
-                        var real_active_categories = [];
+                        var real_active_categories = this.realCategories.slice();
                         products = _.filter(this.products, function (item) {
                             var result = _.includes(item.title.toLowerCase(), filterKey);
+                            if (that.realCategories.length > 0 && that.realCategories.indexOf(item.category_id) == -1) {
+                                result = false;
+                            }
                             if (result) {
                                 real_active_categories.push(item.category_id);
                             }
@@ -101,16 +117,19 @@
                     return this.activeCategories.indexOf(category.id) != -1;
                 },
                 toggleCategory: function (category_id, event) {
-                    this.productQuery = "";
                     if (category_id == -1) {
-                        this.activeCategories = []
+                        this.activeCategories = [];
+                        this.realCategories = []
                     } else if (event.shiftKey) {
                         this.activeCategories = _.xor(this.activeCategories, [category_id]);
+                        this.realCategories = _.xor(this.realCategories, [category_id]);
                     } else {
                         if (this.activeCategories.length == 1 && this.activeCategories.indexOf(category_id) != -1) {
                             this.activeCategories = [];
+                            this.realCategories = [];
                         } else {
                             this.activeCategories = [category_id];
+                            this.realCategories = [category_id];
                         }
                     }
                 }
