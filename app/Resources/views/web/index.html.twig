@@ -2,16 +2,13 @@
 
 {% block body %}
 
+    {% for category in menu['menu'] %}
+        <div class="index-item">
+            {{ category.title }}
+        </div>
+    {% endfor %}
 
-    <div class=""></div>
 
-    <div id="bottom-menu">
-        <ul>
-            <li><a href="#">описание</a></li>
-            <li><a href="#">фото</a></li>
-            <li><a href="#">оставить заявку</a></li>
-        </ul>
-    </div>
 {% endblock %}
 
 {% block javascripts %}

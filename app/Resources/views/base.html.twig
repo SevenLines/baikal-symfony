@@ -2,15 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Байкал Форт АйТи{% endblock %}</title>
     <meta charset="UTF-8">
-    <meta name=description content="">
+    <meta name=description content="{% block description %}{% endblock %}">
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block stylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}">
-        {#<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">#}
         <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
         <link rel="stylesheet" href="{{ asset('styles/job.css') }}">
     {% endblock %}
@@ -50,6 +49,7 @@
     <script src="{{ asset('assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/lodash/dist/lodash.js') }}"></script>
     <script src="{{ asset('assets/vendor/vue/dist/vue.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js-cookie/src/js.cookie.js') }}"></script>
 {% endblock %}
 
 </body>

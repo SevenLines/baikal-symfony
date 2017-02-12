@@ -27,7 +27,7 @@ class JobController extends Controller
             ->setParameter("job_id", $job_id)
             ->where("j.id = :job_id")
             ->addSelect("c", "p")
-            ->orderBy("c.title, p.title")
+            ->orderBy("p.title")
             ->getQuery()->getOneOrNullResult();
 
         return $this->render("web/job.html.twig", [

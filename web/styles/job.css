@@ -38,6 +38,13 @@
 .content-block.products-list {
   margin-top: -0.75em; }
 
+.price-block .nav-pills {
+  font-size: 0.85em; }
+  .price-block .nav-pills li:first-child:hover a {
+    background-color: #ff7f2c; }
+  .price-block .nav-pills li:first-child.active a {
+    background-color: #f86100; }
+
 .product-category-items .title {
   width: 66%; }
 .product-category-items .price {
@@ -48,6 +55,10 @@
   margin-bottom: 0; }
   .product-category-items table thead th {
     border-bottom: none; }
+  .product-category-items table tr.selected {
+    background-color: #fffbed; }
+    .product-category-items table tr.selected:hover {
+      background-color: #fbedb2; }
 
 .table-hover tr {
   -webkit-transition: all 0.2s;

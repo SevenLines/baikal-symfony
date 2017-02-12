@@ -1,7 +1,6 @@
 @import "variables";
 @import "../assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap";
 
-
 body {
   font-family: 'Noto Sans', sans-serif;
   background-color: $color;
@@ -49,20 +48,22 @@ body {
   }
 }
 
-
 .content-block {
-  padding: 1em;
+  padding: 0 1em 1em 1em;
   font-size: 1.15em;
   position: relative;
-  background-color: lighten($color, 20);
-  box-shadow: 0 0 8px darken($color, 20);
+  .content-block-inner {
+    background-color: lighten($color, 20);
+    box-shadow: 0 0 8px darken($color, 20);
+    padding: 1em;
+  }
   &.fixed {
     position: fixed;
     top: 0;
-    left: 1em;
+    left: 0;
     right: 0;
     z-index: 100;
-    margin-right: calc($menu-width + 1em);
+    margin-right: $menu-width;
   }
 }
 
@@ -94,7 +95,7 @@ body {
 
 .wrapper {
   margin-right: $menu-width;
-  padding: 1em;
+  //padding: 1em;
   position: relative;
 }
 
@@ -112,6 +113,19 @@ a {
 
 .header-fixed {
   position: fixed;
-  top: 0px; display:none;
-  background-color:white;
+  top: 0px;
+  display: none;
+  background-color: white;
+}
+
+.btn {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s; 
+}
+
+.btn-success:hover {
+  background-color: $menu-color;
 }

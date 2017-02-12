@@ -1,43 +1,71 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {{ job.title }} - {{ parent() }}
+{% endblock %}
+
+{% block description %}{{ job.shortDescription }}{% endblock %}
+
 {% block body %}
     <div id="products-controller">
         {% include "web/partials/category_toolbar.html.twig" with {'class': 'fake-block'} %}
         {% include "web/partials/category_toolbar.html.twig" with {'class': 'fixed'} %}
 
         <div class="content-block products-list">
-            <div class="tab-content">
-                <div class="product-category">
-                    <div class="product-category-items">
-                        <table class="table table-striped table-hover table-condensed ">
-                            <tbody>
-                            {% verbatim %}
-                                <tr v-for="product in filteredProducts">
-                                    <td class="title">
-                                        <div>{{ product.title }}</div>
-                                    </td>
-                                    <td class="price">
-                                        <div>{{ product.price_max }} ₽</div>
-                                    </td>
-                                    <td class="unit">
-                                        <div>{{ product.unit }}</div>
-                                    </td>
-                                    <td>
-                                        <div class="btn btn-sm btn-default">
-                                            <i class="fa fa-shopping-basket"> </i> В корзину
-                                        </div>
-                                    </td>
-                                </tr>
+            <div class="content-block-inner">
+                <div class="tab-content">
+                    <div class="product-category">
+                        <div class="product-category-items">
+                            <table class="table table-striped table-hover table-condensed ">
+                                <tbody>
+                                {% verbatim %}
+                                    <tr is="product-row"
+                                    v-for="product in filteredProducts"
+                                    :key="product.id"
+                                    v-bind:title="product.title"
+                                    v-bind:price="product.price_max"
+                                    v-bind:unit="product.unit"
+                                    v-bind:in_basket="product.in_basket"
+                                    v-bind:id="product.id"
+                                    ></tr>
+                                    <div v-if="!filteredProducts.length" style="padding-top: 1em">
+                                    к сожалению ничего найти не удалось
+                                    </div>
                                 {% endverbatim %}
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
+
+    <script type="text/x-template" id="product-row">
+        {% verbatim %}
+            <tr v-bind:class="{selected: isInBasket}" >
+                <td class="title">
+                    <div>{{ title }}</div>
+                </td>
+                <td class="price">
+                    <div>{{ price }} ₽</div>
+                </td>
+                <td class="unit">
+                    <div>{{ unit }}</div>
+                </td>
+                <td>
+                    <div class="btn btn-sm btn-default pull-right"
+                    @click="toggleBasket(id)"
+                    v-bind:class="{'btn-success': isInBasket}">
+                        <i class="fa fa-shopping-basket"> </i>
+                        <span v-show="!isInBasket">в корзину</span>
+                        <span v-show="isInBasket">удалить</span>
+                    </div>
+                </td>
+            </tr>
+        {% endverbatim %}
+    </script>
+
 {% endblock %}
 
 {% block javascripts %}
@@ -45,73 +73,9 @@
     <script src="{{ asset('scripts/jobs.js') }}"></script>
 
     <script>
-        new Vue({
-            el: "#products-controller",
-            data: function () {
-                data = {{ job.productCategories | serialize("json") |raw }};
-                var categories = _.map(data, function (item) {
-                    return item;
-                });
-                categories.unshift({
-                    title: 'Без фильтра',
-                    id: -1,
-                });
-                return {
-                    categories: categories,
-                    products: _.flatten(_.map(data, function (category) {
-                        return _.map(category.products, function (item) {
-                            item.category_id = category.id;
-                            return item;
-                        });
-                    })),
-                    productQuery: '',
-                    activeCategories: [categories[1].id],
-                }
-            },
-            computed: {
-                filteredProducts: function () {
-                    var filterKey = this.productQuery && this.productQuery.toLowerCase();
-                    var that = this;
-                    products = this.products;
-                    if (filterKey || this.activeCategories.length > 0) {
-                        products = _.filter(this.products, function (item) {
-                            var result = true;
-                            if (filterKey != "") {
-                                result = _.includes(item.title.toLowerCase(), filterKey);
-                            }
-                            result &= that.activeCategories.indexOf(item.category_id) != -1;
-                            return result;
-                        })
-                    }
-                    return products;
-                }
-            },
-            methods: {
-                sortBy: function (key) {
-
-                },
-                isActive: function (category) {
-                    if (category.id == -1 && this.activeCategories.length == 0) {
-                        return true;
-                    }
-                    return this.activeCategories.indexOf(category.id) != -1;
-                },
-                toggleCategory: function (category_id, event) {
-                    if (category_id == -1) {
-                        this.activeCategories = []
-                    } else if (event.shiftKey) {
-                        this.activeCategories = _.xor(this.activeCategories, [category_id]);
-                    } else {
-                        if (this.activeCategories.length == 1 && this.activeCategories.indexOf(category_id) != -1) {
-                            this.activeCategories = [];
-                        } else {
-                            this.activeCategories = [category_id];
-                        }
-                    }
-                }
-            }
-        })
+        new ProductsController({{ job.productCategories | serialize("json") |raw }}, "#products-controller");
     </script>
+
 {% endblock %}
 
 
