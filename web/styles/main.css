@@ -5835,6 +5835,8 @@ body {
       border-width: 4px;
       border-style: dashed;
       border-color: transparent; }
+      #menu ul li:first-child a {
+        font-weight: bold; }
       #menu ul li.active {
         border-color: black;
         background-color: #f0c200; }
@@ -5843,7 +5845,6 @@ body {
       #menu ul li a {
         text-decoration: none;
         color: black;
-        font-weight: bold;
         font-size: 1.5em;
         padding: 0.5em 0;
         display: block; }

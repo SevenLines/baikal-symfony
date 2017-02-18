@@ -17,3 +17,5 @@
 .idea
 /src/AppBundle/DataFixtures/прайс монтаж электро.xls
 /app/config/docker-parameters.yml
+/web/css/
+/web/js/

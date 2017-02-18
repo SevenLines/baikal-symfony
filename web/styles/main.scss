@@ -27,6 +27,11 @@ body {
     width: 100%;
     text-align: center;
     li {
+      &:first-child {
+        a {
+          font-weight: bold;
+        }
+      }
       transition: all 0.2s;
 
       display: block;
@@ -47,7 +52,7 @@ body {
       a {
         text-decoration: none;
         color: black;
-        font-weight: bold;
+        //font-weight: bold;
         font-size: 1.5em;
         padding: 0.5em 0;
         display: block;
