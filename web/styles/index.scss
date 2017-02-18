@@ -1,0 +1,111 @@
+@import "variables";
+
+.index-wrapper {
+  padding: 0 4em 4em 4em;
+  background-color: white;
+  .about {
+    padding: 1em;
+    font-size: 1.5em;
+  }
+  hr {
+    margin: 1em 0 0 0;
+  }
+  @media (max-width: $width-medium) {
+    padding: 0 2em;
+  }
+  @media (max-width: $width-small) {
+    padding: 0;
+  }
+}
+
+.index-menu {
+  //position: fixed;
+  position: relative;
+  padding: 0 2em;
+  .title {
+    //float: left;
+    @media (max-width: $width-medium) {
+      font-size: 3em;
+    }
+    @media (max-width: $width-small) {
+      font-size: 2em;
+    }
+    font-size: 5em;
+  }
+  .phone, .email {
+  }
+
+}
+
+.index-jobs {
+  width: 100%;
+
+
+  .index-job-item {
+    overflow: hidden;
+    float: left;
+    padding: 0.5em;
+    text-decoration: none;
+
+    @media (max-width: $width-medium) {
+      padding: 0.1em;
+    }
+
+    .inner-2 {
+      padding: 0.5em;
+      border: 4px dashed rgba(0, 0, 0, 0.01);
+      @media (max-width: $width-medium) {
+        padding: 0.1em;
+      }
+    }
+
+    &:hover {
+      .inner-2 {
+        border: 4px dashed black;
+      }
+      .inner {
+        background-color: lighten($menu-color, 10);
+        .short-description {
+        }
+      }
+    }
+
+    .inner {
+      overflow: hidden;
+      box-shadow: 0 4px 8px #808080;
+      @media (max-width: $width-medium) {
+        box-shadow: 0 2px 4px #808080;
+      }
+      //border-radius: 0 8px 8px 0;
+
+      position: relative;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      transition: all 0.3s;
+
+      background-color: $menu-color;
+      text-align: center;
+      .title {
+        padding: 1em 0.25em;
+        font-size: 1.75em;
+        text-decoration: underline;
+      }
+      .short-description {
+        //position: absolute;
+        font-size: 1.25em;
+        //min-height: 100px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1.5em;
+        color: black;
+        background-color: white; //darken($menu-color, 50);
+        @media (max-width: $width-small) {
+          display: none;
+        }
+      }
+    }
+  }
+}

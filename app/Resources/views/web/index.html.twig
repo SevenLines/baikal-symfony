@@ -1,14 +1,39 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-
-    {% for category in menu['menu'] %}
-        <div class="index-item">
-            {{ category.title }}
+    <div class="index-wrapper">
+        <div class="index-menu">
+            <div class="title">Байкал Форт АйТи</div>
+            <div class="info">
+                <div class="phone">Телефон: <span class="data">{{ menu['phone'] }}</span></div>
+                <div class="email">
+                    Почта: <a href="mailto:{{ menu['email'] }}" class="data">{{ menu['email'] }}</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
         </div>
-    {% endfor %}
+        <div class="index-jobs container">
+            {% for job in jobs %}
+                <a href="{{ path("job_description", {"job_id": job.id, "title": job.title}) }}"
+                   class="index-job-item col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
+                    <div class="inner-2">
+                        <div class="inner">
+                            <div class="title">
+                                {{ job.title }}
+                            </div>
+                            <div class="short-description">
+                                {{ job.shortDescription }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
 
-
+{% block menu %}
 {% endblock %}
 
 {% block javascripts %}

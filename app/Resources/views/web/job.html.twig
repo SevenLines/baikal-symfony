@@ -7,18 +7,19 @@
 {% block description %}{{ job.shortDescription }}{% endblock %}
 
 {% block body %}
-    <div id="products-controller">
-        {% include "web/partials/category_toolbar.html.twig" with {'class': 'fake-block'} %}
-        {% include "web/partials/category_toolbar.html.twig" with {'class': 'fixed'} %}
+    <div class="wrapper">
+        <div id="products-controller">
+            {% include "web/partials/category_toolbar.html.twig" with {'class': 'fake-block'} %}
+            {% include "web/partials/category_toolbar.html.twig" with {'class': 'fixed'} %}
 
-        <div class="content-block products-list">
-            <div class="content-block-inner">
-                <div class="tab-content">
-                    <div class="product-category">
-                        <div class="product-category-items">
-                            <table class="table table-striped table-hover table-condensed ">
-                                <tbody>
-                                {% verbatim %}
+            <div class="content-block products-list">
+                <div class="content-block-inner">
+                    <div class="tab-content">
+                        <div class="product-category">
+                            <div class="product-category-items">
+                                <table class="table table-striped table-hover table-condensed ">
+                                    <tbody>
+                                    {% verbatim %}
                                     <tr is="product-row"
                                     v-for="product in filteredProducts"
                                     :key="product.id"
@@ -32,8 +33,9 @@
                                     к сожалению ничего найти не удалось
                                     </div>
                                 {% endverbatim %}
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

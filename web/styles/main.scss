@@ -3,7 +3,7 @@
 
 body {
   font-family: 'Noto Sans', sans-serif;
-  background-color: $color;
+  background-color: #e6e6e6;
 }
 
 #menu {
@@ -11,7 +11,7 @@ body {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: $menu-color;
+  background-color: white;
   box-shadow: 0 0 10px silver;
   ul {
     list-style: none;
@@ -30,10 +30,11 @@ body {
       border-color: transparent;
 
       &.active {
-        border-color: $color;
+        border-color: black;
+        background-color: $menu-color;
       }
       &:hover {
-        border-color: rgba($color, 0.5);
+        background-color: lighten($menu-color, 40);
       }
 
       a {

@@ -5808,14 +5808,14 @@ button.close {
     display: none !important; } }
 body {
   font-family: 'Noto Sans', sans-serif;
-  background-color: white; }
+  background-color: #e6e6e6; }
 
 #menu {
   position: fixed;
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: #f0c200;
+  background-color: white;
   box-shadow: 0 0 10px silver; }
   #menu ul {
     list-style: none;
@@ -5832,9 +5832,10 @@ body {
       border-style: dashed;
       border-color: transparent; }
       #menu ul li.active {
-        border-color: white; }
+        border-color: black;
+        background-color: #f0c200; }
       #menu ul li:hover {
-        border-color: rgba(255, 255, 255, 0.5); }
+        background-color: #fff2bd; }
       #menu ul li a {
         text-decoration: none;
         color: black;
