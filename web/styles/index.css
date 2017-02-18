@@ -1,0 +1,78 @@
+.index-wrapper {
+  padding: 0 4em 4em 4em;
+  background-color: white; }
+  .index-wrapper .about {
+    padding: 1em;
+    font-size: 1.5em; }
+  .index-wrapper hr {
+    margin: 1em 0 0 0; }
+  @media (max-width: 768px) {
+    .index-wrapper {
+      padding: 0 2em; } }
+  @media (max-width: 500px) {
+    .index-wrapper {
+      padding: 0; } }
+
+.index-menu {
+  position: relative;
+  padding: 0 2em; }
+  .index-menu .title {
+    font-size: 5em; }
+    @media (max-width: 768px) {
+      .index-menu .title {
+        font-size: 3em; } }
+    @media (max-width: 500px) {
+      .index-menu .title {
+        font-size: 2em; } }
+
+.index-jobs {
+  width: 100%; }
+  .index-jobs .index-job-item {
+    overflow: hidden;
+    float: left;
+    padding: 0.5em;
+    text-decoration: none; }
+    @media (max-width: 768px) {
+      .index-jobs .index-job-item {
+        padding: 0.1em; } }
+    .index-jobs .index-job-item .inner-2 {
+      padding: 0.5em;
+      border: 4px dashed rgba(0, 0, 0, 0.01); }
+      @media (max-width: 768px) {
+        .index-jobs .index-job-item .inner-2 {
+          padding: 0.1em; } }
+    .index-jobs .index-job-item:hover .inner-2 {
+      border: 4px dashed black; }
+    .index-jobs .index-job-item:hover .inner {
+      background-color: #ffd524; }
+    .index-jobs .index-job-item .inner {
+      overflow: hidden;
+      box-shadow: 0 4px 8px #808080;
+      position: relative;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      transition: all 0.3s;
+      background-color: #f0c200;
+      text-align: center; }
+      @media (max-width: 768px) {
+        .index-jobs .index-job-item .inner {
+          box-shadow: 0 2px 4px #808080; } }
+      .index-jobs .index-job-item .inner .title {
+        padding: 1em 0.25em;
+        font-size: 1.75em;
+        text-decoration: underline; }
+      .index-jobs .index-job-item .inner .short-description {
+        font-size: 1.25em;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1.5em;
+        color: black;
+        background-color: white; }
+        @media (max-width: 500px) {
+          .index-jobs .index-job-item .inner .short-description {
+            display: none; } }
+
+/*# sourceMappingURL=index.css.map */

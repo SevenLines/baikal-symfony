@@ -1,0 +1,131 @@
+@import "variables";
+@import "../assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background-color: $color;
+}
+
+#menu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: $menu-color;
+  box-shadow: 0 0 10px silver;
+  ul {
+    list-style: none;
+    padding: 1em;
+    margin: 0;
+    width: $menu-width;
+    text-align: center;
+    li {
+      transition: all 0.2s;
+
+      display: block;
+      margin: 0.25em 0;
+      padding: 0.25em;
+      border-width: 4px;
+      border-style: dashed;
+      border-color: transparent;
+
+      &.active {
+        border-color: $color;
+      }
+      &:hover {
+        border-color: rgba($color, 0.5);
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 1.5em;
+        padding: 0.5em 0;
+        display: block;
+      }
+    }
+  }
+}
+
+.content-block {
+  padding: 0 1em 1em 1em;
+  font-size: 1.15em;
+  position: relative;
+  .content-block-inner {
+    background-color: lighten($color, 20);
+    box-shadow: 0 0 8px darken($color, 20);
+    padding: 1em;
+  }
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    margin-right: $menu-width;
+  }
+}
+
+.fake-block {
+  visibility: hidden;
+}
+
+#bottom-menu {
+  position: fixed;
+  bottom: 0;
+  font-size: 2em;
+  padding-bottom: 1em;
+  ul {
+    list-style: none;
+    li {
+      display: block;
+      float: left;
+      margin-right: 0.5em;
+      a {
+        background-color: $menu-color;
+        color: $color;
+        border-radius: 0.5em;
+        display: block;
+        padding: 0.25em 1em;
+      }
+    }
+  }
+}
+
+.wrapper {
+  margin-right: $menu-width;
+  //padding: 1em;
+  position: relative;
+}
+
+a {
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.nav-pills li a:hover {
+  background-color: lighten($nav-pills-active-link-hover-bg, 10);
+}
+
+.header-fixed {
+  position: fixed;
+  top: 0px;
+  display: none;
+  background-color: white;
+}
+
+.btn {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s; 
+}
+
+.btn-success:hover {
+  background-color: $menu-color;
+}
