@@ -3,11 +3,24 @@
 {% block body %}
     <div class="index-wrapper">
         <div class="index-menu">
-            <div class="title">Байкал Форт АйТи</div>
-            <div class="info">
-                <div class="phone">Телефон: <span class="data">{{ menu['phone'] }}</span></div>
-                <div class="email">
-                    Почта: <a href="mailto:{{ menu['email'] }}" class="data">{{ menu['email'] }}</a>
+            <div class="pull-left">
+                <div class="title">Байкал Форт АйТи</div>
+                <div class="info">
+                    <div class="phone">Телефон: <span class="data">{{ menu['phone'] }}</span></div>
+                    <div class="email">
+                        Почта: <a href="mailto:{{ menu['email'] }}" class="data">{{ menu['email'] }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right">
+                <div class="navbar-form hidden-md hidden-sm hidden-xs" style="padding-top: 2em">
+                    <div class="input-group input-group-lg">
+                        <input type="text" placeholder="поиск по сайту" class="form-control"
+                               v-model="productQuery">
+                        <div class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="clearfix"></div>

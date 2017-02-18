@@ -9,15 +9,22 @@ body {
 #menu {
   position: fixed;
   right: 0;
-  top: 0;
   bottom: 0;
+  top: 0;
   background-color: white;
   box-shadow: 0 0 10px silver;
+  max-width: $menu-width;
+  overflow-y: scroll;
+
+  .menu-inner {
+    padding: 0 1em 1em 1em;
+  }
+
   ul {
     list-style: none;
-    padding: 1em;
+    padding: 0;
     margin: 0;
-    width: $menu-width;
+    width: 100%;
     text-align: center;
     li {
       transition: all 0.2s;

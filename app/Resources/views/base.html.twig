@@ -9,10 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block stylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}">
-        <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
-        <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
-        <link rel="stylesheet" href="{{ asset('styles/job.css') }}">
+        <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        {% stylesheets
+        'styles/main.css'
+        'styles/index.css'
+        'styles/job.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
     {% endblock %}
 </head>
 <body>
@@ -22,16 +25,19 @@
 
 {% block menu %}
     <div id="menu">
-        <div class="">
+        <div class="menu-inner">
             <ul>
                 {% for item in menu['menu'] %}
                     <li class="{% if job is defined and job.id == item.id or job is not defined and item.id == 0 %}active{% endif %}">
                         <a href="{{ item.url }}">{{ item.title }}</a>
+                        {% if loop.first %}
+                        <hr style="margin: 0">{% endif %}
                     </li>
                 {% endfor %}
             </ul>
-            <div style="padding: 1em">
+            <div>
                 <hr>
+                <h2>Контактная информация:</h2>
                 <div>
                     Почта: <a href="mailto:{{ menu['email'] }}">{{ menu['email'] }}</a>
                 </div>
@@ -48,9 +54,9 @@
     {% javascripts
     'assets/vendor/jquery/dist/jquery.min.js'
     'assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js'
-    'assets/vendor/lodash/dist/lodash.js'
-    'assets/vendor/vue/dist/vue.js'
-    'assets/vendor/js-cookie/src/js.cookie.js' %}
+    'assets/vendor/lodash/dist/lodash.min.js'
+    'assets/vendor/vue/dist/vue.min.js'
+    'assets/vendor/js-cookie/src/js.cookie.js'  %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

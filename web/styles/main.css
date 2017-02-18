@@ -5813,15 +5813,19 @@ body {
 #menu {
   position: fixed;
   right: 0;
-  top: 0;
   bottom: 0;
+  top: 0;
   background-color: white;
-  box-shadow: 0 0 10px silver; }
+  box-shadow: 0 0 10px silver;
+  max-width: 300px;
+  overflow-y: scroll; }
+  #menu .menu-inner {
+    padding: 0 1em 1em 1em; }
   #menu ul {
     list-style: none;
-    padding: 1em;
+    padding: 0;
     margin: 0;
-    width: 300px;
+    width: 100%;
     text-align: center; }
     #menu ul li {
       transition: all 0.2s;

@@ -13,6 +13,7 @@ body {
   bottom: 0;
   background-color: $menu-color;
   box-shadow: 0 0 10px silver;
+  max-width: $menu-width;
   ul {
     list-style: none;
     padding: 1em;

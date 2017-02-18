@@ -2,9 +2,9 @@
 #                          Generated on phpdocker.io                          #
 ###############################################################################
 
-baikalfortit-memcached:
-  image: phpdockerio/memcached:latest
-  container_name: baikalfortit-memcached
+baikalfortit-redis:
+  image: phpdockerio/nginx:latest
+  container_name: baikalfortit-redis
 
 baikalfortit-postgres:
   image: postgres:9.6
@@ -33,5 +33,5 @@ baikalfortit-php-fpm:
     - ..:/var/www/baikalfortit
     - ./php-fpm/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
   links:
-    - baikalfortit-memcached
+    - baikalfortit-redis
     - baikalfortit-postgres
