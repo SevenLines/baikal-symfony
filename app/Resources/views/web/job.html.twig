@@ -60,8 +60,10 @@
                     @click="toggleBasket(id)"
                     v-bind:class="{'btn-success': isInBasket}">
                         <i class="fa fa-shopping-basket"> </i>
+                        <span class="hidden-sm hidden-xs">
                         <span v-show="!isInBasket">в корзину</span>
                         <span v-show="isInBasket">удалить</span>
+                        </span>
                     </div>
                 </td>
             </tr>
@@ -75,6 +77,7 @@
     <script src="{{ asset('scripts/jobs.js') }}"></script>
 
     <script>
+        Vue.component('v-select', VueSelect.VueSelect);
         new ProductsController({{ job.productCategories | serialize("json") |raw }}, "#products-controller");
     </script>
 

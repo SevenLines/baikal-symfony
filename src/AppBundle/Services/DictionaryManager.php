@@ -44,8 +44,8 @@ class DictionaryManager
                 "active" => false,
                 "url" => $this->router->generate("index"),
             ]], $menu),
-            "email" => "mmailm@mail.ru",
-            "phone" => "2-12-85-06",
+            "email" => "baikalfort@mail.ru",
+            "phone" => "+7 (3952) 66-64-69, 66-67-13",
         ];
 
         return $data;

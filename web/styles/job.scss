@@ -35,7 +35,7 @@
 }
 
 .price-block {
-  overflow: hidden;
+  //overflow: hidden;
   .product-category-tag {
     &:hover {
       cursor: pointer;
@@ -45,6 +45,20 @@
     margin-right: 0.5em;
     margin-bottom: 0.5em;
     float: left;
+  }
+
+  .categories-pills {
+    @media (max-width: $width-sbig) {
+      display: none;
+    }
+  }
+
+  .categories-select {
+    display: none;
+    @media (max-width: $width-sbig) {
+      display: block;
+    }
+    margin-bottom:0.5em;
   }
 
 }
@@ -87,6 +101,10 @@
   }
   .unit {
     width: 17%;
+  }
+
+  @media (max-width: $width-big) {
+    font-size: 0.85em;
   }
 
   table {

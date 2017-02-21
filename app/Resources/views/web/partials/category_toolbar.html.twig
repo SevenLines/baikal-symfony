@@ -2,7 +2,12 @@
     <div class="content-block-inner">
         <div class="price-block">
             {% verbatim %}
-        <ul class="nav nav-pills">
+        <select class="form-control categories-select" @change="categorySelectChange($event)">
+            <option v-for="category in categories" v-bind:value="category.id">
+                {{category.title}}
+            </option>
+        </select>
+        <ul class="nav nav-pills categories-pills">
             <li class="" v-for="category in categories" v-bind:class="{active: isActive(category)}">
                 <a href="#"
                    class="product-category-tag"
@@ -11,7 +16,7 @@
                 </a>
             </li>
         </ul>
-        <div class="input-group input-group">
+        <div class="input-group input-group hidden-xs">
             <input type="text" placeholder="поиск по наименованию" class="form-control"
             v-model="productQuery">
             <div class="input-group-addon">
@@ -27,10 +32,10 @@
                     <tr>
                         <th class="title">Наименование</th>
                         <th class="price">Цена</th>
-                        <th class="unit">Единица измерения</th>
+                        <th class="unit">Ед.</th>
                         <th>
                             <div class="btn btn-default" style="visibility: hidden">
-                                <i class="fa fa-shopping-basket"> </i> В корзину
+                                <i class="fa fa-shopping-basket"> </i> <span class="hidden-sm hidden-xs">В корзину</span>
                             </div>
                         </th>
                     </tr>

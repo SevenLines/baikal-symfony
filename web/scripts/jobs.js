@@ -2,6 +2,7 @@
  * Created by m on 11.02.17.
  */
 (function () {
+
     Vue.component("product-row", {
         template: "#product-row",
         props: ['title', 'id', 'category_id', 'price', 'unit', 'in_basket'],
@@ -107,8 +108,15 @@
                 }
             },
             methods: {
-                sortBy: function (key) {
-
+                categorySelectChange: function (event) {
+                    category_id = parseInt(event.currentTarget.value);
+                    if (category_id == -1) {
+                        this.activeCategories = [];
+                        this.realCategories = []
+                    } else {
+                        this.activeCategories = [category_id];
+                        this.realCategories = [category_id];
+                    }
                 },
                 isActive: function (category) {
                     if (category.id == -1 && this.activeCategories.length == 0) {

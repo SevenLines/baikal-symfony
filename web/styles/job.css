@@ -21,16 +21,23 @@
   .description.scroll .full-description {
     max-height: 0; }
 
-.price-block {
-  overflow: hidden; }
-  .price-block .product-category-tag {
-    border: 1px solid silver;
-    padding: 0.5em 1em;
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
-    float: left; }
-    .price-block .product-category-tag:hover {
-      cursor: pointer; }
+.price-block .product-category-tag {
+  border: 1px solid silver;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  float: left; }
+  .price-block .product-category-tag:hover {
+    cursor: pointer; }
+@media (max-width: 1150px) {
+  .price-block .categories-pills {
+    display: none; } }
+.price-block .categories-select {
+  display: none;
+  margin-bottom: 0.5em; }
+  @media (max-width: 1150px) {
+    .price-block .categories-select {
+      display: block; } }
 
 .content-block.category-toolbar {
   padding-bottom: 0;
@@ -51,6 +58,9 @@
   width: 17%; }
 .product-category-items .unit {
   width: 17%; }
+@media (max-width: 990px) {
+  .product-category-items {
+    font-size: 0.85em; } }
 .product-category-items table {
   margin-bottom: 0; }
   .product-category-items table thead th {
