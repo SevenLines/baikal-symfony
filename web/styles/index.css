@@ -23,7 +23,8 @@
         font-size: 3em; } }
     @media (max-width: 500px) {
       .index-menu .title {
-        font-size: 2em; } }
+        font-size: 2em;
+        padding-top: 0.5em; } }
 
 .index-jobs {
   width: 100%; }

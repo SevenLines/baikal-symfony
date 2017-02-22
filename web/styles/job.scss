@@ -93,14 +93,17 @@
 }
 
 .product-category-items {
-  .title {
-    width: 66%;
-  }
+  //.title {
+  //  width: 100%;
+  //}
   .price {
-    width: 17%;
+    white-space: nowrap;
+    //width: 3em;
   }
   .unit {
-    width: 17%;
+    @media (max-width: $width-small) {
+      display: none;
+    }
   }
 
   @media (max-width: $width-big) {

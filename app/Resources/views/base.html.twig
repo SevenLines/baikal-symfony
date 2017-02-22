@@ -24,14 +24,21 @@
 {% block body %}{% endblock %}
 
 {% block menu %}
-    <div id="menu">
+    <div id="menu" v-bind:class="activeClass" v-click-outside="hideMenu">
+        <div class="toggler" v-on:click="showMenu">
+            <div class="toggler-inner">
+                <div class="title">
+                    <i class="fa fa-2x fa-bars"></i>
+                </div>
+            </div>
+        </div>
         <div class="menu-inner">
             <ul>
                 {% for item in menu['menu'] %}
                     <li class="{% if job is defined and job.id == item.id or job is not defined and item.id == 0 %}active{% endif %}">
                         <a href="{{ item.url }}">{{ item.title }}</a>
                         {% if loop.first %}
-                        <hr style="margin: 0">{% endif %}
+                            <hr style="margin: 0">{% endif %}
                     </li>
                 {% endfor %}
             </ul>
@@ -46,20 +53,23 @@
                 </div>
             </div>
         </div>
-
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {% javascripts
     'assets/vendor/jquery/dist/jquery.min.js'
-    'assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js'
     'assets/vendor/lodash/dist/lodash.min.js'
-    'assets/vendor/vue/dist/vue.min.js'
-    'assets/vendor/vue-select/dist/vue-select.js'
-    'assets/vendor/js-cookie/src/js.cookie.js'  %}
+    'assets/vendor/vue/dist/vue.js'
+    'assets/vendor/js-cookie/src/js.cookie.js'
+    'scripts/menu.js'
+    'scripts/jobs.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+
+    <script>
+        new MenuInterface("#menu");
+    </script>
 {% endblock %}
 
 </body>

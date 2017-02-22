@@ -47,13 +47,13 @@
         {% verbatim %}
             <tr v-bind:class="{selected: isInBasket}" >
                 <td class="title">
-                    <div>{{ title }}</div>
+                    <span>{{ title }}</span>
                 </td>
                 <td class="price">
-                    <div>{{ price }} ₽</div>
+                    <span>{{ price }} ₽</span>
                 </td>
                 <td class="unit">
-                    <div>{{ unit }}</div>
+                    <span>{{ unit }}</span>
                 </td>
                 <td>
                     <div class="btn btn-sm btn-default pull-right"
@@ -74,10 +74,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('scripts/jobs.js') }}"></script>
-
     <script>
-        Vue.component('v-select', VueSelect.VueSelect);
         new ProductsController({{ job.productCategories | serialize("json") |raw }}, "#products-controller");
     </script>
 

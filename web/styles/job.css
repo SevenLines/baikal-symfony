@@ -52,12 +52,11 @@
   .price-block .nav-pills li:first-child.active a {
     background-color: #f86100; }
 
-.product-category-items .title {
-  width: 66%; }
 .product-category-items .price {
-  width: 17%; }
-.product-category-items .unit {
-  width: 17%; }
+  white-space: nowrap; }
+@media (max-width: 500px) {
+  .product-category-items .unit {
+    display: none; } }
 @media (max-width: 990px) {
   .product-category-items {
     font-size: 0.85em; } }
