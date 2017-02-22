@@ -17,10 +17,10 @@ add('writable_dirs', []);
 
 // Servers
 server('production', '83.220.170.91')
-    ->user('mick')
+    ->user('light')
     ->port('50212')
     ->identityFile()
-    ->set('deploy_path', '/home/mick/projects/baikal-symfony')
+    ->set('deploy_path', '~/projects/baikal-symfony')
     ->pty(true);
 
 // Tasks
