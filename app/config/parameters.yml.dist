@@ -15,5 +15,8 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
+    redis_host: baikalfortit-redis
+    redis_db: 1
+
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
