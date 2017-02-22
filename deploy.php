@@ -6,6 +6,7 @@ require 'recipe/symfony.php';
 
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
+set('dump_assets', true);
 set('bin_dir', 'bin');
 
 set('repository', 'https://github.com/SevenLines/baikal-symfony.git');
@@ -29,6 +30,10 @@ task('php-fpm:restart', function () {
     // The user must have rights for restart service
     // /etc/sudoers: username ALL=NOPASSWD:/bin/systemctl restart php-fpm.service
     run('sudo systemctl restart php7-fpm.service');
+});
+
+task("dump_assetic", function () {
+    run("")
 });
 
 after('deploy:symlink', 'php-fpm:restart');
