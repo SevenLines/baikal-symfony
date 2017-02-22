@@ -26,17 +26,19 @@
                 }
             },
             mounted: function() {
-                var mc = new Hammer(document.body);
                 var me = this;
-                mc.on("panright", function(ev) {
-                    if (ev.deltaX > 50) {
-                        me.active = false;
-                    }
-                });
-                mc.on("panleft", function(ev) {
-                    if (ev.deltaX < -50) {
-                        me.active = true;
-                    }
+                [document.body, document.getElementById("menu")].forEach(function(element) {
+                    var mc = new Hammer(element);
+                    mc.on("panright", function(ev) {
+                        if (ev.deltaX > 120 && Math.abs(ev.deltaY) < 50) {
+                            me.active = false;
+                        }
+                    });
+                    mc.on("panleft", function(ev) {
+                        if (ev.deltaX < -120 && Math.abs(ev.deltaY) < 50) {
+                            me.active = true;
+                        }
+                    });
                 });
             },
             methods: {
