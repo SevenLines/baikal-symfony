@@ -32,9 +32,6 @@ task('php-fpm:restart', function () {
     run('sudo systemctl restart php7-fpm.service');
 });
 
-task("dump_assetic", function () {
-    run("")
-});
 
 after('deploy:symlink', 'php-fpm:restart');
 
