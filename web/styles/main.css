@@ -5810,6 +5810,9 @@ body {
   font-family: 'Noto Sans', sans-serif;
   background-color: #e6e6e6; }
 
+html, body {
+  height: 100%; }
+
 #menu {
   position: fixed;
   right: 0;

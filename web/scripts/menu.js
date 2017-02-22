@@ -11,16 +11,11 @@
                         vnode.context[binding.expression](event);
                     }
                 };
-                el.addEventListener('click', this.stopProp);
                 document.body.addEventListener('click', this.event)
             },
             unbind: function (el) {
-                el.removeEventListener('click', this.stopProp);
                 document.body.removeEventListener('click', this.event)
             },
-            stopProp: function (event) {
-                event.stopPropagation()
-            }
         });
 
         new Vue({
@@ -29,6 +24,20 @@
                 return {
                     'active': false
                 }
+            },
+            mounted: function() {
+                var mc = new Hammer(document.body);
+                var me = this;
+                mc.on("panright", function(ev) {
+                    if (ev.deltaX > 50) {
+                        me.active = false;
+                    }
+                });
+                mc.on("panleft", function(ev) {
+                    if (ev.deltaX < -50) {
+                        me.active = true;
+                    }
+                });
             },
             methods: {
                 showMenu: function () {
