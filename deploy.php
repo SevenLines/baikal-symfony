@@ -6,6 +6,7 @@ require 'recipe/symfony.php';
 
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
+set('bin_dir', 'bin');
 
 set('repository', 'https://github.com/SevenLines/baikal-symfony.git');
 
@@ -17,6 +18,7 @@ add('writable_dirs', []);
 // Servers
 server('production', '83.220.170.91')
     ->user('mick')
+    ->port('50212')
     ->identityFile()
     ->set('deploy_path', '/home/mick/projects/baikal-symfony')
     ->pty(true);
