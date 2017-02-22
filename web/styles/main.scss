@@ -120,6 +120,9 @@ html, body {
   padding: 0 1em 1em 1em;
   font-size: 1.15em;
   position: relative;
+  @media (max-width: $width-medium) {
+    padding: 0;
+  }
   .content-block-inner {
     background-color: lighten($color, 20);
     box-shadow: 0 0 8px darken($color, 20);

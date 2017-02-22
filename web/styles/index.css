@@ -64,6 +64,9 @@
         padding: 1em 0.25em;
         font-size: 1.75em;
         text-decoration: underline; }
+        @media (max-width: 768px) {
+          .index-jobs .index-job-item .inner .title {
+            padding: 0.5em 0.25em; } }
       .index-jobs .index-job-item .inner .short-description {
         font-size: 1.25em;
         left: 0;

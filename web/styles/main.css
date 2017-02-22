@@ -5897,6 +5897,9 @@ html, body {
   padding: 0 1em 1em 1em;
   font-size: 1.15em;
   position: relative; }
+  @media (max-width: 768px) {
+    .content-block {
+      padding: 0; } }
   .content-block .content-block-inner {
     background-color: white;
     box-shadow: 0 0 8px #cccccc;
