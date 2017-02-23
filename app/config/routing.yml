@@ -7,3 +7,7 @@ app_api:
     type:     annotation
     prefix: /api/v1/
 
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin

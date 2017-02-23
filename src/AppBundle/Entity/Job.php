@@ -187,4 +187,11 @@ class Job implements \JsonSerializable
     {
         return $this->productCategories;
     }
+
+    function __toString()
+    {
+        return $this->getTitle();
+    }
+
+
 }
