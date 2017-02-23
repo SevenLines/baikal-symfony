@@ -57,6 +57,10 @@
 @media (max-width: 500px) {
   .product-category-items .unit {
     display: none; } }
+.product-category-items .unit .input-group .input-group-addon {
+  width: auto; }
+.product-category-items .unit .input-group input {
+  width: 70px; }
 @media (max-width: 990px) {
   .product-category-items {
     font-size: 0.85em; } }

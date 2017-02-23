@@ -74,6 +74,29 @@ html, body {
   }
   //padding: 1em;
   position: relative;
+
+  .loading-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: $menu-width;
+    z-index: 200;
+    background-color: white;
+    margin: 0 1em;
+    .icon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      text-align: center;
+
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 
 a {

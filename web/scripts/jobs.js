@@ -6,6 +6,24 @@
     Vue.component("product-row", {
         template: "#product-row",
         props: ['title', 'id', 'category_id', 'price', 'unit', 'in_basket'],
+        data: function() {
+            return {
+                count: 1
+            }
+        },
+        watch: {
+            count: function (val, oldValue) {
+                if (val == 0) {
+                    sharedBasketStore.removeFromBasket(this.id, null);
+                    this.count = 1;
+                    this.in_basket = false;
+                } else if (oldValue != 0) {
+                    sharedBasketStore.addToBasket(this.id, val, null);
+                    this.in_basket = true;
+                }
+                sharedBasketStore.update();
+            }
+        },
         computed: {
             isInBasket: function (product_id) {
                 return this.in_basket;
@@ -49,8 +67,12 @@
                     })),
                     productQuery: '',
                     activeCategories: [],
-                    realCategories: []
+                    realCategories: [],
+                    loading: true,
                 }
+            },
+            mounted: function () {
+                this.loading = false;
             },
             watch: {
                 productQuery: function (newProductQuery) {
@@ -93,6 +115,8 @@
                     products = _.sortBy(products, function (o) {
                         return [o.in_basket == false, o.title]
                     });
+
+                    window.scrollTo(0, 0);
 
                     return products;
                 }

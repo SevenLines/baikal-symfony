@@ -82,12 +82,12 @@
       display: block;
       margin: 0.25em 0;
       padding: 0.25em;
-      border-width: 4px;
-      border-style: dashed;
-      border-color: transparent;
+      //border-width: 4px;
+      //border-style: dashed;
+      //border-color: transparent;
 
       &.active {
-        border-color: black;
+        box-shadow: 0 0 4px silver;
         background-color: $menu-color;
       }
       &:hover {

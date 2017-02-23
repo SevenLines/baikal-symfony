@@ -11,21 +11,33 @@
         toggleToBasket: function (product_id) {
             this.state.products = Cookies.getJSON('basket') || {};
 
-            if (_.has(this.state.products, product_id)) {
-                this.removeFromBasket(this.state.products, product_id)
+            if (product_id in this.state.products) {
+                this.removeFromBasket(product_id, this.state.products)
             } else {
-                this.addToBasket(this.state.products, product_id)
+                this.addToBasket(product_id, 1, this.state.products)
             }
-            Cookies.set('basket', this.state.products);
 
             return _.has(this.state.products, product_id);
         },
-        addToBasket: function (basket, product_id) {
-            basket[product_id] = 1;
+        addToBasket: function (product_id, count, basket) {
+            if (basket === null) {
+                basket = Cookies.getJSON('basket') || {};
+                this.state.products = basket;
+            }
+            if (count === null) {
+                count = 1
+            }
+            basket[product_id] = count;
 
+            Cookies.set('basket', basket)
         },
-        removeFromBasket: function (basket, product_id) {
+        removeFromBasket: function (product_id, basket) {
+            if (basket === null) {
+                basket = Cookies.getJSON('basket') || {};
+                this.state.products = basket;
+            }
             delete basket[product_id];
+            Cookies.set('basket', basket)
         },
         update: function () {
             this.state.products = Cookies.getJSON('basket') || {}

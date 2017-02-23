@@ -47,12 +47,31 @@ class JobApiController extends Controller
         $request = Request::createFromGlobals();
         $basket = json_decode($request->cookies->get("basket", "{}"), true);
 
-        $basket_info = $this->getDoctrine()->getRepository("AppBundle:Product")->createQueryBuilder("p")
-            ->select('SUM(p.price_min) as sum_min, SUM(p.price_max) as sum_max')
-            ->where("p.id in (:ids)")
-            ->setParameter("ids", array_filter(array_keys($basket), function ($item) {
-                return is_integer($item);
-            }))->getQuery()->getOneOrNullResult();
+
+        if (count(array_keys($basket)) > 0) {
+            $expression_min = "CASE ";
+            $expression_max = "CASE ";
+            foreach ($basket as $id => $count) {
+                if (is_int($id) and is_int($count)) {
+                    $expression_min .= "WHEN p.id = $id THEN p.price_min * $count ";
+                    $expression_max .= "WHEN p.id = $id THEN p.price_max * $count ";
+                }
+            }
+            $expression_min .= "ELSE 0 END";
+            $expression_max .= "ELSE 0 END";
+
+            $basket_info = $this->getDoctrine()->getRepository("AppBundle:Product")->createQueryBuilder("p")
+                ->select("SUM($expression_min) as sum_min, SUM($expression_max) as sum_max")
+                ->where("p.id in (:ids)")
+                ->setParameter("ids", array_filter(array_keys($basket), function ($item) {
+                    return is_integer($item);
+                }))->getQuery()->getOneOrNullResult();
+        } else {
+            $basket_info = [
+                "sum_min" => 0,
+                "sum_max" => 0,
+            ];
+        }
 
         return new JsonResponse([
             "sum_min" => intval($basket_info['sum_min']),

@@ -9,6 +9,13 @@
 {% block body %}
     <div class="wrapper">
         <div id="products-controller">
+            <div class="loading-overlay" v-bind:class="{hidden: !loading}">
+                <div class="icon">
+                    <i class="fa fa-5x fa-refresh fa-spin fa-fw"></i>
+                    <br>
+                    <div class="message"><h3>формирую список товаров <br>подождите немного</h3></div>
+                </div>
+            </div>
             {% include "web/partials/category_toolbar.html.twig" with {'class': 'fake-block'} %}
             {% include "web/partials/category_toolbar.html.twig" with {'class': 'fixed'} %}
 
@@ -53,7 +60,10 @@
                     <span>{{ price }} ₽</span>
                 </td>
                 <td class="unit">
-                    <span>{{ unit }}</span>
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" v-model="count" type="number" placeholder="1" min="0"/>
+                        <div class="input-group-addon">{{ unit }}</div>
+                    </div>
                 </td>
                 <td>
                     <div class="btn btn-sm btn-default pull-right"

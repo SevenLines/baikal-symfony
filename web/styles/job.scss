@@ -104,6 +104,14 @@
     @media (max-width: $width-small) {
       display: none;
     }
+    .input-group {
+      .input-group-addon {
+        width: auto;
+      }
+      input {
+        width: 70px;
+      }
+    }
   }
 
   @media (max-width: $width-big) {

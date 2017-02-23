@@ -60,14 +60,11 @@
       transition: all 0.2s;
       display: block;
       margin: 0.25em 0;
-      padding: 0.25em;
-      border-width: 4px;
-      border-style: dashed;
-      border-color: transparent; }
+      padding: 0.25em; }
       #menu ul li:first-child a {
         font-weight: bold; }
       #menu ul li.active {
-        border-color: black;
+        box-shadow: 0 0 4px silver;
         background-color: #f0c200; }
       #menu ul li:hover {
         background-color: #fff2bd; }

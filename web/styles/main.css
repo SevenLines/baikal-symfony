@@ -5865,6 +5865,25 @@ html, body {
   @media (min-width: 768px) {
     .wrapper {
       margin-right: 300px; } }
+  .wrapper .loading-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 300px;
+    z-index: 200;
+    background-color: white;
+    margin: 0 1em; }
+    .wrapper .loading-overlay .icon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      text-align: center;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); }
 
 a {
   -webkit-transition: all 0.2s;
