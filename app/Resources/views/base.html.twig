@@ -12,6 +12,7 @@
         <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
         {% stylesheets
         'styles/main.css'
+        'styles/menu.css'
         'styles/index.css'
         'styles/job.css' %}
         <link rel="stylesheet" href="{{ asset_url }}">
@@ -52,23 +53,45 @@
                     Телефон: {{ menu['phone'] }}
                 </div>
             </div>
+            <hr>
+            <div is="basket" v-bind:urls="urls"></div>
         </div>
     </div>
+
+    {% verbatim %}
+    <script id="menu-basket-template" type="text/x-template">
+        <div class="basket">
+            <div class="basket-inner">
+                <i class="icon fa fa-5x fa-shopping-cart"></i>
+                <i class="fa fa-cog fa-spin fa-3x fa-fw" v-bind:class="{'hidden': !updateBasket}"></i>
+                <div class="info" v-bind:class="{'hidden': updateBasket}">
+                    <div class="count"><span class="value">{{count}}</span> {{count_verbose}}</div>
+
+                    <div class="sum">на сумму: <br><span class="value">{{sumMax}}</span>₽</div>
+                </div>
+            </div>
+        </div>
+    </script>
+    {% endverbatim %}
 {% endblock %}
 
 {% block javascripts %}
     {% javascripts
     'assets/vendor/lodash/dist/lodash.min.js'
     'assets/vendor/vue/dist/vue.min.js'
+    'assets/vendor/vue-resource/dist/vue-resource.min.js'
     'assets/vendor/js-cookie/src/js.cookie.js'
     'assets/vendor/hammerjs/hammer.min.js'
+    'scripts/basket.js'
     'scripts/menu.js'
     'scripts/jobs.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     <script>
-        new MenuInterface("#menu");
+        new MenuInterface("#menu", urls = {
+            'basket_calc': '{{ path("basket_calc") }}'
+        });
     </script>
 {% endblock %}
 

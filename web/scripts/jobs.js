@@ -13,18 +13,8 @@
         },
         methods: {
             toggleBasket: function (product_id) {
-                basket = Cookies.getJSON('basket') || {};
-                if (_.has(basket, product_id)) {
-                    delete basket[product_id];
-                } else {
-                    basket[product_id] = 1;
-                }
-
-                this.in_basket = _.has(basket, product_id);
-
-                Cookies.set('basket', basket);
+                this.in_basket = sharedBasketStore.toggleToBasket(product_id);
             },
-
         },
     });
 

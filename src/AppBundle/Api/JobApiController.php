@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class JobApiController extends Controller
 {
@@ -36,5 +37,26 @@ class JobApiController extends Controller
             ->select("j.id", "j.title", "j.shortDescription")
             ->getQuery()->getResult();
         return new JsonResponse($jobs);
+    }
+
+    /**
+     * @Route("basket/calculate", name="basket_calc")
+     */
+    public function basketCalculateAction()
+    {
+        $request = Request::createFromGlobals();
+        $basket = json_decode($request->cookies->get("basket", "{}"), true);
+
+        $basket_info = $this->getDoctrine()->getRepository("AppBundle:Product")->createQueryBuilder("p")
+            ->select('SUM(p.price_min) as sum_min, SUM(p.price_max) as sum_max')
+            ->where("p.id in (:ids)")
+            ->setParameter("ids", array_filter(array_keys($basket), function ($item) {
+                return is_integer($item);
+            }))->getQuery()->getOneOrNullResult();
+
+        return new JsonResponse([
+            "sum_min" => intval($basket_info['sum_min']),
+            "sum_max" => intval($basket_info['sum_max'])
+        ]);
     }
 }

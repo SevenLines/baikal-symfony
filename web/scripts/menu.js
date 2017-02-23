@@ -2,8 +2,7 @@
  * Created by m on 22.02.17.
  */
 (function () {
-    window.MenuInterface = function (element_id) {
-
+    window.MenuInterface = function (element_id, urls) {
         Vue.directive('click-outside', {
             bind: function (el, binding, vnode) {
                 this.event = function (event) {
@@ -20,10 +19,9 @@
 
         new Vue({
             el: element_id,
-            data: function () {
-                return {
-                    'active': false
-                }
+            data: {
+                active: false,
+                urls: urls
             },
             mounted: function() {
                 var me = this;
