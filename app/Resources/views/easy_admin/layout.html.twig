@@ -1,0 +1,17 @@
+{% extends "@EasyAdmin/default/layout.html.twig" %}
+
+{% block user_menu %}
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <span>{% if app.user|default %}
+                {{ app.user.username|default('user.unnamed'|trans(domain = 'EasyAdminBundle')) }}
+            {% else %}
+                {{ 'user.anonymous'|trans(domain = 'EasyAdminBundle') }}
+            {% endif %}</span>
+            <i class="hidden-xs fa fa-user"> </i>
+        </button>
+        <ul class="dropdown-menu" style="min-width: auto;">
+            <li><a href="{{path("fos_user_security_logout")}}">Выйти</a></li>
+        </ul>
+    </div>
+{% endblock %}

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new \JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new \FOS\UserBundle\FOSUserBundle(),
             new AppBundle\AppBundle(),
         ];
 

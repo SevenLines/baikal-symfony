@@ -1,0 +1,15 @@
+.login-form {
+  width: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: white;
+  padding: 1em;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px white; }
+
+/*# sourceMappingURL=login_form.css.map */
