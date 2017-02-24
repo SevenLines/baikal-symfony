@@ -36,7 +36,8 @@
         "predis/predis": "^1.1",
         "javiereguiluz/easyadmin-bundle": "^1.16",
         "egeloen/ckeditor-bundle": "^4.0",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "symfony/cache": "^3.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

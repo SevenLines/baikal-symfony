@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Persistence\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

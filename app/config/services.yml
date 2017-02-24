@@ -4,9 +4,14 @@ parameters:
 #    parameter_name: value
 
 services:
-  dictionary_manager:
-    class: AppBundle\Services\DictionaryManager
-    arguments: ['@router', '@doctrine']
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    dictionary_manager:
+        class: AppBundle\Services\DictionaryManager
+        arguments: ['@router', '@doctrine', "@options_service", "@cache.app"]
+    options_service:
+        class: AppBundle\Services\OptionsService
+        arguments: ["@cache.app", "@doctrine"]
+    cache_invalidator:
+        class: AppBundle\EventListener\CacheInvalidator
+        arguments: ["@options_service", "@dictionary_manager"]
+        tags:
+            - {name: doctrine.event_subscriber, connection: default}

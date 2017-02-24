@@ -1,7 +1,9 @@
 <?php
 
 namespace AppBundle\Repository;
+
 use AppBundle\Entity\Options;
+use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 /**
  * OptionsRepository
@@ -11,42 +13,4 @@ use AppBundle\Entity\Options;
  */
 class OptionsRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function get() : Options {
-        $options = $this->createQueryBuilder('op')
-            ->select("op")
-            ->orderBy("op.id", "ASC")
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $className = $this->getClassName();
-        if ($options === null) {
-            $options = new $className;
-            $this->_em->persist($options);
-            $this->_em->flush();
-        }
-
-        return $options;
-    }
-
-    public function find($id, $lockMode = null, $lockVersion = null)
-    {
-        return $this->get();
-    }
-
-    public function findAll()
-    {
-        return $this->get();
-    }
-
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-    {
-        return $this->get();
-    }
-
-    public function findOneBy(array $criteria, array $orderBy = null)
-    {
-        return $this->get();
-    }
-
-
 }

@@ -19,7 +19,7 @@ class AdminController extends Controller
      */
     public function optionsEditAction()
     {
-        $options = $this->getDoctrine()->getRepository("AppBundle:Options")->get();
+        $options = $this->get("options_service")->getOptions();
 
         // redirect to the 'edit' view of the given entity item
         return $this->redirectToRoute('easyadmin', array(
