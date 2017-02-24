@@ -1,5 +1,14 @@
 easy_admin:
     entities:
+        Options:
+            class: AppBundle\Entity\Options
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-3', label: 'Основная информация' }
+                    - {property: 'phones', label: "Номера телефонов", type: text}
+                    - {property: 'email', label: "Почта", type: email}
+                    - { type: 'group', css_class: 'col-sm-9', label: 'Описание' }
+                    - {property: 'description', label: "О нас", type: ckeditor}
         Job:
             class: AppBundle\Entity\Job
             label: "Виды работ"
@@ -58,3 +67,10 @@ easy_admin:
     design:
         color_scheme: 'light'
         form_theme: vertical
+        menu:
+            - label: 'Товары'
+              children:
+              - Job
+              - ProductCategory
+              - Product
+            - { label: 'Настройки', route: "options_edit", icon: 'cog'}

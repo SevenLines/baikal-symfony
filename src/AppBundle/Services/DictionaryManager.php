@@ -37,6 +37,8 @@ class DictionaryManager
             ];
         }, $this->doctrine->getRepository("AppBundle:Job")->findAll());
 
+        $options = $this->doctrine->getRepository("AppBundle:Options")->get();
+
         $data = [
             "menu" => array_merge([[
                 "title" => "Байкал Форт АйТи",
@@ -44,8 +46,8 @@ class DictionaryManager
                 "active" => false,
                 "url" => $this->router->generate("index"),
             ]], $menu),
-            "email" => "baikalfort@mail.ru",
-            "phone" => "+7 (3952) 66-64-69, 66-77-13",
+            "email" => $options->getEmail(),
+            "phone" => $options->getPhones(),
         ];
 
         return $data;
