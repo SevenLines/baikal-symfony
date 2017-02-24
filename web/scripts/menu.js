@@ -26,7 +26,9 @@
             mounted: function() {
                 var me = this;
                 [document.body, document.getElementById("menu")].forEach(function(element) {
-                    var mc = new Hammer(element);
+                    var mc = new Hammer(element, {
+                        cssProps: {userSelect: 'text'}
+                    });
                     mc.on("swiperight", function(ev) {
                         me.active = false;
                     });
