@@ -42,8 +42,9 @@
 .content-block.category-toolbar {
   padding-bottom: 0;
   margin-bottom: 0; }
-.content-block.products-list {
-  margin-top: -0.75em; }
+@media (min-width: 768px) {
+  .content-block.products-list {
+    margin-top: -0.75em; } }
 
 .price-block .nav-pills {
   font-size: 0.85em; }

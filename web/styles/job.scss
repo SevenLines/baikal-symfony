@@ -69,7 +69,9 @@
     margin-bottom: 0;
   }
   &.products-list {
-    margin-top: -0.75em;
+    @media (min-width: $width-medium) {
+      margin-top: -0.75em;
+    }
   }
 }
 
