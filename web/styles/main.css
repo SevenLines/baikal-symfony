@@ -5874,6 +5874,10 @@ html, body {
     z-index: 200;
     background-color: white;
     margin: 0 1em; }
+    @media (max-width: 768px) {
+      .wrapper .loading-overlay {
+        right: 40px;
+        margin: 0; } }
     .wrapper .loading-overlay .icon {
       position: absolute;
       left: 50%;

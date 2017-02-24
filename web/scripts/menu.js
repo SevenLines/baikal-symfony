@@ -25,17 +25,14 @@
             },
             mounted: function() {
                 var me = this;
+                delete Hammer.defaults.stop_browser_behavior.userSelec
                 [document.body, document.getElementById("menu")].forEach(function(element) {
                     var mc = new Hammer(element);
-                    mc.on("panright", function(ev) {
-                        if (ev.deltaX > 120 && Math.abs(ev.deltaY) < 50) {
-                            me.active = false;
-                        }
+                    mc.on("swiperight", function(ev) {
+                        me.active = false;
                     });
-                    mc.on("panleft", function(ev) {
-                        if (ev.deltaX < -120 && Math.abs(ev.deltaY) < 50) {
-                            me.active = true;
-                        }
+                    mc.on("swipeleft", function(ev) {
+                        me.active = true;
                     });
                 });
             },
