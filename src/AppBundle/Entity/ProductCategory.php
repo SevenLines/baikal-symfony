@@ -153,4 +153,11 @@ class ProductCategory implements \JsonSerializable
         ];
         return $data;
     }
+
+    function __toString()
+    {
+        return $this->getTitle();
+    }
+
+
 }

@@ -1,0 +1,60 @@
+easy_admin:
+    entities:
+        Job:
+            class: AppBundle\Entity\Job
+            label: "Виды работ"
+            list:
+                title: 'Список видов работ'
+                fields:
+                    - 'id'
+                    - {property: 'title', label: "Наименование"}
+                    - {property: 'short_description', label: "Описание"}
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-3', label: 'Основная информация' }
+                    - {property: 'title', label: "Наименование", type: text}
+                    - { type: 'group', css_class: 'col-sm-9', label: 'Описание' }
+                    - {property: 'short_description', label: "Краткое", type: ckeditor}
+                    - {property: 'description', label: "Полное", type: ckeditor}
+        Product:
+            class: AppBundle\Entity\Product
+            label: "Товары"
+            list:
+                title: "Список товаров"
+                sort: ['title', 'ASC']
+                fields:
+                    - id
+                    - {property: 'title', label: "Наименование", sortable: true}
+                    - {property: 'unit', 'label': "Ед. измерение", sortable: true}
+                    - {property: 'price_min', label: "Мин. цена", sortable: true}
+                    - {property: 'price_max', label: "Макс. цена", sortable: true}
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-8', label: 'Основная информация' }
+                    - { property: 'product_category', label: "Категория", type: "easyadmin_autocomplete", type_options: {class: 'AppBundle\Entity\ProductCategory' }}
+                    - {property: 'title', label: "Наименование", type: text}
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Цена' }
+                    - {property: 'unit', 'label': "Ед. измерение", type: text}
+                    - {property: 'price_min', label: "Мин. цена"}
+                    - {property: 'price_max', label: "Макс. цена"}
+        ProductCategory:
+            class: AppBundle\Entity\ProductCategory
+            label: "Категории товаров"
+            list:
+                title: "Список категорий товаров"
+                sort: ['title', 'ASC']
+                fields:
+                    - id
+                    - {property: 'title', label: "Наименование", sortable: true}
+                    - {property: 'job', label: "Вид работ", sortable: true}
+                    - {property: 'products', label: "Количество товаров"}
+            form:
+                fields:
+                - { type: 'group', css_class: 'col-sm-4', label: 'Основная информация' }
+                - {property: 'title', label: "Наименование", type: text}
+                - {property: 'job', label: "Вид работ", type: "easyadmin_autocomplete", type_options: {class: 'AppBundle\Entity\Job'}}
+                - { type: 'group', css_class: 'col-sm-8', label: 'Товары' }
+                - {property: 'products', label: "список", type: "easyadmin_autocomplete", type_options: {class: 'AppBundle\Entity\Product'}}
+    design:
+        color_scheme: 'light'
+        form_theme: vertical

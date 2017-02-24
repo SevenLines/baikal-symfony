@@ -33,7 +33,10 @@
         "symfony/yaml": "^3.2",
         "jms/serializer-bundle": "^1.1",
         "symfony/assetic-bundle": "^2.8",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "javiereguiluz/easyadmin-bundle": "^1.16",
+        "egeloen/ckeditor-bundle": "^4.0",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

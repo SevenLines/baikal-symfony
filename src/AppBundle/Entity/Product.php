@@ -213,4 +213,11 @@ class Product implements \JsonSerializable
             "unit" => $this->getUnit(),
         ];
     }
+
+    function __toString()
+    {
+        return $this->getTitle();
+    }
+
+
 }
