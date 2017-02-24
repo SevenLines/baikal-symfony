@@ -44,8 +44,8 @@ class OptionsService
 
             if (null === $options_item) {
                 $options_item = new Options();
-                $repo->persist($options_item);
-                $repo->flush();
+                $this->doctrine->getManager()->persist($options_item);
+                $this->doctrine->getManager()->flush();
             }
 
             $options->set($options_item);
