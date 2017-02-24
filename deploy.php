@@ -17,12 +17,7 @@ add('shared_dirs', []);
 add('writable_dirs', []);
 
 // Servers
-server('production', '83.220.170.91')
-    ->user('light')
-    ->port('50212')
-    ->identityFile()
-    ->set('deploy_path', '~/projects/baikal-symfony')
-    ->pty(true);
+serverList("servers.yml");
 
 // Tasks
 desc('Restart PHP-FPM service');

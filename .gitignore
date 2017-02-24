@@ -19,3 +19,4 @@
 /app/config/docker-parameters.yml
 /web/css/
 /web/js/
+/servers.yml

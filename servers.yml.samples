@@ -1,0 +1,6 @@
+prod:
+  host: domain.com
+  user: www
+  identity_file: ~
+  stage: production
+  deploy_path: /home/www/
