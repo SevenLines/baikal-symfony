@@ -25,7 +25,6 @@
             },
             mounted: function() {
                 var me = this;
-                delete Hammer.defaults.stop_browser_behavior.userSelec
                 [document.body, document.getElementById("menu")].forEach(function(element) {
                     var mc = new Hammer(element);
                     mc.on("swiperight", function(ev) {
