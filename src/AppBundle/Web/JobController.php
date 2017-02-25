@@ -16,6 +16,7 @@ class JobController extends Controller
 {
     /**
      * @Route("j/{job_id}/{title}", name="job_description")
+     * @Route("j/{job_id}", name="job_description_without_name")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function job($job_id)
