@@ -2,8 +2,8 @@
 
 namespace Tests\AppBundle\Controller;
 
-use AppBundle\Test\BaseTestCase;
 use AppBundle\Entity\Job;
+use AppBundle\Test\BaseTestCase;
 
 class DefaultControllerTest extends BaseTestCase
 {
@@ -22,7 +22,6 @@ class DefaultControllerTest extends BaseTestCase
         $this->em->persist($this->job2);
         $this->em->flush();
     }
-
 
     public function testJobsPresentOnIndexPage()
     {
