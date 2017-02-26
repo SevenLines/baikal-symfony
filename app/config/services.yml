@@ -10,6 +10,9 @@ services:
     options_service:
         class: AppBundle\Services\OptionsService
         arguments: ["@cache.app", "@doctrine"]
+    basket_service:
+        class: AppBundle\Services\BasketService
+        arguments: ["@doctrine"]
     cache_invalidator:
         class: AppBundle\EventListener\CacheInvalidator
         arguments: ["@options_service", "@dictionary_manager"]

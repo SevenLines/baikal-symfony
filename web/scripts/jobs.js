@@ -2,40 +2,6 @@
  * Created by m on 11.02.17.
  */
 (function () {
-
-    Vue.component("product-row", {
-        template: "#product-row",
-        props: ['title', 'id', 'category_id', 'price', 'unit', 'in_basket'],
-        data: function() {
-            return {
-                count: 1
-            }
-        },
-        watch: {
-            count: function (val, oldValue) {
-                if (val == 0) {
-                    sharedBasketStore.removeFromBasket(this.id, null);
-                    this.count = 1;
-                    this.in_basket = false;
-                } else if (oldValue != 0) {
-                    sharedBasketStore.addToBasket(this.id, val, null);
-                    this.in_basket = true;
-                }
-                sharedBasketStore.update();
-            }
-        },
-        computed: {
-            isInBasket: function (product_id) {
-                return this.in_basket;
-            },
-        },
-        methods: {
-            toggleBasket: function (product_id) {
-                this.in_basket = sharedBasketStore.toggleToBasket(product_id);
-            },
-        },
-    });
-
     window.ProductsController = function ($data, $element) {
         new Vue({
             el: $element,

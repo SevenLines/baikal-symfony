@@ -9,9 +9,28 @@
 namespace AppBundle\Web;
 
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class BasketController extends Controller
 {
 
+    /**
+     * @Route("basket", name="basket_pre_order")
+     */
+    public function preOrderAction()
+    {
+        $products_info = $this->get("basket_service")->getFromCookies();
+
+        $data = [
+            "products" => array_map(function($item) {
+                return $item;
+            }, $products_info['products']),
+            "sum_min" => $products_info ['sum_min'],
+            "sum_max" => $products_info ['sum_max'],
+        ];
+
+        return $this->render(":web:basket.html.twig", $data);
+    }
 }

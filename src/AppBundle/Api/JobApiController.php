@@ -60,12 +60,13 @@ class JobApiController extends Controller
             $expression_min .= "ELSE 0 END";
             $expression_max .= "ELSE 0 END";
 
-            $basket_info = $this->getDoctrine()->getRepository("AppBundle:Product")->createQueryBuilder("p")
+            $query = $this->getDoctrine()->getRepository("AppBundle:Product")->createQueryBuilder("p")
                 ->select("SUM($expression_min) as sum_min, SUM($expression_max) as sum_max")
                 ->where("p.id in (:ids)")
                 ->setParameter("ids", array_filter(array_keys($basket), function ($item) {
                     return is_integer($item);
-                }))->getQuery()->getOneOrNullResult();
+                }))->getQuery();
+            $basket_info = $query->getOneOrNullResult();
         } else {
             $basket_info = [
                 "sum_min" => 0,

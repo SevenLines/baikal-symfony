@@ -59,31 +59,31 @@
         </div>
     </div>
 
-    {% verbatim %}
     <script id="menu-basket-template" type="text/x-template">
-        <div class="basket">
+        <a class="basket" href="{{ path('basket_pre_order') }}">
             <div class="basket-inner">
+                {% verbatim %}
                 <i class="icon fa fa-5x fa-shopping-cart"></i>
                 <i class="fa fa-cog fa-spin fa-3x fa-fw" v-bind:class="{'hidden': !updateBasket}"></i>
                 <div class="info" v-bind:class="{'hidden': updateBasket}">
                     <div class="count"><span class="value">{{count}}</span> {{count_verbose}}</div>
-
                     <div class="sum">на сумму: <br><span class="value">{{sumMax}}</span>₽</div>
                 </div>
+                {% endverbatim %}
             </div>
-        </div>
+        </a>
     </script>
-    {% endverbatim %}
 {% endblock %}
 
 {% block javascripts %}
     {% javascripts
     'assets/vendor/lodash/dist/lodash.min.js'
-    'assets/vendor/vue/dist/vue.min.js'
+    'assets/vendor/vue/dist/vue.js'
     'assets/vendor/vue-resource/dist/vue-resource.min.js'
     'assets/vendor/js-cookie/src/js.cookie.js'
     'assets/vendor/hammerjs/hammer.min.js'
     'scripts/basket.js'
+    'scripts/menu_basket.js'
     'scripts/menu.js'
     'scripts/jobs.js' %}
     <script src="{{ asset_url }}"></script>
@@ -91,7 +91,8 @@
 
     <script>
         new MenuInterface("#menu", urls = {
-            'basket_calc': '{{ path("basket_calc") }}'
+            'basket_calc': '{{ path("basket_calc") }}',
+            'basket_pre_oder': '{{ path('basket_pre_order') }}'
         });
     </script>
 {% endblock %}

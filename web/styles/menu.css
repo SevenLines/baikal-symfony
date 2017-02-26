@@ -75,6 +75,7 @@
         padding: 0.5em 0;
         display: block; }
   #menu .basket {
+    display: block;
     padding: 1em;
     position: relative;
     border-radius: 200px;
