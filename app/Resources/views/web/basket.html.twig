@@ -8,6 +8,14 @@
 
 {% block body %}
     <div class="wrapper" id="basket-info">
+        <div class="loading-overlay" v-bind:class="{hidden: !loading}">
+            <div class="icon">
+                <i class="fa fa-5x fa-refresh fa-spin fa-fw"></i>
+                <br>
+                <div class="message"><h3>наполняю корзину<br>подождите немного</h3></div>
+            </div>
+        </div>
+
         {% include ":web/partials:basket_info.html.twig" with {'class': 'fake-block'} %}
         {% include ":web/partials:basket_info.html.twig" with {'class': 'fixed'} %}
 

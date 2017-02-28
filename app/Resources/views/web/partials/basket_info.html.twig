@@ -1,8 +1,27 @@
 <div class="content-block category-toolbar {{ class }}">
     <div class="content-block-inner">
-        <h2>Корзина</h2>
-        <div class="basket-description">
-            В корзине {{ products|length }} товаров на сумму {{ sum_max }}
+        <div class="pull-left">
+            <h2>Корзина</h2>
+            <div class="basket-description">
+                В корзине {{ products|length }} товаров на сумму {{ sum_max }}
+            </div>
         </div>
+        <a href="#" class="place-order">
+            <h1>Оформить заявку</h1>
+        </a>
+        {#<div class="order-process">#}
+            {#<div class="item">#}
+                {#<h1>1</h1>#}
+            {#</div>#}
+            {#<div class="item-divider"><div class="item-divider-inner"></div></div>#}
+            {#<div class="item">#}
+                {#<h1>2</h1>#}
+            {#</div>#}
+            {#<div class="item-divider"><div class="item-divider-inner"></div></div>#}
+            {#<div class="item">#}
+                {#<h1>3</h1>#}
+            {#</div>#}
+        {#</div>#}
+        <div class="clearfix"></div>
     </div>
 </div>

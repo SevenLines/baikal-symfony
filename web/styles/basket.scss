@@ -1,0 +1,62 @@
+@import "base_varaibles";
+
+.order-process {
+  float: right;
+  .item {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50px;
+    float: left;
+    background-color: $menu-color;
+    text-align: center;
+    padding: 12px;
+    font-size: 50px;
+  }
+  .item-divider {
+    float: left;
+    width: 30px;
+    height: 100px;
+    position: relative;
+    .item-divider-inner {
+      background-color: $menu-color;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 4px;
+    }
+  }
+
+}
+
+.place-order {
+  h1 {
+    margin: 0;
+  }
+  text-decoration: none;
+  float: right;
+  padding: 2em;
+  background-color: $menu-color;
+  border-radius: 8px;
+  box-shadow: 0 0 4px silver;
+
+  @media (max-width: $width-big) {
+    padding: 1em;
+    width: 100%;
+    clear: both;
+    text-align: center;
+    margin-top: 0.5em;
+  }
+
+  @media (max-width: $width-xsmall) {
+    padding: 0.5em;
+    h1 {
+      font-size: 1.75em;
+    }
+  }
+
+  &:hover {
+    background-color: mix(red, $menu-color, 25);
+  }
+  //margin: 1em;
+}

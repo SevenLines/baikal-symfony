@@ -1,0 +1,49 @@
+.order-process {
+  float: right; }
+  .order-process .item {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50px;
+    float: left;
+    background-color: #f0c200;
+    text-align: center;
+    padding: 12px;
+    font-size: 50px; }
+  .order-process .item-divider {
+    float: left;
+    width: 30px;
+    height: 100px;
+    position: relative; }
+    .order-process .item-divider .item-divider-inner {
+      background-color: #f0c200;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 4px; }
+
+.place-order {
+  text-decoration: none;
+  float: right;
+  padding: 2em;
+  background-color: #f0c200;
+  border-radius: 8px;
+  box-shadow: 0 0 4px silver; }
+  .place-order h1 {
+    margin: 0; }
+  @media (max-width: 990px) {
+    .place-order {
+      padding: 1em;
+      width: 100%;
+      clear: both;
+      text-align: center;
+      margin-top: 0.5em; } }
+  @media (max-width: 420px) {
+    .place-order {
+      padding: 0.5em; }
+      .place-order h1 {
+        font-size: 1.75em; } }
+  .place-order:hover {
+    background-color: #f49200; }
+
+/*# sourceMappingURL=basket.css.map */
