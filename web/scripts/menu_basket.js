@@ -46,10 +46,11 @@
 
     Vue.component("product-row", {
         template: "#product-row",
-        props: ['title', 'id', 'category_id', 'price', 'unit', 'in_basket'],
-        data: function() {
+        props: ['title', 'id', 'category_id', 'price', 'unit', 'in_basket_init', 'count_init'],
+        data: function () {
             return {
-                count: 1
+                in_basket: this.in_basket_init,
+                count: this.count_init,
             }
         },
         watch: {

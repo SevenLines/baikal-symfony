@@ -32,7 +32,8 @@
                                     v-bind:title="product.title"
                                     v-bind:price="product.price_max"
                                     v-bind:unit="product.unit"
-                                    v-bind:in_basket="product.in_basket"
+                                    v-bind:in_basket_init="product.in_basket"
+                                    v-bind:count_init="product.count"
                                     v-bind:id="product.id"
                                     ></tr>
                                     <div v-if="!filteredProducts.length" style="padding-top: 1em">

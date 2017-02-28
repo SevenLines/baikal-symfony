@@ -2,39 +2,55 @@
  * Created by m on 11.02.17.
  */
 (function () {
-    window.ProductsController = function ($data, $element) {
+    window.ProductsController = function ($productCategories, $element, $products) {
         new Vue({
             el: $element,
             data: function () {
-                data = $data;
-                var categories = _.map(data, function (item) {
-                    return item;
-                });
-                categories.unshift({
-                    title: 'Все категории',
-                    id: -1,
-                });
+                var basket = Cookies.getJSON('basket');
 
-                basket = Cookies.getJSON('basket');
+                if ($productCategories !== null) {
+                    data = $productCategories;
+                    var categories = data;
+                    categories.unshift({
+                        title: 'Все категории',
+                        id: -1,
+                    });
 
-                return {
-                    categories: _.sortBy(categories, function (o) {
-                        if (o.id == -1) {
-                            return '!'
-                        }
-                        return o.title;
-                    }),
-                    products: _.flatten(_.map(data, function (category) {
-                        return _.map(category.products, function (item) {
-                            item.category_id = category.id;
-                            item.in_basket = _.has(basket, item.id);
-                            return item;
-                        });
-                    })),
-                    productQuery: '',
-                    activeCategories: [],
-                    realCategories: [],
-                    loading: true,
+                    return {
+                        categories: _.sortBy(categories, function (o) {
+                            if (o.id == -1) {
+                                return '!'
+                            }
+                            return o.title;
+                        }),
+                        products: _.flatten(_.map(data, function (category) {
+                            return _.map(category.products, function (item) {
+                                item.category_id = category.id;
+                                item.in_basket = _.has(basket, item.id);
+                                item.count = item.in_basket ? basket[item.id] : 1;
+                                return item;
+                            });
+                        })),
+                        productQuery: '',
+                        activeCategories: [],
+                        realCategories: [],
+                        loading: true,
+                    }
+                }
+                if ($products !== null) {
+                    return {
+                        categories: [],
+                        products: _.map($products, function(item) {
+                            var it = item['product'];
+                            it.in_basket = _.has(basket, it.id);
+                            it.count = it.in_basket ? basket[it.id] : 1;
+                            return it;
+                        }),
+                        productQuery: '',
+                        activeCategories: [],
+                        realCategories: [],
+                        loading: true,
+                    }
                 }
             },
             mounted: function () {
