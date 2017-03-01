@@ -33,4 +33,15 @@ class BasketController extends Controller
 
         return $this->render(":web:basket.html.twig", $data);
     }
+
+    /**
+     * @Route("place_order", name="place_order")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function placeOrder()
+    {
+        $request = Request::createFromGlobals();
+        $data = [];
+        return $this->render(":web:order.html.twig", $data);
+    }
 }

@@ -1,8 +1,6 @@
 /**
  * Created by m on 23.02.17.
  */
-
-
 (function () {
     var updateBasketActionCompleteEvent = document.createEvent('Event');
     var updateBasketActionCompleteFailEvent = document.createEvent('Event');
@@ -58,7 +56,7 @@
             }, function () {
                 document.dispatchEvent(updateBasketActionCompleteFailEvent);
             })
-        }, 1000)
+        }, 1000),
     };
 
     Vue.component("product-row", {
@@ -95,9 +93,7 @@
         },
     });
 
-    Vue.component("menu-basket", {
-        template: "#menu-basket-template",
-        props: ['urls'],
+    var menuBasketMixin = {
         mounted: function () {
             var me = this;
             document.addEventListener("updateBasketActionComplete", function (e) {
@@ -125,7 +121,9 @@
         },
         computed: {
             count: function () {
-                return _.keys(this.realState.products).length
+                return _.filter(_.keys(this.realState.products), function (key) {
+                    return String(key) === String(parseInt(key, 10))
+                }).length
             },
             count_verbose: function () {
                 count = this.count;
@@ -148,9 +146,24 @@
         watch: {
             realState: {
                 handler: function (val, oldValue) {
-                    sharedBasketStore.updateBasketAction(this.urls['basket_calc'], val, oldValue)
+                    sharedBasketStore.updateBasketAction(commonUrls['basket_calc'], val, oldValue)
                 },
                 deep: true
+            }
+        }
+    };
+
+    Vue.component("menu-basket", {
+        template: "#menu-basket-template",
+        mixins: [menuBasketMixin]
+    });
+
+    Vue.component("basket-top-bar", {
+        template: "#basket-top-bar-template",
+        mixins: [menuBasketMixin],
+        methods: {
+            placeOrder: function ($event) {
+                this.$http.post($event.currentTarget.href, sharedBasketStore.state.products);
             }
         }
     });

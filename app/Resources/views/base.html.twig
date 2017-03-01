@@ -56,7 +56,7 @@
                 </div>
             </div>
             <hr>
-            <div is="menu-basket" v-bind:urls="urls"></div>
+            <div is="menu-basket"></div>
         </div>
     </div>
 
@@ -83,18 +83,23 @@
     'assets/vendor/vue-resource/dist/vue-resource.min.js'
     'assets/vendor/js-cookie/src/js.cookie.js'
     'assets/vendor/hammerjs/hammer.min.js'
-    'scripts/basket.js'
     'scripts/menu_basket.js'
     'scripts/menu.js'
+    'scripts/basket.js'
     'scripts/jobs.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     <script>
-        new MenuInterface("#menu", urls = {
+        window.commonUrls = {
             'basket_calc': '{{ path("basket_calc") }}',
-            'basket_pre_oder': '{{ path('basket_pre_order') }}'
-        });
+            'basket_pre_oder': '{{ path('basket_pre_order') }}',
+            'basket_place_oder': '{{ path('place_order') }}'
+        }
+    </script>
+
+    <script>
+        new MenuInterface("#menu");
     </script>
 {% endblock %}
 
