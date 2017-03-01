@@ -13,11 +13,18 @@
                 <div class="icon">
                     <i class="fa fa-5x fa-refresh fa-spin fa-fw"></i>
                     <br>
-                    <div class="message"><h3>формирую список товаров и услуг<br>подождите немного</h3></div>
+                    <div class="message">
+                        {% block loading_message %}
+                            <h3>формирую список товаров и услуг<br>подождите немного</h3>
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
-            {% include "web/partials/category_toolbar.html.twig" with {'class': 'fake-block'} %}
-            {% include "web/partials/category_toolbar.html.twig" with {'class': 'fixed'} %}
+
+            {% block top_container %}
+                {% include "web/partials/category_toolbar.html.twig" with {'class': 'fake-block'} %}
+                {% include "web/partials/category_toolbar.html.twig" with {'class': 'fixed'} %}
+            {% endblock %}
 
             <div class="content-block products-list">
                 <div class="content-block-inner">
@@ -83,10 +90,11 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script>
-        new ProductsController({{ job.productCategories | serialize("json") |raw }}, "#products-controller");
-    </script>
-
+    {% block javascripts_controller_init %}
+        <script>
+            new ProductsController({{ job.productCategories | serialize("json") |raw }}, "#products-controller");
+        </script>
+    {% endblock %}
 {% endblock %}
 
 

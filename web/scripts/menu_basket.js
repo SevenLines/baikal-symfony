@@ -4,6 +4,13 @@
 
 
 (function () {
+    var updateBasketActionCompleteEvent = document.createEvent('Event');
+    var updateBasketActionCompleteFailEvent = document.createEvent('Event');
+    var beforeUpdateBasketActionCompleteEvent = document.createEvent('Event');
+    updateBasketActionCompleteEvent.initEvent('updateBasketActionComplete', true, true);
+    updateBasketActionCompleteFailEvent.initEvent('updateBasketActionCompleteFail', true, true);
+    beforeUpdateBasketActionCompleteEvent.initEvent('beforeUpdateBasketActionComplete', true, true);
+
     var sharedBasketStore = {
         state: {
             products: {}
@@ -41,7 +48,17 @@
         },
         update: function () {
             this.state.products = Cookies.getJSON('basket') || {}
-        }
+        },
+        updateBasketAction: _.debounce(function (url, val, oldValue) {
+            var me = this;
+            document.dispatchEvent(beforeUpdateBasketActionCompleteEvent);
+            Vue.http.get(url).then(function (data) {
+                me.updateBasketActionData = data.body;
+                document.dispatchEvent(updateBasketActionCompleteEvent);
+            }, function () {
+                document.dispatchEvent(updateBasketActionCompleteFailEvent);
+            })
+        }, 1000)
     };
 
     Vue.component("product-row", {
@@ -78,9 +95,23 @@
         },
     });
 
-    Vue.component("basket", {
+    Vue.component("menu-basket", {
         template: "#menu-basket-template",
         props: ['urls'],
+        mounted: function () {
+            var me = this;
+            document.addEventListener("updateBasketActionComplete", function (e) {
+                me.sumMin = sharedBasketStore.updateBasketActionData['sum_min'];
+                me.sumMax = sharedBasketStore.updateBasketActionData['sum_max'];
+                me.updateBasket = false
+            });
+            document.addEventListener("updateBasketActionCompleteFail", function (e) {
+                me.updateBasket = false;
+            });
+            document.addEventListener("beforeUpdateBasketActionComplete", function (e) {
+                me.updateBasket = true;
+            })
+        },
         data: function () {
             return {
                 updateBasket: false,
@@ -114,23 +145,10 @@
                 return value
             }
         },
-        methods: {
-            updateBasketAction: _.debounce(function (val, oldValue) {
-                var me = this;
-                me.updateBasket = true;
-                this.$http.get(this.urls['basket_calc']).then(function (data) {
-                    me.sumMin = data.body['sum_min'];
-                    me.sumMax = data.body['sum_max'];
-                    me.updateBasket = false
-                }, function () {
-                    me.updateBasket = false
-                })
-            }, 1000)
-        },
         watch: {
             realState: {
                 handler: function (val, oldValue) {
-                    this.updateBasketAction(val, oldValue)
+                    sharedBasketStore.updateBasketAction(this.urls['basket_calc'], val, oldValue)
                 },
                 deep: true
             }

@@ -44,6 +44,8 @@
       .place-order h1 {
         font-size: 1.75em; } }
   .place-order:hover {
+    text-decoration: none; }
+  .place-order:hover {
     background-color: #f49200; }
 
 /*# sourceMappingURL=basket.css.map */

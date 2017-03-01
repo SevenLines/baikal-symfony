@@ -56,6 +56,10 @@
   }
 
   &:hover {
+    text-decoration: none;
+  }
+
+  &:hover {
     background-color: mix(red, $menu-color, 25);
   }
   //margin: 1em;
