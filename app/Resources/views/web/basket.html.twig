@@ -20,11 +20,9 @@
         <div class>
             <div class="pull-left">
                 <h2>Корзина</h2>
-                <div class="basket-description">
-                    {% verbatim %}
-                В корзине {{ count }} {{ count_verbose }} на сумму {{ sumMax }}₽
-                {% endverbatim %}
-                </div>
+                <div class="basket-description">{% verbatim %}
+                {{ count }} {{ count_verbose }} на сумму {{ sumMax }}₽
+                {% endverbatim %}</div>
             </div>
             <a href="{{ path("place_order") }}" class="place-order" @click.prevent="placeOrder($event)">
                 <h1>Оформить заявку</h1>
