@@ -163,7 +163,14 @@
         mixins: [menuBasketMixin],
         methods: {
             placeOrder: function ($event) {
-                this.$http.post($event.currentTarget.href, sharedBasketStore.state.products);
+                this.$http.post(
+                    commonUrls['basket_place_oder'],
+                    sharedBasketStore.state.products
+                ).then(function (data) {
+                    document.location.href = commonUrls['basket_order'] + "?hash=" + data.body.hash;
+                }, function () {
+
+                });
             }
         }
     });

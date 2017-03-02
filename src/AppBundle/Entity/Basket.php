@@ -31,7 +31,14 @@ class Basket
     /**
      * @var string
      *
-     * @ORM\Column(name="full_name", type="text")
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="full_name", type="text", nullable=true)
      */
     private $fullName;
 
@@ -56,6 +63,13 @@ class Basket
      */
     private $products;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hash", type="text", unique=true)
+     */
+    private $hash;
 
     /**
      * Get id
@@ -186,5 +200,52 @@ class Basket
     {
         return $this->products;
     }
-}
 
+    /**
+     * Set hash
+     *
+     * @param string $hash
+     *
+     * @return Basket
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Get hash
+     *
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Basket
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+}

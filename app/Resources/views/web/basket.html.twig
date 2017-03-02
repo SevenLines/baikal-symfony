@@ -24,7 +24,7 @@
                 {{ count }} {{ count_verbose }} на сумму {{ sumMax }}₽
                 {% endverbatim %}</div>
             </div>
-            <a href="{{ path("place_order") }}" class="place-order" @click.prevent="placeOrder($event)">
+            <a href="{{ path("order") }}" class="place-order" @click.prevent="placeOrder($event)">
                 <h1>Оформить заявку</h1>
             </a>
         </div>
