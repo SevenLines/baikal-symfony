@@ -1,5 +1,5 @@
 @import "base_varaibles";
-@import "variables";
+//@import "variables";
 
 .description {
   overflow: hidden;
@@ -129,7 +129,7 @@
     }
     tr {
       &.selected {
-        $clr: lighten($brand-success, 50);
+        $clr: lighten($menu-color, 50);
         background-color: $clr;
         &:hover {
           background-color: mix($clr, $menu-color, 75);

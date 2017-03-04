@@ -5,7 +5,7 @@
   top: 0;
   background-color: white;
   box-shadow: 0 0 10px silver;
-  max-width: 300px;
+  max-width: 320px;
   overflow-y: scroll;
   z-index: 100;
   -webkit-transition: all 0.3s;
@@ -36,7 +36,7 @@
       transform: translate(-50%, -50%) rotate(90deg); }
   @media (max-width: 768px) {
     #menu {
-      right: -260px;
+      right: -280px;
       padding-left: 40px; }
       #menu .toggler {
         right: 40px;

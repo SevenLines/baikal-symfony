@@ -7,6 +7,7 @@
     <meta name=description content="{% block description %}{% endblock %}">
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     {% block stylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
         <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -39,10 +40,16 @@
             <ul>
                 {% for item in menu['menu'] %}
                     <li class="{% if job is defined and job.id == item.id or job is not defined and item.id == 0 %}active{% endif %}">
-                        <a href="{{ item.url }}">{{ item.title }}</a>
-                        {% if loop.first %}
-                            <hr style="margin: 0">{% endif %}
+                        <a href="{{ item.url }}">
+                            {% if loop.first %}
+                                <img src="{{ asset('icon_32.png') }}" alt="">
+                                <span style="font-size: 1em">{{ item.title }}</span>
+                            {% else %}
+                                <span>{{ item.title }}</span>
+                            {% endif %}
+                        </a>
                     </li>
+                    {% if loop.first %}<hr style="margin: 0">{% endif %}
                 {% endfor %}
             </ul>
             <div>
@@ -78,11 +85,13 @@
 
 {% block javascripts %}
     {% javascripts
+    'assets/vendor/jquery/dist/jquery.min.js'
     'assets/vendor/lodash/dist/lodash.min.js'
     'assets/vendor/vue/dist/vue.js'
     'assets/vendor/vue-resource/dist/vue-resource.min.js'
     'assets/vendor/js-cookie/src/js.cookie.js'
     'assets/vendor/hammerjs/hammer.min.js'
+    'assets/vendor/bootstrap-validator/dist/validator.min.js'
     'scripts/menu_basket.js'
     'scripts/menu.js'
     'scripts/basket.js'

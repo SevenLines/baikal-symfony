@@ -4,33 +4,45 @@
     <div class="wrapper">
         <div class="content-block">
             <div class="content-block-inner">
-                <h1>Ваши контакты</h1>
-                <form class="form" method="POST">
+                <form class="form" action="" data-toggle="form-validator" method="POST">
+
+                    <h1>Ваши контакты</h1>
                     <div class="col-md-6">
-                        <div class="input-group col-md-12">
+                        <div class="form-group has-feedback">
                             <label for="">ФИО <span class="red">*</span></label>
-                            <input type="text" class="form-control" name="full_name" placeholder="Иванов Иван Иванович">
+                            <input type="text" class="form-control" name="full_name" placeholder="Иванов Иван Иванович"
+                                   required data-required-error="это поле необходимо заполнить">
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <div class="help-block with-errors"></div>
                         </div>
-                        <div class="input-group col-md-12" style="margin-top: 0.5em">
+                        <div class="form-group has-feedback">
                             <label for="">Телефон</label>
                             <input type="text" class="form-control" name="phone" placeholder="+7XXX XXX XX XX">
                         </div>
-                        <div class="input-group col-md-12" style="margin-top: 0.5em">
+                        <div class="form-group has-feedback">
                             <label for="">email <span class="red">*</span></label>
-                            <input type="text" class="form-control" name="email" placeholder="xxxxx@xxxxx.xxx">
+                            <input type="text" class="form-control" name="email" placeholder="xxxxx@xxxxx.xxx"
+                                   type="email" required data-error="неверный формат почтового адреса"
+                                   data-required-error="это поле необходимо заполнить">
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div>
+                            <small><span class="red">*</span> - поля обязательные для заполнения</small>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="input-group col-md-12">
                             <label for="">Комментарий</label>
-                            <textarea class="form-control" name="comment" id="" cols="30" rows="10" placeholder=""></textarea>
+                            <textarea class="form-control" name="comment" id="" cols="30" rows="10"
+                                      placeholder=""></textarea>
                         </div>
                     </div>
                 </form>
+                <div class="clearfix"></div>
 
-                <h1>Смета
-                    {#<small>по заявке №{{ basket.id }}</small>#}
-                </h1>
+                <h1>Смета</h1>
                 <table class="table">
                     <thead>
                     <tr>
@@ -56,9 +68,21 @@
                     </tr>
                     </tfoot>
                 </table>
-
-                <div class="btn btn-primary btn-lg">Сохранить</div>
+                <button type="submit" class="btn btn-primary btn-lg">Оформить</button>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(window).on('load', function () {
+            $('form[data-toggle="form-validator"]').each(function () {
+                var $form = $(this)
+                Plugin.call($form, $form.data())
+            })
+        })
+    </script>
 {% endblock %}

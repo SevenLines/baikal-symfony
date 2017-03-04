@@ -70,9 +70,9 @@
   .product-category-items table thead th {
     border-bottom: none; }
   .product-category-items table tr.selected {
-    background-color: #fffbed; }
+    background-color: #fffcf0; }
     .product-category-items table tr.selected:hover {
-      background-color: #fbedb2; }
+      background-color: #fbeeb4; }
 
 .table-hover tr {
   -webkit-transition: all 0.2s;
