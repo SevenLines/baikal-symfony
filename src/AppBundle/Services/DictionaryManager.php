@@ -58,7 +58,7 @@ class DictionaryManager
 
             $data = [
                 "menu" => array_merge([[
-                    "title" => "Байкал Форт ",
+                    "title" => "Байкал Форт АйТи",
                     "id" => 0,
                     "active" => false,
                     "url" => $this->router->generate("index"),
