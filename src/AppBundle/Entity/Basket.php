@@ -72,6 +72,13 @@ class Basket
     private $hash;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text",  nullable=true)
+     */
+    private $comment;
+
+    /**
      * Get id
      *
      * @return int
@@ -247,5 +254,29 @@ class Basket
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Basket
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

@@ -1,74 +1,56 @@
 {% extends "base.html.twig" %}
+{% form_theme form 'form/bootstrap_3_layout.html.twig' %}
 
 {% block body %}
     <div class="wrapper">
         <div class="content-block">
             <div class="content-block-inner">
-                <form class="form" action="" data-toggle="form-validator" method="POST">
-
+                {{ form_start(form, { 'attr': {'data-toggle': 'validate-me'}}) }}
                     <h1>Ваши контакты</h1>
                     <div class="col-md-6">
-                        <div class="form-group has-feedback">
-                            <label for="">ФИО <span class="red">*</span></label>
-                            <input type="text" class="form-control" name="full_name" placeholder="Иванов Иван Иванович"
-                                   required data-required-error="это поле необходимо заполнить">
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group has-feedback">
-                            <label for="">Телефон</label>
-                            <input type="text" class="form-control" name="phone" placeholder="+7XXX XXX XX XX">
-                        </div>
-                        <div class="form-group has-feedback">
-                            <label for="">email <span class="red">*</span></label>
-                            <input type="text" class="form-control" name="email" placeholder="xxxxx@xxxxx.xxx"
-                                   type="email" required data-error="неверный формат почтового адреса"
-                                   data-required-error="это поле необходимо заполнить">
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <div class="help-block with-errors"></div>
-                        </div>
+                        {{ form_row(form.full_name) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.phone) }}
                         <div>
                             <small><span class="red">*</span> - поля обязательные для заполнения</small>
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="input-group col-md-12">
-                            <label for="">Комментарий</label>
-                            <textarea class="form-control" name="comment" id="" cols="30" rows="10"
-                                      placeholder=""></textarea>
-                        </div>
+                        {{ form_row(form.comment) }}
                     </div>
-                </form>
-                <div class="clearfix"></div>
+                    <div class="clearfix"></div>
 
-                <h1>Смета</h1>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Наименование</th>
-                        <th>количество</th>
-                        <th>сумма</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for product in basket.products %}
+                    <h1>Смета</h1>
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{ product.title }}</td>
-                            <td>{{ product.count }} {{ product.unit }} по {{ product.price_max }}₽</td>
-                            <td>{{ product.price_max * product.count }}₽</td>
+                            <th>Наименование</th>
+                            <th>количество</th>
+                            <th>сумма</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td></td>
-                        <td><b class="pull-right"></b></td>
-                        <td><b>{{ basket.totalPriceMax }}₽</b></td>
-                    </tr>
-                    </tfoot>
-                </table>
-                <button type="submit" class="btn btn-primary btn-lg">Оформить</button>
+                        </thead>
+                        <tbody>
+                        {% for product in basket.products %}
+                            <tr>
+                                <td>{{ product.title }}</td>
+                                <td>{{ product.count }} {{ product.unit }} по {{ product.price_max }}₽</td>
+                                <td>{{ product.price_max * product.count }}₽</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td></td>
+                            <td><b class="pull-right"></b></td>
+                            <td><b>{{ basket.totalPriceMax }}₽</b></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg">Оформить</button>
+                    </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
@@ -78,11 +60,10 @@
     {{ parent() }}
 
     <script>
-        $(window).on('load', function () {
-            $('form[data-toggle="form-validator"]').each(function () {
-                var $form = $(this)
-                Plugin.call($form, $form.data())
-            })
+        $('form[data-toggle="validate-me"]').validator({
+            'errors': {
+
+            }
         })
     </script>
 {% endblock %}
