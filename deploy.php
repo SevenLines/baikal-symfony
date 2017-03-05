@@ -60,7 +60,7 @@ set('releases_list', function () {
 
     // Prepare list.
     $list = array_map(function ($release) {
-        return basename(rtrim($release, "/\r"));
+        return basename(rtrim(trim($release), '/'));
     }, $list);
 
     $releases = []; // Releases list.
