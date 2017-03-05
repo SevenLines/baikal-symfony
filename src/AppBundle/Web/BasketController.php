@@ -9,10 +9,8 @@
 namespace AppBundle\Web;
 
 
-use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -144,6 +142,7 @@ class BasketController extends Controller
             'basket' => $basket
         ]);
         $response->headers->clearCookie("order_hash");
+        $response->headers->clearCookie("basket");
 
         return $response;
     }
