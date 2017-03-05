@@ -74,8 +74,9 @@
                 <i class="icon fa fa-5x fa-shopping-cart"></i>
                 <i class="fa fa-cog fa-spin fa-3x fa-fw" v-bind:class="{'hidden': !updateBasket}"></i>
                 <div class="info" v-bind:class="{'hidden': updateBasket}">
-                    <div class="count"><span class="value">{{count}}</span> {{count_verbose}}</div>
-                    <div class="sum">на сумму: <br><span class="value">{{sumMax}}</span>₽</div>
+                    <div class="" v-if="count == 0">Корзина пуста</div>
+                    <div class="count" v-if="count > 0"><span class="value">{{count}}</span> {{count_verbose}}</div>
+                    <div class="sum" v-if="count > 0">на сумму: <br><span class="value">{{sumMax}}</span>₽</div>
                 </div>
                 {% endverbatim %}
             </div>

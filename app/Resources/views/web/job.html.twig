@@ -32,7 +32,6 @@
                         <div class="product-category-items">
                             <table class="table table-striped table-hover table-condensed ">
                                 <tbody>
-                                {% verbatim %}
                                     <tr is="product-row"
                                     v-for="product in filteredProducts"
                                     :key="product.id"
@@ -44,9 +43,8 @@
                                     v-bind:id="product.id"
                                     ></tr>
                                     <div v-if="!filteredProducts.length" style="padding-top: 1em">
-                                    к сожалению ничего найти не удалось
+                                    {% block empty_message %}к сожалению ничего найти не удалось{% endblock %}
                                     </div>
-                                {% endverbatim %}
                                 </tbody>
                             </table>
                         </div>
