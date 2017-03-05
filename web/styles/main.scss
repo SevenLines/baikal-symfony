@@ -142,3 +142,41 @@ a {
 .btn-success:hover {
   background-color: $menu-color;
 }
+
+.info-block {
+  .content-block-inner {
+    height: 100%;
+    position: relative;
+
+    .message {
+      width: 95%;
+      position: absolute;
+      top: 50%;
+      text-align: center;
+      -webkit-transform: translate(0%, -50%);
+      -moz-transform: translate(0%, -50%);
+      -ms-transform: translate(0%, -50%);
+      -o-transform: translate(0%, -50%);
+      transform: translate(0%, -50%);
+
+
+      hr {
+        margin: 0.25em;
+      }
+      .icon {
+        font-size: 7em;
+        @media (max-width: $width-medium) {
+          font-size: 5em;
+        }
+        color: mix(#54d81a, $menu-color, 50);
+      }
+      .info {
+        font-size: 2em;
+        @media (max-width: $width-medium) {
+          font-size: 1.5em;
+        }
+      }
+    }
+  }
+
+}

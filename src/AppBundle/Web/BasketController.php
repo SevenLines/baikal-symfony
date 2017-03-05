@@ -114,7 +114,7 @@ class BasketController extends Controller
             $doctrine = $this->getDoctrine();
             $basket = $doctrine->getRepository("AppBundle:Basket")->getByHash($hash);
         } else {
-            throw $this->createNotFoundException();
+            return $this->redirectToRoute("index");
         }
 
         $basket->{'totalPriceMin'} = array_sum(array_map(function ($item) {

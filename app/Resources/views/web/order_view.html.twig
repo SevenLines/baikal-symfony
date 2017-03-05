@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+{% form_theme form 'form/bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="content-block">
+            <div class="content-block-inner">
+                    <h1>Ваши контакты</h1>
+
+                    <h1>Смета</h1>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Наименование</th>
+                            <th>количество</th>
+                            <th>сумма</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in basket.products %}
+                            <tr>
+                                <td>{{ product.title }}</td>
+                                <td>{{ product.count }} {{ product.unit }} по {{ product.price_max }}₽</td>
+                                <td>{{ product.price_max * product.count }}₽</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td></td>
+                            <td><b class="pull-right"></b></td>
+                            <td><b>{{ basket.totalPriceMax }}₽</b></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg">Оформить</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $('form[data-toggle="validate-me"]').validator({
+            'errors': {
+
+            }
+        })
+    </script>
+{% endblock %}

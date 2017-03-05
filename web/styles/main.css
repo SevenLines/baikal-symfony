@@ -5918,4 +5918,31 @@ a {
 .btn-success:hover {
   background-color: #f0c200; }
 
+.info-block .content-block-inner {
+  height: 100%;
+  position: relative; }
+  .info-block .content-block-inner .message {
+    width: 95%;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    -webkit-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -o-transform: translate(0%, -50%);
+    transform: translate(0%, -50%); }
+    .info-block .content-block-inner .message hr {
+      margin: 0.25em; }
+    .info-block .content-block-inner .message .icon {
+      font-size: 7em;
+      color: #a2cd0d; }
+      @media (max-width: 768px) {
+        .info-block .content-block-inner .message .icon {
+          font-size: 5em; } }
+    .info-block .content-block-inner .message .info {
+      font-size: 2em; }
+      @media (max-width: 768px) {
+        .info-block .content-block-inner .message .info {
+          font-size: 1.5em; } }
+
 /*# sourceMappingURL=main.css.map */
