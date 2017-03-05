@@ -1,13 +1,12 @@
 <?php
 namespace Deployer;
-require 'recipe/symfony.php';
+require 'recipe/symfony3.php';
 
 // Configuration
 
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
 set('dump_assets', true);
-set('bin_dir', 'bin');
 
 set('repository', 'https://github.com/SevenLines/baikal-symfony.git');
 

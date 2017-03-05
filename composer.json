@@ -39,7 +39,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "symfony/cache": "^3.2",
         "phpunit/phpunit": "~5.7",
-        "symfony/css-selector": "^3.2"
+        "symfony/css-selector": "^3.2",
+        "deployer/deployer": "^4.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
