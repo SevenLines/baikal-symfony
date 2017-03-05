@@ -12,6 +12,7 @@ namespace AppBundle\Web;
 use Doctrine\ORM\Query;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -45,15 +46,11 @@ class BasketController extends Controller
      */
     public function orderAction(Request $request)
     {
-        $hash = $request->query->get('hash');
+        $hash = $request->cookies->get('order_hash');
 
         if (!empty($hash)) {
             $doctrine = $this->getDoctrine();
-            $basket = $doctrine->getRepository("AppBundle:Basket")->createQueryBuilder("b")
-                ->select("b")
-                ->where("b.hash = :hash")
-                ->setParameter("hash", $hash)
-                ->getQuery()->getOneOrNullResult();
+            $basket = $doctrine->getRepository("AppBundle:Basket")->getByHash($hash);
 
             $form = $this->createFormBuilder($basket)
                 ->add("full_name", TextType::class, [
@@ -78,11 +75,16 @@ class BasketController extends Controller
 
             $form->handleRequest($request);
 
+            # обработка отправленной формы
             if ($form->isSubmitted() && $form->isValid()) {
                 $basket = $form->getData();
+                $basket->setConfirmed(true);
                 $vm = $doctrine->getManager();
                 $vm->persist($basket);
                 $vm->flush();
+
+                $response = $this->redirectToRoute("order_success");
+                return $response;
             }
 
             $basket->{'totalPriceMin'} = array_sum(array_map(function ($item) {
@@ -100,5 +102,49 @@ class BasketController extends Controller
             'basket' => $basket,
             'form' => $form_view
         ]);
+    }
+
+    /**
+     * @Route("/order/success", name="order_success")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function orderSuccessAction(Request $request)
+    {
+        $hash = $request->cookies->get('order_hash');
+        if (!empty($hash)) {
+            $doctrine = $this->getDoctrine();
+            $basket = $doctrine->getRepository("AppBundle:Basket")->getByHash($hash);
+        } else {
+            throw $this->createNotFoundException();
+        }
+
+        $basket->{'totalPriceMin'} = array_sum(array_map(function ($item) {
+            return $item['price_min'] * $item['count'];
+        }, $basket->getProducts()));
+        $basket->{'totalPriceMax'} = array_sum(array_map(function ($item) {
+            return $item['price_max'] * $item['count'];
+        }, $basket->getProducts()));
+
+        # отправляем письмо об успешном заказе
+        $message = \Swift_Message::newInstance()
+            ->setSubject("Заказ номер: {$basket->getId()}")
+            ->setFrom("robot@baikalfortit.ru")
+            ->setTo("{$basket->getEmail()}")
+            ->setBody(
+                $this->renderView(
+                    ":emails:email_order.html.twig", [
+                        "basket" => $basket
+                    ]
+                ), 'text/html'
+            );
+        $this->get("mailer")->send($message);
+
+        $response = $this->render(":web:order_success.html.twig", [
+            'basket' => $basket
+        ]);
+        $response->headers->clearCookie("order_hash");
+
+        return $response;
     }
 }

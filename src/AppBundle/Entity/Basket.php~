@@ -74,6 +74,13 @@ class Basket
     /**
      * @var string
      *
+     * @ORM\Column(name="confirmed", type="boolean", nullable=false)
+     */
+    private $confirmed = false;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="comment", type="text",  nullable=true)
      */
     private $comment;
@@ -254,5 +261,29 @@ class Basket
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Basket
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

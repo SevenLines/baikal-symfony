@@ -13,22 +13,26 @@ use AppBundle\Entity\Basket;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class BasketApiController extends Controller
 {
     /**
      * @Route("place-order", name="api_place_order")
-     * @Method({"POST"})
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return Response
      */
-    public function placeOrderAction()
+    public function placeOrderAction(Request $request)
     {
-        $request = Request::createFromGlobals();
         $content = $request->getContent();
+        $doctrine = $this->getDoctrine();
         if (!empty($content)) {
             $products_info = json_decode($content, true);
-            $products = $this->getDoctrine()->getRepository("AppBundle:Product")->createQueryBuilder("p")
+            $products = $doctrine->getRepository("AppBundle:Product")->createQueryBuilder("p")
                 ->select("p.unit, p.id, p.title, p.price_min, p.price_max")
                 ->where("p.id in (:ids)")
                 ->setParameter("ids", array_filter(array_keys($products_info), function($item) {
@@ -41,18 +45,34 @@ class BasketApiController extends Controller
             $products = [];
         }
 
-        $basket = new Basket();
-        $basket->setHash(uniqid("", true))
-            ->setProducts($products)
-            ->setDateCreated(new \DateTime())
-            ->setDateUpdated(new \DateTime());
+        # если хеш заказ в куках, то пытаемя найти не подтвержденный заказ в БД
+        $hash = $request->cookies->get('order_hash');
+        $basket = null;
+        if ($hash) {
+            $basket = $doctrine->getRepository("AppBundle:Basket")->getByHash($hash, true);
+            if ($basket) {
+                $basket->setProducts($products);
+            }
+        }
 
-        $manager = $this->getDoctrine()->getManager();
+        # если к этому моменту заказа не добавили то создаем новый
+        if (is_null($basket)) {
+            $basket = new Basket();
+            $basket->setHash(uniqid("", true))
+                ->setProducts($products);
+        }
+
+        $manager = $doctrine->getManager();
         $manager->persist($basket);
         $manager->flush();
 
-        return new JsonResponse([
-            "hash" => $basket->getHash()
-        ]);
+        if ($request->isXmlHttpRequest()) {
+            $response = new Response();
+        } else {
+            $response = new RedirectResponse($this->generateUrl("order"));
+        }
+        $response->headers->setCookie(new Cookie('order_hash', $basket->getHash()));
+
+        return $response;
     }
 }

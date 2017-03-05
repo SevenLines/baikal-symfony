@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="basket")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BasketRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Basket
 {
@@ -70,6 +71,13 @@ class Basket
      * @ORM\Column(name="hash", type="text", unique=true)
      */
     private $hash;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="confirmed", type="boolean")
+     */
+    private $confirmed = false;
 
     /**
      * @var string
@@ -278,5 +286,42 @@ class Basket
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set confirmed
+     *
+     * @param boolean $confirmed
+     *
+     * @return Basket
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmed
+     *
+     * @return boolean
+     */
+    public function getConfirmed()
+    {
+        return $this->confirmed;
+    }
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setDateUpdated(new \DateTime());
+        if (is_null($this->getDateCreated())) {
+            $this->setDateCreated(new \DateTime());
+        }
     }
 }

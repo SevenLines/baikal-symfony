@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+    <div class="wrapper">
+        <div class="content-block fixed order-success" style="bottom: 0">
+            <div class="content-block-inner">
+                <div class="message">
+                    <div class="icon">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <div class="info">
+                        Ваш заявка принята и отправлена на обработку, <br>
+                        в ближайшее время мы свяжемся с вами.
+                    </div>
+                    <hr>
+                    <div>
+                         мы также выслали Вам письмо с описанием заявки
+                         на почтовый адрес {{ basket.email }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

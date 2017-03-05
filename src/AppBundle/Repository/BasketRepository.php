@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Basket;
 
 /**
  * BasketRepository
@@ -10,4 +11,25 @@ namespace AppBundle\Repository;
  */
 class BasketRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param string $hash
+     * @param bool $not_confirmed_only
+     * @return Basket
+     * @internal param bool $confirmed_only
+     */
+    public function getByHash(string $hash, $not_confirmed_only=false)
+    {
+        $basket_query = $this->createQueryBuilder("b")
+            ->select("b")
+            ->where("b.hash = :hash")
+            ->setParameter("hash", $hash);
+
+        if ($not_confirmed_only) {
+            $basket_query = $basket_query->andWhere("not(b.confirmed = TRUE)");
+        }
+
+        $basket = $basket_query->getQuery()->getOneOrNullResult();
+
+        return $basket;
+    }
 }

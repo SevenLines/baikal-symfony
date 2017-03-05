@@ -1,0 +1,43 @@
+{%- set menu = dicts.getAll() -%}
+<h3>Спасибо что оформили заказ на сайте <a href="{{ url('index') }}">Байкал Форт АйТи</a></h3>
+
+<h2>Вы указали следующие данные</h2>
+ФИО: {{ basket.fullName }} <br>
+Электронная почта: {{ basket.email }} <br>
+{%  if basket.phone %}телефон: {{ basket.phone }}{% endif %}<br>
+
+{% if basket.comment %}
+    Комментарий: <br>
+    {{ basket.comment }}
+{% endif %}
+
+<h2>Смета</h2>
+<table border="1px">
+    <thead>
+    <tr>
+        <th>Наименование</th>
+        <th>количество</th>
+        <th>сумма</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in basket.products %}
+        <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.count }} {{ product.unit }} по {{ product.price_max }}Р</td>
+            <td>{{ product.price_max * product.count }}Р</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <td></td>
+        <td><b style="text-align: right"></b></td>
+        <td><b>{{ basket.totalPriceMax }}Р</b></td>
+    </tr>
+    </tfoot>
+</table>
+
+<p></p>
+С уважением, Вадим Викторович <br>
+тел: {{ menu['phone'] }}

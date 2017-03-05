@@ -23,20 +23,26 @@
       height: 4px; }
 
 .place-order {
+  text-align: center;
   text-decoration: none;
   float: right;
-  padding: 2em;
+  padding: 1.5em;
   background-color: #f0c200;
   border-radius: 8px;
   box-shadow: 0 0 4px silver; }
   .place-order h1 {
     margin: 0; }
+  .place-order .spec {
+    font-size: 0.85em;
+    color: #8a7000; }
+    @media (max-width: 420px) {
+      .place-order .spec {
+        display: none; } }
   @media (max-width: 990px) {
     .place-order {
       padding: 1em;
       width: 100%;
       clear: both;
-      text-align: center;
       margin-top: 0.5em; } }
   @media (max-width: 420px) {
     .place-order {
@@ -47,5 +53,32 @@
     text-decoration: none; }
   .place-order:hover {
     background-color: #f49200; }
+
+.order-success .content-block-inner {
+  height: 100%;
+  position: relative; }
+  .order-success .content-block-inner .message {
+    width: 95%;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    -webkit-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -o-transform: translate(0%, -50%);
+    transform: translate(0%, -50%); }
+    .order-success .content-block-inner .message hr {
+      margin: 0.25em; }
+    .order-success .content-block-inner .message .icon {
+      font-size: 7em;
+      color: #a2cd0d; }
+      @media (max-width: 768px) {
+        .order-success .content-block-inner .message .icon {
+          font-size: 5em; } }
+    .order-success .content-block-inner .message .info {
+      font-size: 2em; }
+      @media (max-width: 768px) {
+        .order-success .content-block-inner .message .info {
+          font-size: 1.5em; } }
 
 /*# sourceMappingURL=basket.css.map */
