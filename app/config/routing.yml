@@ -7,10 +7,19 @@ app_api:
     type:     annotation
     prefix: /api/v1/
 
+app_privacy:
+    path: /privacy
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: ':web/static:privacy.html.twig'
+
+
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
     prefix:   /admin
+
+
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

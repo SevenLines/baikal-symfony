@@ -1,13 +1,8 @@
 {%- set menu = dicts.getAll() -%}
-<h3>Спасибо что оформили заказ на сайте <a href="{{ url('index') }}">Байкал Форт АйТи</a></h3>
+<h3>Была оформлена заявка №{{ basket.id }} от {{ basket.dateUpdated|date('Y.m.d H:i:s') }}</h3>
 
-<p>
-Мы свяжемся в ближайшее время
-</p>
-
-<h2>Вы указали следующие данные</h2>
-<b>ФИО:</b>  {{ basket.fullName }} <br>
-<b>Электронная почта:</b> {{ basket.email }} <br>
+<b>ФИО:</b> {{ basket.fullName }} <br>
+<b>Электронная почта:</b> <a href="mailto:{{ basket.email }}">{{ basket.email }}</a> <br>
 {%  if basket.phone %}<b>Телефон:</b>{{ basket.phone }}{% endif %}<br>
 
 {% if basket.comment %}
@@ -41,7 +36,3 @@
     </tr>
     </tfoot>
 </table>
-
-<p></p>
-С уважением, Вадим Викторович <br>
-тел: {{ menu['phone'] }}

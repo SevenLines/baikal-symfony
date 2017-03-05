@@ -75,7 +75,7 @@ class Basket
     /**
      * @var string
      *
-     * @ORM\Column(name="confirmed", type="boolean")
+     * @ORM\Column(name="confirmed", type="boolean",  nullable=true)
      */
     private $confirmed = false;
 
@@ -323,5 +323,18 @@ class Basket
         if (is_null($this->getDateCreated())) {
             $this->setDateCreated(new \DateTime());
         }
+    }
+
+    /**
+     * добавляет поля totalPriceMin и totalPriceMax к текущему заказу
+     */
+    public function calculateTotalValues()
+    {
+        $this->{'totalPriceMin'} = array_sum(array_map(function ($item) {
+            return $item['price_min'] * $item['count'];
+        }, $this->getProducts()));
+        $this->{'totalPriceMax'} = array_sum(array_map(function ($item) {
+            return $item['price_max'] * $item['count'];
+        }, $this->getProducts()));
     }
 }

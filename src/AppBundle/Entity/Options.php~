@@ -37,6 +37,14 @@ class Options
     private $email;
 
     /**
+     * Письма куда будут отсылаться сообщения по заявкам
+     * @var string
+     *
+     * @ORM\Column(name="manager_emails", type="text", nullable=true)
+     */
+    private $manager_emails;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)

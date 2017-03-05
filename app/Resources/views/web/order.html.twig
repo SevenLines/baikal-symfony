@@ -5,51 +5,59 @@
     <div class="wrapper">
         <div class="content-block">
             <div class="content-block-inner">
+                <h1 style="margin-top: 0">Оформление заявки</h1>
+                <p>Чтобы мы могли связаться с Вами, пожалуйста, заполните форму:</p>
                 {{ form_start(form, { 'attr': {'data-toggle': 'validate-me'}}) }}
-                    <h1>Ваши контакты</h1>
-                    <div class="col-md-6">
-                        {{ form_row(form.full_name) }}
-                        {{ form_row(form.email) }}
-                        {{ form_row(form.phone) }}
-                        <div>
-                            <small><span class="red">*</span> - поля обязательные для заполнения</small>
-                        </div>
+                <div class="col-md-6">
+                    {{ form_row(form.full_name) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.phone) }}
+                    <div>
+                        <small><span class="red">*</span> - поля обязательные для заполнения</small>
                     </div>
+                </div>
 
-                    <div class="col-md-6">
-                        {{ form_row(form.comment) }}
+                <div class="col-md-6">
+                    {{ form_row(form.comment) }}
+                </div>
+                <div class="clearfix"></div>
+
+                <h2>Смета</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>количество</th>
+                        <th>сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in basket.products %}
+                        <tr>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.count }} {{ product.unit }} по {{ product.price_max }}₽</td>
+                            <td>{{ product.price_max * product.count }}₽</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><b class="pull-right"></b></td>
+                        <td><b style="background-color: #f0c200">{{ basket.totalPriceMax }}₽</b></td>
+                    </tr>
+                    </tfoot>
+                </table>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg pull-left">Оформить</button>
+                    <div class="pull-left" style="margin-left: 1em; padding-top: 0.9em">
+                        <small>нажимая на кнопку Оформить вы соглашаетесь с
+                            <a style="text-decoration: underline" target="_blank" href="{{ url('app_privacy') }}">правилами обработки данных</a>
+                        </small>
                     </div>
                     <div class="clearfix"></div>
+                </div>
 
-                    <h1>Смета</h1>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Наименование</th>
-                            <th>количество</th>
-                            <th>сумма</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for product in basket.products %}
-                            <tr>
-                                <td>{{ product.title }}</td>
-                                <td>{{ product.count }} {{ product.unit }} по {{ product.price_max }}₽</td>
-                                <td>{{ product.price_max * product.count }}₽</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td></td>
-                            <td><b class="pull-right"></b></td>
-                            <td><b>{{ basket.totalPriceMax }}₽</b></td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg">Оформить</button>
-                    </div>
                 {{ form_end(form) }}
             </div>
         </div>
@@ -61,9 +69,7 @@
 
     <script>
         $('form[data-toggle="validate-me"]').validator({
-            'errors': {
-
-            }
+            'errors': {}
         })
     </script>
 {% endblock %}

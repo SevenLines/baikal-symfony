@@ -85,12 +85,8 @@ class BasketController extends Controller
                 return $response;
             }
 
-            $basket->{'totalPriceMin'} = array_sum(array_map(function ($item) {
-                return $item['price_min'] * $item['count'];
-            }, $basket->getProducts()));
-            $basket->{'totalPriceMax'} = array_sum(array_map(function ($item) {
-                return $item['price_max'] * $item['count'];
-            }, $basket->getProducts()));
+            # расчитываем суммарные суммы
+            $basket->calculateTotalValues();
         } else {
             throw $this->createNotFoundException("");
         }
@@ -117,14 +113,10 @@ class BasketController extends Controller
             return $this->redirectToRoute("index");
         }
 
-        $basket->{'totalPriceMin'} = array_sum(array_map(function ($item) {
-            return $item['price_min'] * $item['count'];
-        }, $basket->getProducts()));
-        $basket->{'totalPriceMax'} = array_sum(array_map(function ($item) {
-            return $item['price_max'] * $item['count'];
-        }, $basket->getProducts()));
+        # расчитываем суммарные суммы
+        $basket->calculateTotalValues();
 
-        # отправляем письмо об успешном заказе
+        # отправляем письмо об успешном заказе клиенту
         $message = \Swift_Message::newInstance()
             ->setSubject("Заказ номер: {$basket->getId()}")
             ->setFrom("robot@baikalfortit.ru")
@@ -138,9 +130,27 @@ class BasketController extends Controller
             );
         $this->get("mailer")->send($message);
 
+        # отправляем письмо об заказе менеджерам
+        $options = $this->get("options_service")->getOptions();
+        $message = \Swift_Message::newInstance()
+            ->setSubject("Заказ номер: {$basket->getId()}")
+            ->setFrom("robot@baikalfortit.ru")
+            ->setTo($options->getManagerEmailsArray())
+            ->setBody(
+                $this->renderView(
+                    ":emails:email_order_manager.html.twig", [
+                        "basket" => $basket
+                    ]
+                ), 'text/html'
+            );
+        $this->get("mailer")->send($message);
+
+        # рендерим ответ
         $response = $this->render(":web:order_success.html.twig", [
             'basket' => $basket
         ]);
+
+        # очищаем куки корзины и хеша заказа
         $response->headers->clearCookie("order_hash");
         $response->headers->clearCookie("basket");
 

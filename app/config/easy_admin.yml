@@ -7,7 +7,8 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-3', label: 'Основная информация' }
                     - {property: 'phones', label: "Номера телефонов", type: text}
                     - {property: 'email', label: "Почта", type: email}
-                    - { type: 'group', css_class: 'col-sm-9', label: 'Описание' }
+                    - {property: 'manager_emails', label: "Почтовые адреса менеджеров", type: text}
+                    - {type: 'group', css_class: 'col-sm-9', label: 'Описание' }
                     - {property: 'description', label: "О нас", type: ckeditor}
         Job:
             class: AppBundle\Entity\Job

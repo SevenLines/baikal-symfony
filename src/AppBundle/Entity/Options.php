@@ -37,6 +37,14 @@ class Options
     private $email;
 
     /**
+     * Письма куда будут отсылаться сообщения по заявкам
+     * @var string
+     *
+     * @ORM\Column(name="manager_emails", type="text", nullable=true)
+     */
+    private $manager_emails;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -124,5 +132,34 @@ class Options
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set managerEmails
+     *
+     * @param string $managerEmails
+     *
+     * @return Options
+     */
+    public function setManagerEmails($managerEmails)
+    {
+        $this->manager_emails = $managerEmails;
+
+        return $this;
+    }
+
+    /**
+     * Get managerEmails
+     *
+     * @return string
+     */
+    public function getManagerEmails()
+    {
+        return $this->manager_emails;
+    }
+
+    public function getManagerEmailsArray()
+    {
+        return preg_split('/[ ,;]/', $this->manager_emails);
     }
 }
