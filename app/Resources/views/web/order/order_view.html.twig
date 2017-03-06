@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="content-block">
+            <div class="content-block-inner">
+                    <h1>Заказ № {{ basket.id }}</h1>
+                    <h2>Указанные контакты</h2>
+                    <b>ФИО: </b>{{ basket.fullName }}<br>
+                    <b>Электронный адрес: </b>{{ basket.email }} <br>
+                    <b>Телефон: </b>{{ basket.phone }}<br>
+                    <b>Комментрий: </b><p>{{ basket.comment }}
+
+                    {% include ":web/order:_products.html.twig" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $('form[data-toggle="validate-me"]').validator({
+            'errors': {
+
+            }
+        })
+    </script>
+{% endblock %}

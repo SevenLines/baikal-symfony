@@ -9,19 +9,31 @@
 namespace AppBundle\Services;
 
 
+use AppBundle\Entity\Basket;
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Swift_Mailer;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\Request;
 
 class BasketService
 {
     private $doctrine;
+    private $mailer;
+    private $templating;
+    private $options;
 
-    public function __construct(Registry $doctrine)
+    public function __construct(Registry $doctrine,
+                                Swift_Mailer $mailer,
+                                TwigEngine $templating,
+                                OptionsService $options)
     {
         $this->doctrine = $doctrine;
+        $this->mailer = $mailer;
+        $this->templating = $templating;
+        $this->options = $options;
     }
 
-    public function getFromCookies()
+    public function getProductsFromCookies()
     {
         $request = Request::createFromGlobals();
         $basket = json_decode($request->cookies->get("basket", "{}"), true);
@@ -50,5 +62,40 @@ class BasketService
         }
 
         return $result;
+    }
+
+    public function sendOrderSuccessMessages(Basket $basket)
+    {
+        # расчитываем суммарные суммы
+        $basket->calculateTotalValues();
+
+        # отправляем письмо об успешном заказе клиенту
+        $message = \Swift_Message::newInstance()
+            ->setSubject("Заказ номер: {$basket->getId()}")
+            ->setFrom("robot@baikalfortit.ru")
+            ->setTo("{$basket->getEmail()}")
+            ->setBody(
+                $this->templating->render(
+                    ":emails:email_order.html.twig", [
+                        "basket" => $basket
+                    ]
+                ), 'text/html'
+            );
+        $this->mailer->send($message);
+
+        # отправляем письмо об заказе менеджерам
+        $options = $this->options->getOptions();
+        $message = \Swift_Message::newInstance()
+            ->setSubject("Заказ номер: {$basket->getId()}")
+            ->setFrom("robot@baikalfortit.ru")
+            ->setTo($options->getManagerEmailsArray())
+            ->setBody(
+                $this->templating->render(
+                    ":emails:email_order_manager.html.twig", [
+                        "basket" => $basket
+                    ]
+                ), 'text/html'
+            );
+        $this->mailer->send($message);
     }
 }

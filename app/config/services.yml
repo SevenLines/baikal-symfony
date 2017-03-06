@@ -12,7 +12,7 @@ services:
         arguments: ["@cache.app", "@doctrine"]
     basket_service:
         class: AppBundle\Services\BasketService
-        arguments: ["@doctrine"]
+        arguments: ["@doctrine", '@mailer', '@templating', '@options_service']
     cache_invalidator:
         class: AppBundle\EventListener\CacheInvalidator
         arguments: ["@options_service", "@dictionary_manager"]

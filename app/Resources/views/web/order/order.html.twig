@@ -22,32 +22,7 @@
                 </div>
                 <div class="clearfix"></div>
 
-                <h2>Смета</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Наименование</th>
-                        <th>количество</th>
-                        <th>сумма</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for product in basket.products %}
-                        <tr>
-                            <td>{{ product.title }}</td>
-                            <td>{{ product.count }} {{ product.unit }} по {{ product.price_max }}₽</td>
-                            <td>{{ product.price_max * product.count }}₽</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td></td>
-                        <td><b class="pull-right"></b></td>
-                        <td><b style="background-color: #f0c200">{{ basket.totalPriceMax }}₽</b></td>
-                    </tr>
-                    </tfoot>
-                </table>
+                {% include ":web/order:_products.html.twig" %}
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg pull-left">Оформить</button>
                     <div class="pull-left" style="margin-left: 1em; padding-top: 0.9em">

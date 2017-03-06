@@ -9,11 +9,10 @@
 namespace AppBundle\Web;
 
 
+use AppBundle\Form\BasketType;
+use AppBundle\Form\OrderViewConfirmationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 class BasketController extends Controller
@@ -24,7 +23,7 @@ class BasketController extends Controller
      */
     public function preOrderAction()
     {
-        $products_info = $this->get("basket_service")->getFromCookies();
+        $products_info = $this->get("basket_service")->getProductsFromCookies();
 
         $data = [
             "products" => array_map(function ($item) {
@@ -50,27 +49,8 @@ class BasketController extends Controller
             $doctrine = $this->getDoctrine();
             $basket = $doctrine->getRepository("AppBundle:Basket")->getByHash($hash);
 
-            $form = $this->createFormBuilder($basket)
-                ->add("full_name", TextType::class, [
-                    'label' => "ФИО",
-                    'attr' => ['placeholder' => "Иванов Иван Инваович"]
-                ])
-                ->add("email", EmailType::class, [
-                    'label' => "Электронный адрес",
-                    'attr' => ['placeholder' => "xxxxx@xxxxx.xxx"]
-                ])
-                ->add("phone", TextType::class, [
-                    'required' => false,
-                    'label' => "Телефон",
-                    'attr' => ['placeholder' => "+7 XXX XXX XX XX"]
-                ])
-                ->add("comment", TextareaType::class, [
-                    'required' => false,
-                    'label' => "Комментарий",
-                    "attr" => ['cols' => "30", 'rows' => "10"]
-                ])
-                ->getForm();
-
+            # создаем форму
+            $form = $this->createForm(BasketType::class, $basket);
             $form->handleRequest($request);
 
             # обработка отправленной формы
@@ -92,11 +72,12 @@ class BasketController extends Controller
         }
 
         $form_view = $form->createView();
-        return $this->render(":web:order.html.twig", [
+        return $this->render(":web/order:order.html.twig", [
             'basket' => $basket,
             'form' => $form_view
         ]);
     }
+
 
     /**
      * @Route("/order/success", name="order_success")
@@ -113,40 +94,11 @@ class BasketController extends Controller
             return $this->redirectToRoute("index");
         }
 
-        # расчитываем суммарные суммы
-        $basket->calculateTotalValues();
-
-        # отправляем письмо об успешном заказе клиенту
-        $message = \Swift_Message::newInstance()
-            ->setSubject("Заказ номер: {$basket->getId()}")
-            ->setFrom("robot@baikalfortit.ru")
-            ->setTo("{$basket->getEmail()}")
-            ->setBody(
-                $this->renderView(
-                    ":emails:email_order.html.twig", [
-                        "basket" => $basket
-                    ]
-                ), 'text/html'
-            );
-        $this->get("mailer")->send($message);
-
-        # отправляем письмо об заказе менеджерам
-        $options = $this->get("options_service")->getOptions();
-        $message = \Swift_Message::newInstance()
-            ->setSubject("Заказ номер: {$basket->getId()}")
-            ->setFrom("robot@baikalfortit.ru")
-            ->setTo($options->getManagerEmailsArray())
-            ->setBody(
-                $this->renderView(
-                    ":emails:email_order_manager.html.twig", [
-                        "basket" => $basket
-                    ]
-                ), 'text/html'
-            );
-        $this->get("mailer")->send($message);
+        # рассылаем сообщения
+        $this->get("basket_service")->sendOrderSuccessMessages($basket);
 
         # рендерим ответ
-        $response = $this->render(":web:order_success.html.twig", [
+        $response = $this->render(":web/order:order_success.html.twig", [
             'basket' => $basket
         ]);
 
@@ -155,5 +107,46 @@ class BasketController extends Controller
         $response->headers->clearCookie("basket");
 
         return $response;
+    }
+
+
+    /**
+     * @Route("order/view/{hash}", name="order_view")
+     * @param Request $request
+     * @param $hash
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function orderViewAction(Request $request, $hash)
+    {
+        $basket = $this->getDoctrine()->getRepository("AppBundle:Basket")->getByHash($hash);
+
+        if (is_null($basket)) {
+            throw $this->createNotFoundException("");
+        }
+
+        if ($this->get("security.authorization_checker")->isGranted("ROLE_ADMIN")) {
+            $basket->calculateTotalValues();
+            return $this->render(":web/order:order_view.html.twig", [
+                'basket' => $basket
+            ]);
+        }
+
+        $form = $this->createForm(OrderViewConfirmationType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            if ($basket->getEmail() == $data['email']) {
+                $basket->calculateTotalValues();
+                $response = $this->render(":web/order:order_view.html.twig", [
+                    'basket' => $basket
+                ]);
+                return $response;
+            }
+        }
+
+        return $this->render(":web/order:order_view_confirmation.html.twig", [
+            'form' => $form->createView()
+        ]);
     }
 }
