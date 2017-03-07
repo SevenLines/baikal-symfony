@@ -42,6 +42,10 @@
     </tfoot>
 </table>
 
+<p>
+    ссылка для просмотра заявки: <a href="{{ absolute_url(path("order_view", {'hash': basket.hash})) }}">{{ absolute_url(path("order_view", {'hash': basket.hash})) }}</a>
+</p>
+
 <p></p>
 С уважением, Вадим Викторович <br>
 тел: {{ menu['phone'] }}

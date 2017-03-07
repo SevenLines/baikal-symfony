@@ -75,6 +75,13 @@ class Basket
     /**
      * @var string
      *
+     * @ORM\Column(name="salt", type="text", nullable=true)
+     */
+    private $salt;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="confirmed", type="boolean",  nullable=true)
      */
     private $confirmed = false;
@@ -336,5 +343,29 @@ class Basket
         $this->{'totalPriceMax'} = array_sum(array_map(function ($item) {
             return $item['price_max'] * $item['count'];
         }, $this->getProducts()));
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return Basket
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 }

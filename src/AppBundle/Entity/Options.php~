@@ -133,4 +133,33 @@ class Options
     {
         return $this->description;
     }
+
+    /**
+     * Set managerEmails
+     *
+     * @param string $managerEmails
+     *
+     * @return Options
+     */
+    public function setManagerEmails($managerEmails)
+    {
+        $this->manager_emails = $managerEmails;
+
+        return $this;
+    }
+
+    /**
+     * Get managerEmails
+     *
+     * @return string
+     */
+    public function getManagerEmails()
+    {
+        return $this->manager_emails;
+    }
+
+    public function getManagerEmailsArray()
+    {
+        return preg_split('/[ ,;]/', $this->manager_emails);
+    }
 }

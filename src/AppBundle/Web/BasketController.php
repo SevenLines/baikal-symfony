@@ -124,29 +124,9 @@ class BasketController extends Controller
             throw $this->createNotFoundException("");
         }
 
-        if ($this->get("security.authorization_checker")->isGranted("ROLE_ADMIN")) {
-            $basket->calculateTotalValues();
-            return $this->render(":web/order:order_view.html.twig", [
-                'basket' => $basket
-            ]);
-        }
-
-        $form = $this->createForm(OrderViewConfirmationType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            if ($basket->getEmail() == $data['email']) {
-                $basket->calculateTotalValues();
-                $response = $this->render(":web/order:order_view.html.twig", [
-                    'basket' => $basket
-                ]);
-                return $response;
-            }
-        }
-
-        return $this->render(":web/order:order_view_confirmation.html.twig", [
-            'form' => $form->createView()
+        $basket->calculateTotalValues();
+        return $this->render(":web/order:order_view.html.twig", [
+            'basket' => $basket
         ]);
     }
 }

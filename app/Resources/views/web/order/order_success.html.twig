@@ -18,6 +18,9 @@
                          мы также выслали Вам письмо с описанием заявки
                          на почтовый адрес {{ basket.email }}
                     </div>
+                    <div>
+                        Ваша инидвидуальная ссылка для остлеживания заказа: <a href="{{path("order_view", {'hash': basket.hash}) }}">{{path("order_view", {'hash': basket.hash}) }}</a>
+                    </div>
                 </div>
             </div>
         </div>

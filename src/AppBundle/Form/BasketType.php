@@ -21,7 +21,7 @@ class BasketType extends AbstractType
     {
         $builder->add("full_name", TextType::class, [
             'label' => "ФИО",
-            'attr' => ['placeholder' => "Иванов Иван Инваович"]
+            'attr' => ['placeholder' => "Иванов Иван Иванович"]
         ])->add("email", EmailType::class, [
             'label' => "Электронный адрес",
             'attr' => ['placeholder' => "xxxxx@xxxxx.xxx"]

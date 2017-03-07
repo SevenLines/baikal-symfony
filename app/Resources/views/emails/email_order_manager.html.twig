@@ -36,3 +36,7 @@
     </tr>
     </tfoot>
 </table>
+
+<p>
+    ссылка для просмотра заявки: <a href="{{ absolute_url(path("order_view", {'hash': basket.hash})) }}">{{ absolute_url(path("order_view", {'hash': basket.hash})) }}</a>
+</p>
