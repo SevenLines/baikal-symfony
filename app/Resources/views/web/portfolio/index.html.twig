@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="content-block" id="portfolio-admin">
+            <form action="" name="app_bundle_portfolio_image_type" id="images-drop-zone" class="dropzone">
+                {{ form_widget(form._token) }}
+                <div class="content-block-inner" style="font-size: 0.75em">
+                    <div class="input-group">
+                        {{ form_widget(form.categories) }}
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" @click.prevent="sendImages">Сохранить изображения</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/select2/dist/js/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
+    <script>
+        Dropzone.options.imagesDropZone = {
+            url: "{{ path('api_portfolio_upload') }}",
+            paramName: "portfolio_image[imageFile]", // The name that will be used to transfer the file
+            maxFilesize: 10, // MB
+            autoProcessQueue: false,
+            parallelUploads: 100,
+            init: function () {
+                var self = this;
+                this.on('success', function (file) {
+                    self.removeFile(file);
+                });
+            }
+        };
+
+
+        new Vue({
+            el: "#portfolio-admin",
+            mounted: function () {
+                $('select').select2({
+                    tags: true
+                });
+            },
+            methods: {
+                sendImages: function () {
+                    var dropzone = Dropzone.forElement("#images-drop-zone");
+                    dropzone.processQueue();
+                }
+            }
+        })
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/dist/css/select2.min.css') }}">
+{% endblock %}

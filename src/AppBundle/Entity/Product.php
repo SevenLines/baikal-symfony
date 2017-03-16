@@ -51,6 +51,11 @@ class Product implements \JsonSerializable
      */
     private $productCategory;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PortfolioSet", mappedBy="productCategory")
+     */
+    private $portfolioSets;
+
 
     /**
      * Get id
@@ -220,4 +225,45 @@ class Product implements \JsonSerializable
     }
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->portfolioSets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add portfolioSet
+     *
+     * @param \AppBundle\Entity\PortfolioSet $portfolioSet
+     *
+     * @return Product
+     */
+    public function addPortfolioSet(\AppBundle\Entity\PortfolioSet $portfolioSet)
+    {
+        $this->portfolioSets[] = $portfolioSet;
+
+        return $this;
+    }
+
+    /**
+     * Remove portfolioSet
+     *
+     * @param \AppBundle\Entity\PortfolioSet $portfolioSet
+     */
+    public function removePortfolioSet(\AppBundle\Entity\PortfolioSet $portfolioSet)
+    {
+        $this->portfolioSets->removeElement($portfolioSet);
+    }
+
+    /**
+     * Get portfolioSets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPortfolioSets()
+    {
+        return $this->portfolioSets;
+    }
 }

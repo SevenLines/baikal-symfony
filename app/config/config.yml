@@ -85,5 +85,20 @@ fos_user:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
 
+oneup_flysystem:
+    adapters:
+        upload_adapter:
+            local:
+                directory: "%kernel.root_dir%/../web/uploads"
+    filesystems:
+        upload_filesystem:
+            adapter:    upload_adapter
+
 vich_uploader:
-    db_driver: orm # or mongodb or propel or phpcr
+    db_driver: orm
+#    storage:   flysystem
+    mappings:
+        portfolio_images:
+            uri_prefix:         /portfolio/images
+            upload_destination: "%kernel.root_dir%/../web/uploads/portfolio/images"
+#            upload_destination: upload_filesystem

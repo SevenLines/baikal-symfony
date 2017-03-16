@@ -22,3 +22,4 @@
 /servers.yml
 /app/sqlite.db.cache
 /web/images/uploads/
+/web/uploads/

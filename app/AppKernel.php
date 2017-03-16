@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
             new \Vich\UploaderBundle\VichUploaderBundle(),
+            new \Oneup\FlysystemBundle\OneupFlysystemBundle(),
             new AppBundle\AppBundle(),
         ];
 

@@ -1190,3 +1190,145 @@
   - title: Установка электротехнического лючка с числом мест до 8 шт
     unit: шт
     price: 500
+- title: Электромонтаж
+  items:
+  - title: Установка электросчетчика (без настройки)
+    price_from:  
+    price_to: 850
+    unit: шт
+  - title: Углубление электрощита
+    price_from:  
+    price_to: 1650
+    unit: шт
+  - title: Установка Автомата электрического двуполюсного
+    price_from:  
+    price_to: 400
+    unit: шт
+  - title: установка Автомата электрического однополюсного
+    price_from:  
+    price_to: 300
+    unit: шт
+  - title: Автомата электрического трехполюсного
+    price_from:  
+    price_to: 500
+    unit: шт
+  - title: установка Бокса наружного под электроавтоматы
+    price_from:  
+    price_to: 900
+    unit: шт
+  - title: установка Бокса под электроавтоматы на 6 модулей врезка в бетон
+    price_from:  
+    price_to: 2800
+    unit: шт
+  - title: Бокса под электроавтоматы на 6 модулей врезка в гипсокартон
+    price_from:  
+    price_to: 1200
+    unit: шт
+  - title: Бокса под электроавтоматы на 6 модулей врезка в кирпич
+    price_from:  
+    price_to: 1800
+    unit: шт
+  - title: Бокса под электроавтоматы на 12 модулей врезка в бетон
+    price_from:  
+    price_to: 3300
+    unit: шт
+  - title: Бокса под электроавтоматы на 12 модулей врезка в гипсокартон
+    price_from:  
+    price_to: 1600
+    unit: шт
+  - title: Бокса под электроавтоматы на 12 модулей врезка в кирпич
+    price_from:  
+    price_to: 2200
+    unit: шт
+  - title: Бокса под электроавтоматы на 36 модулей врезка в бетон
+    price_from:  
+    price_to: 4900
+    unit: шт
+  - title: Бокса под электроавтоматы на 36 модулей врезка в гипсокартон
+    price_from:  
+    price_to: 2800
+    unit: шт
+  - title: Кабельканала шириной до 25 мм. на бетонной поверхности монтаж
+    price_from:  
+    price_to: 150
+    unit: п/м
+  - title: Кабельканала шириной до 25 мм. на гипсолите, гипсокартоне, дереве монтаж
+    price_from:  
+    price_to: 100
+    unit: п/м
+  - title: Прокладка электропровода силового
+    price_from:  
+    price_to: 50
+    unit: м2
+  - title: Прокладка электропровода слаботочного
+    price_from:  
+    price_to: 40
+    unit: м2
+  - title: Установка монтажных коробок в кирпичных стенах
+    price_from:  
+    price_to: 100
+    unit: шт
+  - title: Установка монтажных коробок в бетонных стенах
+    price_from:  
+    price_to: 140
+    unit: шт
+  - title: Установка монтажных коробок в стенах из гипсокартона
+    price_from:  
+    price_to: 100
+    unit: шт
+  - title: Монтаж напольных электрических лючков
+    price_from:  
+    price_to: 500
+    unit: шт
+  - title: Установка коробок распределительных
+    price_from:  
+    price_to: 100
+    unit: шт
+  - title: Установка розеток, выключателей
+    price_from:  
+    price_to: 200
+    unit: шт
+  - title: Установка компьютерных, телефонных розеток
+    price_from:  
+    price_to: 300
+    unit: шт
+  - title: Монтаж светильника точечного
+    price_from:  
+    price_to: 300
+    unit: шт
+  - title: Монтаж люминесцентного светильника
+    price_from:  
+    price_to: 280
+    unit: шт
+  - title: Монтаж люстры
+    price_from:  
+    price_to: 400
+    unit: шт
+  - title: Установка домофона
+    price_from:  
+    price_to: 450
+    unit: шт
+  - title: Монтаж электрощита на 12 групп
+    price_from:  
+    price_to: 1800
+    unit: шт
+  - title: Установка групповых автоматов защиты
+    price_from:  
+    price_to: 400
+    unit: шт
+  - title: Установка вводного автомата защиты
+    price_from:  
+    price_to: 280
+    unit: шт
+  - title: Установка электровентиляторов
+    price_from:  
+    price_to: 500
+    unit: шт
+  - title: Пробивка штробы в кирпичной стене под электропроводку
+    price_from:  
+    price_to: 150
+    unit: шт
+  - title: Пробивка штробы в бетонной стене под электропроводку
+    price_from:  
+    price_to: 160
+    unit: п/м

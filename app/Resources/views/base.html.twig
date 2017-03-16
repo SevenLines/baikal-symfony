@@ -7,7 +7,7 @@
     <meta name=description content="{% block description %}{% endblock %}">
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    {#<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">#}
     {% block stylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
         <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -42,7 +42,7 @@
                     <li class="{% if job is defined and job.id == item.id or job is not defined and item.id == 0 %}active{% endif %}">
                         <a href="{{ item.url }}">
                             {% if loop.first %}
-                                <img src="{{ asset('icon_32.png') }}" alt="">
+                                {#<img src="{{ asset('icon_32.png') }}" alt="">#}
                                 <span style="font-size: 1em">{{ item.title }}</span>
                             {% else %}
                                 <span>{{ item.title }}</span>
@@ -53,6 +53,8 @@
                 {% endfor %}
             </ul>
             <div>
+                <hr>
+                <a href="{{ path('portfolio') }}"><h2>Портфолио</h2></a>
                 <hr>
                 <h2>Контактная информация:</h2>
                 <div>
