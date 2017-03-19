@@ -15,7 +15,13 @@ class PortfolioImageType extends AbstractType
     {
         $builder->add("imageFile", FileType::class)
             ->add("categories", EntityType::class, [
-                'query_builder' => function(EntityRepository $er) {
+                'query_builder' => function(EntityRepository $er) use ($options) {
+                    if (!is_null($options['job_id'])) {
+                        return $er->createQueryBuilder('c')
+                            ->select("c")
+                            ->where("c.job = :job_id")
+                            ->setParameter("job_id", $options['job_id']);
+                    }
                     return $er->createQueryBuilder('c')->select("c");
                 },
                 'choice_label' => 'title',
@@ -28,8 +34,11 @@ class PortfolioImageType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_token_id' => 'csrf_portfolio_image',
+            'job_id' => null,
         ]);
     }
+
+
 
     public function getBlockPrefix()
     {

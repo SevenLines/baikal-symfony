@@ -16,12 +16,14 @@ class PortfolioController extends Controller
      */
     public function indexAction($job_id)
     {
-        $form = $this->createForm('AppBundle\Form\PortfolioImageType');
+        $form = $this->createForm('AppBundle\Form\PortfolioImageType', null, [
+            'job_id' => $job_id
+        ]);
 
         $doctrine = $this->getDoctrine();
         $categories = $doctrine->getRepository("AppBundle:ProductCategory")->createQueryBuilder("c")
             ->select("c.title as text, c.id as id")
-            ->getQuery()->getArrayResult();
+            ->innerJoin("c.job", "j");
 
         $job = $doctrine->getRepository("AppBundle:Job")->find($job_id);
 
@@ -32,8 +34,10 @@ class PortfolioController extends Controller
 
         if (!is_null($job_id)) {
             $images = $images->where("j.id = :job_id")->setParameter("job_id", $job_id);
+            $categories = $categories->where("j.id = :job_id")->setParameter("job_id", $job_id);
         }
 
+        $categories = $categories->getQuery()->getArrayResult();
         $images = $images->getQuery()->getResult();
 
         return $this->render('web/portfolio/portfolio_index.html.twig', [
