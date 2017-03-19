@@ -41,15 +41,6 @@
                 <img v-bind:src="imagePreview" alt="">
             </div>
         </transition>
-
-        {#{% if is_granted('ROLE_PORTFOLIO_EDIT') %}#}
-        {#<transition name="image-edit">#}
-        {#<div class="image-edit" v-show="visible">#}
-        {#<img v-bind:src="imagePreview" alt="">#}
-        {#</div>#}
-        {#</transition>#}
-        {#{% endif %}#}
-
     </div>
 
 {% endblock %}
@@ -84,12 +75,14 @@
                 el: "#portfolio-admin",
                 mixins: [PortfolioMixin],
                 mounted: function () {
-                    $('#images-drop-zone').find('select').select2({
+                    $('#portfolio_image_categories').select2({
                         tags: true
                     });
 
-                    $('select.categories').select2({
-                        tags: true
+                    var selects = $('.portfolio-image select');
+                    selects.select2({
+                        tags: true,
+                        data: {{ categories|json_encode|raw }}
                     });
                 },
                 methods: {

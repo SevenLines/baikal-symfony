@@ -1,21 +1,19 @@
 {% for image in images %}
+    {% set can_edit = is_granted('ROLE_PORTFOLIO_EDIT') %}
     {% if image.imageName %}
-        <div class="portfolio-image" id="portfolio-image-{{ image.id }}"
-             @click.prevent="showImage('{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("big_thumb") }}')">
+        <div class="portfolio-image{% if can_edit %} editable{% endif %}" id="portfolio-image-{{ image.id }}"
+             {% if not can_edit %}@click.prevent="showImage('{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("big_thumb") }}')"{% endif %}>
             <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("thumb") }}"
-
+                 {% if can_edit %}@click.prevent="showImage('{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("big_thumb") }}')"{% endif %}
             />
-            {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
-                <div class="btn-group btn-group-sm" style="padding-top: 0.25em">
-                    <button class="btn btn-primary">
-                        <i class="fa fa-edit"
-                           @click.prevent="removeImage('{{ path('api_portfolio_patch', {'id': image.id}) }}', 'portfolio-image-{{ image.id }}', $event)"></i>
-                    </button>
-                    <button class="btn btn-danger"
-                            @click.prevent="removeImage('{{ path('api_portfolio_delete', {'id': image.id}) }}', 'portfolio-image-{{ image.id }}', $event)">
-                        <i class="fa fa-remove"></i>
-                    </button>
-                </div>
+            {% if can_edit %}
+                <button class="btn btn-danger btn-delete"
+                @click.prevent="removeImage('{{ path('api_portfolio_delete', {'id': image.id}) }}', 'portfolio-image-{{ image.id }}', $event)">
+                <i class="fa fa-remove"></i>
+                </button>
+                {#<div class="labels">#}
+                    {#<select multiple="multiple"></select>#}
+                {#</div>#}
             {% else %}
                 <div class="labels">
                     {% for c in image.categories %}
