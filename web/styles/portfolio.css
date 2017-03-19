@@ -1,16 +1,53 @@
 .portfolio-image {
   float: left;
-  padding: 0.25em;
+  padding: 0.5em;
   margin: 0.5em;
   box-shadow: 0 0 4px silver;
+  width: 12.5%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
   cursor: pointer;
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
   -ms-transition: all .3s;
   -o-transition: all .3s;
-  transition: all .3s; }
+  transition: all .3s;
+  text-align: center; }
+  @media (max-width: 1150px) {
+    .portfolio-image {
+      width: 19%;
+      margin: 0.5%; } }
+  @media (max-width: 768px) {
+    .portfolio-image {
+      width: 24%;
+      margin: 0.5%; } }
+  @media (max-width: 500px) {
+    .portfolio-image {
+      width: 32%;
+      margin: 0.5%; } }
+  @media (max-width: 420px) {
+    .portfolio-image {
+      width: 48%;
+      margin: 0.6%; } }
+  .portfolio-image .labels {
+    margin-top: 0.5em;
+    width: 100%; }
+  .portfolio-image .label {
+    font-size: 0.6em;
+    border-radius: 0; }
+    .portfolio-image .label.label-primary {
+      background-color: #707070; }
+  .portfolio-image .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.5em; }
+  .portfolio-image img {
+    max-width: 100%; }
   .portfolio-image:hover {
-    box-shadow: 0 0 6px #f0c200; }
+    box-shadow: 0 0 6px #828282; }
 
 .image-preview-enter-active, .image-preview-leave-active {
   -webkit-transition: opacity .2s;
@@ -30,6 +67,9 @@
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.55);
   z-index: 120; }
+  @media (max-width: 768px) {
+    .image-preview, .image-edit {
+      right: 0; } }
 
 .image-preview {
   cursor: pointer; }
