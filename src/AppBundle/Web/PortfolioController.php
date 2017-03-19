@@ -9,19 +9,39 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class PortfolioController extends Controller
 {
     /**
-     * @Route("portfolio", name="portfolio")
+     * @Route("portfolio/{job_id}/{title}", name="portfolio")
+     * @Route("portfolio/{job_id}", name="portfolio", defaults={"job_id": null})
+     * @param $job_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction($job_id)
     {
         $form = $this->createForm('AppBundle\Form\PortfolioImageType');
 
-        $categories = $this->getDoctrine()->getRepository("AppBundle:ProductCategory")->createQueryBuilder("c")
+        $doctrine = $this->getDoctrine();
+        $categories = $doctrine->getRepository("AppBundle:ProductCategory")->createQueryBuilder("c")
             ->select("c.title as text, c.id as id")
             ->getQuery()->getArrayResult();
+
+        $job = $doctrine->getRepository("AppBundle:Job")->find($job_id);
+
+        $images = $doctrine->getRepository("AppBundle:PortfolioImage")->createQueryBuilder("i")
+            ->innerJoin("i.categories", 'c')
+            ->innerJoin("c.job", 'j')
+            ->orderBy("i.updatedAt");
+
+        if (!is_null($job_id)) {
+            $images = $images->where("j.id = :job_id")->setParameter("job_id", $job_id);
+        }
+
+        $images = $images->getQuery()->getResult();
+
         return $this->render('web/portfolio/index.html.twig', [
             'categories' => $categories,
-            'form' => $form->createView()
+            'images' =>$images,
+            'job' => $job,
+            'form' => $form->createView(),
+            'form_name' => $form->getName(),
         ]);
     }
 }

@@ -1,0 +1,27 @@
+{% for image in images %}
+    {% if image.imageName %}
+        <div class="portfolio-image" id="portfolio-image-{{ image.id }}">
+            <div>
+                <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("thumb") }}"
+                     @click.prevent="showImage('{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("big_thumb") }}')"
+                />
+            </div>
+            {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
+                <div class="btn-group btn-group-sm" style="padding-top: 0.25em">
+                    <button class="btn btn-primary">
+                        <i class="fa fa-edit"
+                           @click.prevent="removeImage('{{ path('api_portfolio_patch', {'id': image.id}) }}', 'portfolio-image-{{ image.id }}', $event)"></i>
+                    </button>
+                    <button class="btn btn-danger"
+                            @click.prevent="removeImage('{{ path('api_portfolio_delete', {'id': image.id}) }}', 'portfolio-image-{{ image.id }}', $event)">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                </div>
+            {% else %}
+                {% for c in image.categories %}
+                    <span class="label label-primary">{{ c.title }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endfor %}

@@ -13,6 +13,7 @@ use AppBundle\Entity\Job;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class DictionaryManager
 {
@@ -23,19 +24,26 @@ class DictionaryManager
      * @var RedisAdapter
      */
     private $cache;
+    /**
+     * @var RequestStack
+     */
+    private $requestStack;
 
     public function __construct(Router $router,
                                 Registry $doctrine,
                                 OptionsService $optionsService,
-                                RedisAdapter $cache)
+                                RedisAdapter $cache,
+                                RequestStack $requestStack)
     {
         $this->doctrine = $doctrine;
         $this->router = $router;
         $this->optionsService = $optionsService;
         $this->cache = $cache;
+        $this->requestStack = $requestStack;
     }
 
-    public function invalidate() {
+    public function invalidate()
+    {
         $this->cache->deleteItem("menu");
     }
 
@@ -47,10 +55,29 @@ class DictionaryManager
                 return [
                     "title" => $job->getTitle(),
                     "id" => $job->getId(),
-                    "url" => $this->router->generate("job_description", [
+                    "url" => $this->router->generate("portfolio", [
                         "job_id" => $job->getId(),
                         "title" => $job->getTitle()
                     ]),
+                    "urls" => [
+                        'price_list' => [
+                            "url" => $this->router->generate("job_description", [
+                                "job_id" => $job->getId(),
+                                "title" => $job->getTitle(),
+                            ]),
+                            "title" => "прейскурант цен",
+                            "active" => false,
+                        ],
+                        'portfolio' => [
+                            "url" => $this->router->generate("portfolio", [
+                                "job_id" => $job->getId(),
+                                "title" => $job->getTitle(),
+                            ]),
+                            "title" => "портфолио",
+                            "active" => false,
+                        ],
+                    ],
+                    "active" => false,
                 ];
             }, $this->doctrine->getRepository("AppBundle:Job")->findAll());
 
@@ -71,7 +98,21 @@ class DictionaryManager
             $this->cache->save($menu_cache);
         }
 
-        return $menu_cache->get();
+        $data = $menu_cache->get();
+
+        $requestUri = $this->requestStack->getCurrentRequest()->getRequestUri();
+        foreach ($data['menu'] as &$item) {
+            if (isset($item['urls'])) {
+                foreach ($item['urls'] as &$url) {
+                    if ($requestUri == $url['url']) {
+                        $url['active'] = true;
+                        $item['active'] = true;
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
 }

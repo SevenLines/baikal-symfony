@@ -28,7 +28,7 @@
         </div>
         <div class="index-jobs container">
             {% for job in jobs %}
-                <a href="{{ path("job_description", {"job_id": job.id, "title": job.title}) }}"
+                <a href="{{ path("portfolio", {"job_id": job.id, "title": job.title}) }}"
                    class="index-job-item col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
                     <div class="inner-2">
                         <div class="inner">
@@ -43,12 +43,7 @@
                 </a>
             {% endfor %}
         </div>
-        <hr>
-        <div>
-            <div class="index-menu">
-                <a style="text-decoration: underline" href="{{ path('portfolio') }}"><h1>Наше портфолио</h1></a>
-            </div>
-        </div>
+
     </div>
 {% endblock %}
 

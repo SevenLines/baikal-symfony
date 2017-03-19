@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new \FOS\UserBundle\FOSUserBundle(),
             new \Vich\UploaderBundle\VichUploaderBundle(),
             new \Oneup\FlysystemBundle\OneupFlysystemBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
             new AppBundle\AppBundle(),
         ];
 

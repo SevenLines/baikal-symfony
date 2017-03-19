@@ -42,6 +42,11 @@
                 },
                 hideMenu: function () {
                     this.active = false;
+                },
+                showSubMenu: function ($event) {
+                    var $parent = $($event.target).parents("li");
+                    $parent.siblings("li").not(".active").addClass("hidden-menu-list");
+                    $parent.toggleClass("hidden-menu-list");
                 }
             },
             computed: {

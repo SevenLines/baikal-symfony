@@ -1,0 +1,13 @@
+<div class="content-block {{ class }}"  style="font-size:1em">
+    <form action="{{ path('api_portfolio_upload') }}" name="app_bundle_portfolio_image_type" id="{{ id }}" class="dropzone">
+        {{ form_widget(form._token) }}
+        <div class="content-block-inner">
+            <div class="input-group">
+                {{ form_widget(form.categories) }}
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" @click.prevent="sendImages">Сохранить изображения</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

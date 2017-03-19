@@ -13,6 +13,8 @@
   -ms-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s; }
+  #menu hr {
+    margin: 0.5em 0; }
   #menu .toggler {
     position: absolute;
     left: 0;
@@ -56,19 +58,43 @@
     margin: 0;
     width: 100%;
     text-align: center; }
-    #menu ul li {
+    #menu ul li.job {
       transition: all 0.2s;
       display: block;
       margin: 0.25em 0;
       padding: 0.25em; }
-      #menu ul li:first-child a {
+      #menu ul li.job:first-child a {
         font-weight: bold; }
-      #menu ul li.active {
+      #menu ul li.job.active {
         box-shadow: 0 0 4px silver;
-        background-color: #f0c200; }
-      #menu ul li:hover {
         background-color: #fff2bd; }
-      #menu ul li a {
+        #menu ul li.job.active:hover {
+          background-color: #fff2bd; }
+      #menu ul li.job li.active {
+        background-color: #f0c200; }
+      #menu ul li.job li a {
+        text-decoration: underline;
+        color: black;
+        font-size: 1em;
+        padding: 0.2em 0;
+        display: block; }
+        #menu ul li.job li a:hover {
+          background-color: #ffdf57; }
+      #menu ul li.job.hidden-menu-list ul {
+        max-height: 0; }
+      #menu ul li.job ul {
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        -ms-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        max-height: 60px; }
+      #menu ul li.job:hover {
+        background-color: #fff7d7; }
+      #menu ul li.job a {
         text-decoration: none;
         color: black;
         font-size: 1.5em;
@@ -78,24 +104,25 @@
     display: block;
     padding: 1em;
     position: relative;
-    border-radius: 200px;
+    border-radius: 20px;
     background-color: #f0c200;
-    width: 200px;
-    height: 200px;
     text-align: center;
     margin: 0 auto;
-    margin-top: 2em;
     cursor: pointer;
     box-shadow: 0 0 4px silver;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
-    transition: all 0.3s; }
+    transition: all 0.3s;
+    overflow: hidden; }
     #menu .basket:hover {
       background-color: #ffd524; }
     #menu .basket .basket-inner {
       color: black;
+      overflow: hidden;
+      margin-left: 1em;
+      width: 100%;
       position: absolute;
       left: 50%;
       top: 50%;

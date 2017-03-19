@@ -1,0 +1,62 @@
+@import "base_varaibles";
+
+.portfolio-image {
+  float: left;
+  padding: 0.25em;
+  margin: 0.5em;
+  box-shadow: 0 0 4px silver;
+
+  cursor: pointer;
+
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+
+  &:hover {
+    box-shadow: 0 0 6px $menu-color;
+  }
+}
+
+.image-preview-enter-active, .image-preview-leave-active {
+  -webkit-transition: opacity .2s;
+  -moz-transition: opacity .2s;
+  -ms-transition: opacity .2s;
+  -o-transition: opacity .2s;
+  transition: opacity .2s;
+}
+
+.image-preview-enter, .image-preview-leave-to {
+  opacity: 0;
+}
+
+.image-preview, .image-edit {
+  position: fixed;
+  left: 0;
+  right: $menu-width;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(white, 0.55%);
+  z-index: 120;
+
+}
+
+.image-preview {
+  cursor: pointer;
+
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    max-height: 95%;
+    max-width: 95%;
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}

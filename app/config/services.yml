@@ -6,7 +6,7 @@ parameters:
 services:
     dictionary_manager:
         class: AppBundle\Services\DictionaryManager
-        arguments: ['@router', '@doctrine', "@options_service", "@cache.app"]
+        arguments: ['@router', '@doctrine', "@options_service", "@cache.app", "@request_stack"]
     options_service:
         class: AppBundle\Services\OptionsService
         arguments: ["@cache.app", "@doctrine"]

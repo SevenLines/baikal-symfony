@@ -17,6 +17,7 @@
         'styles/login_form.css'
         'styles/index.css'
         'styles/basket.css'
+        'styles/portfolio.css'
         'styles/job.css' %}
         <link rel="stylesheet" href="{{ asset_url }}">
         {% endstylesheets %}
@@ -39,23 +40,32 @@
         <div class="menu-inner">
             <ul>
                 {% for item in menu['menu'] %}
-                    <li class="{% if job is defined and job.id == item.id or job is not defined and item.id == 0 %}active{% endif %}">
-                        <a href="{{ item.url }}">
-                            {% if loop.first %}
-                                {#<img src="{{ asset('icon_32.png') }}" alt="">#}
+                    <li class="job {% if item.active %}active{% else %}hidden-menu-list{% endif %}">
+                        {% if loop.first %}
+                            <a href="{{ item.url }}">
                                 <span style="font-size: 1em">{{ item.title }}</span>
-                            {% else %}
+                            </a>
+                        {% else %}
+                            <a {% if not item.active %}href="{{ item.url }}"
+                               @click.prevent="showSubMenu($event)"{% endif %}>
                                 <span>{{ item.title }}</span>
-                            {% endif %}
-                        </a>
+                            </a>
+                            <ul>
+                                {% for url in item.urls %}
+                                    <li class="{% if url.active %}active{% endif %}">
+                                        <a {% if not url.active %}href="{{ url.url }}"{% endif %}>{{ url.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </li>
-                    {% if loop.first %}<hr style="margin: 0">{% endif %}
+                    {% if loop.first %}
+                        <hr style="margin: 0">
+                    {% endif %}
                 {% endfor %}
             </ul>
+            <div is="menu-basket"></div>
             <div>
-                <hr>
-                <a href="{{ path('portfolio') }}"><h2>Портфолио</h2></a>
-                <hr>
                 <h2>Контактная информация:</h2>
                 <div>
                     Почта: <a href="mailto:{{ menu['email'] }}">{{ menu['email'] }}</a>
@@ -64,25 +74,27 @@
                     Телефон: {{ menu['phone'] }}
                 </div>
             </div>
-            <hr>
-            <div is="menu-basket"></div>
         </div>
     </div>
 
     <script id="menu-basket-template" type="text/x-template">
-        <a class="basket" href="{{ path('basket_pre_order') }}">
-            <div class="basket-inner">
-                {% verbatim %}
-                <i class="icon fa fa-5x fa-shopping-cart"></i>
+        <div>
+            <hr>
+            <a class="basket" href="{{ path('basket_pre_order') }}">
+                <i class="icon fa fa-3x fa-shopping-cart pull-left"></i>
+                <div class="basket-inner">
+                    {% verbatim %}
                 <i class="fa fa-cog fa-spin fa-3x fa-fw" v-bind:class="{'hidden': !updateBasket}"></i>
                 <div class="info" v-bind:class="{'hidden': updateBasket}">
-                    <div class="" v-if="count == 0">Корзина пуста</div>
-                    <div class="count" v-if="count > 0"><span class="value">{{count}}</span> {{count_verbose}}</div>
-                    <div class="sum" v-if="count > 0">на сумму: <br><span class="value">{{sumMax}}</span>₽</div>
+                    <span class="" v-if="count == 0">Корзина пуста</span>
+                    <span class="count" v-if="count > 0"><span class="value">{{count}}</span> {{count_verbose}}</span>
+                    <span class="sum" v-if="count > 0">на сумму <br><span class="value">{{sumMax}}</span>руб.</span>
                 </div>
                 {% endverbatim %}
-            </div>
-        </a>
+                </div>
+            </a>
+            <hr>
+        </div>
     </script>
 {% endblock %}
 
@@ -98,6 +110,7 @@
     'scripts/menu_basket.js'
     'scripts/menu.js'
     'scripts/basket.js'
+    'scripts/portfolio.js'
     'scripts/jobs.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
