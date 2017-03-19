@@ -27,13 +27,26 @@
     margin: 0.6%;
   }
 
-  height: 250px;
+  height: 180px;
   overflow: hidden;
   position: relative;
 
   .labels {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.5em;
     margin-top: 0.5em;
     width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.85);
+    opacity: 1;
+
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
   }
 
   .label {
@@ -49,7 +62,13 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 0.5em;
+    height: 0.6em;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+50 */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
   }
 
   cursor: pointer;
@@ -67,6 +86,9 @@
 
   &:hover {
     box-shadow: 0 0 6px #828282;
+    .labels {
+      opacity: 0.25;
+    }
   }
 }
 
@@ -80,6 +102,12 @@
 
 .image-preview-enter, .image-preview-leave-to {
   opacity: 0;
+}
+
+.image-preview-leave-active {
+  img {
+    display: none;
+  }
 }
 
 .image-preview, .image-edit {
@@ -102,6 +130,12 @@
   cursor: pointer;
 
   img {
+    min-width: 150px;
+    min-height: 150px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+
     position: absolute;
     left: 50%;
     top: 50%;

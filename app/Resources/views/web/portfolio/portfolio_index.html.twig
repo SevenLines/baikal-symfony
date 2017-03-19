@@ -25,12 +25,13 @@
         {% endif %}
         <div class="content-block" id="portfolio-admin">
             <div class="content-block-inner" style="overflow: hidden">
+                <h1 style="margin-top: 0">{{ job.title }}</h1>
                 <div>{{ job.description|raw }}</div>
-                <p>Вы можете ознакомится с ценами на наши услуги пройдя по ссылке
+                <p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке
                     <a style="text-decoration: underline" href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">
                         прейскурант цен
                     </a>
-                <hr>
+                <hr style="margin: 0.5em 0">
                 {% include ":web/partials:potfolio_images.html.twig" %}
             </div>
         </div>

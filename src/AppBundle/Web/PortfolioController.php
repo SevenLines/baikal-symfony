@@ -36,7 +36,7 @@ class PortfolioController extends Controller
 
         $images = $images->getQuery()->getResult();
 
-        return $this->render('web/portfolio/index.html.twig', [
+        return $this->render('web/portfolio/portfolio_index.html.twig', [
             'categories' => $categories,
             'images' =>$images,
             'job' => $job,
