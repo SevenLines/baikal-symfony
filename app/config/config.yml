@@ -107,7 +107,11 @@ vich_uploader:
 liip_imagine:
     resolvers:
         default:
-            web_path: "%kernel.root_dir%/../web"
+            web_path: ~
+    loaders:
+        default:
+          filesystem:
+            data_root: "%kernel.root_dir%/../../../"
     filter_sets:
         cache: ~
         thumb:
