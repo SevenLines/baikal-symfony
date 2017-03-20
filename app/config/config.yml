@@ -73,6 +73,39 @@ assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
     bundles: []
+    assets:
+        guest_css:
+            inputs:
+                - 'styles/main.css'
+                - 'styles/menu.css'
+                - 'styles/login_form.css'
+                - 'styles/login_button.css'
+                - 'styles/index.css'
+                - 'styles/basket.css'
+                - 'styles/portfolio.css'
+                - 'styles/job.css'
+        admin_css:
+            inputs:
+                - 'assets/vendor/dropzone/dist/min/dropzone.min.css'
+                - 'styles/select2-bootstrap.css'
+                - 'assets/vendor/select2/dist/css/select2.min.css'
+        guest_js:
+            inputs:
+                - 'assets/vendor/jquery/dist/jquery.min.js'
+                - 'assets/vendor/lodash/dist/lodash.min.js'
+                - 'assets/vendor/vue-resource/dist/vue-resource.min.js'
+                - 'assets/vendor/js-cookie/src/js.cookie.js'
+                - 'assets/vendor/hammerjs/hammer.min.js'
+                - 'assets/vendor/bootstrap-validator/dist/validator.min.js'
+                - 'scripts/menu_basket.js'
+                - 'scripts/menu.js'
+                - 'scripts/basket.js'
+                - 'scripts/portfolio.js'
+                - 'scripts/jobs.js'
+        admin_js:
+            inputs:
+                - 'assets/vendor/select2/dist/js/select2.js'
+                - 'assets/vendor/dropzone/dist/min/dropzone.min.js'
     filters:
         cssrewrite: ~
 

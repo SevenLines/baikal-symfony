@@ -9,22 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {#<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">#}
     {% block stylesheets %}
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+        {#<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">#}
         <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-        {% stylesheets
-        'styles/main.css'
-        'styles/menu.css'
-        'styles/login_form.css'
-        'styles/index.css'
-        'styles/basket.css'
-        'styles/portfolio.css'
-        'styles/job.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}">
+        {% stylesheets "@guest_css" %}
+            <link rel="stylesheet" href="{{ asset_url }}">
         {% endstylesheets %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% stylesheets "@admin_css" %}
+            <link rel="stylesheet" href="{{ asset_url }}">
+            {% endstylesheets %}
+        {% endif %}
     {% endblock %}
 </head>
 <body>
 
+<div class="login">
+    <a class="login-link" href="{{ path('fos_user_security_login') }}">
+        <i class="fa fa-download"></i>
+    </a>
+</div>
 
 {% block body %}{% endblock %}
 
@@ -77,6 +80,7 @@
         </div>
     </div>
 
+
     <script id="menu-basket-template" type="text/x-template">
         <div>
             <hr>
@@ -99,21 +103,23 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% javascripts
-    'assets/vendor/jquery/dist/jquery.min.js'
-    'assets/vendor/lodash/dist/lodash.min.js'
-    'assets/vendor/vue/dist/vue.js'
-    'assets/vendor/vue-resource/dist/vue-resource.min.js'
-    'assets/vendor/js-cookie/src/js.cookie.js'
-    'assets/vendor/hammerjs/hammer.min.js'
-    'assets/vendor/bootstrap-validator/dist/validator.min.js'
-    'scripts/menu_basket.js'
-    'scripts/menu.js'
-    'scripts/basket.js'
-    'scripts/portfolio.js'
-    'scripts/jobs.js' %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {% if app.environment == 'dev' %}
+        <!-- dev -->
+        {% javascripts 'assets/vendor/vue/dist/vue.js' '@guest_js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% else %}
+        <!-- prod -->
+        {% javascripts 'assets/vendor/vue/dist/vue.min.js' '@guest_js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
+
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% javascripts '@admin_js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endif %}
 
     <script>
         window.commonUrls = {

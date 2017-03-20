@@ -1,0 +1,28 @@
+.login {
+  position: fixed;
+  left: -60px;
+  top: 20px;
+  padding: 2em;
+  padding-left: 0;
+  z-index: 1000;
+
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+
+  .login-link {
+    background-color: white;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 0 4px silver;
+    display: block;
+    padding: 1em;
+    padding-left: 2em;
+    margin-right: 20px;
+  }
+  
+  &:hover {
+    left: 0;
+  }
+}
