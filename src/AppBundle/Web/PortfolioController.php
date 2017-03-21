@@ -2,12 +2,14 @@
 
 namespace AppBundle\Web;
 
-use AppBundle\Entity\Job;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\PortfolioImage;
+use AppBundle\Entity\ProductCategory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PortfolioController extends Controller
 {
+
     /**
      * @Route("portfolio/{job_id}/{title}", name="portfolio")
      * @Route("portfolio/{job_id}", name="portfolio", defaults={"job_id": null})
@@ -28,6 +30,7 @@ class PortfolioController extends Controller
         $job = $doctrine->getRepository("AppBundle:Job")->find($job_id);
 
         $images = $doctrine->getRepository("AppBundle:PortfolioImage")->createQueryBuilder("i")
+            ->select("i, c")
             ->innerJoin("i.categories", 'c')
             ->innerJoin("c.job", 'j')
             ->orderBy("i.updatedAt");
@@ -37,12 +40,22 @@ class PortfolioController extends Controller
             $categories = $categories->where("j.id = :job_id")->setParameter("job_id", $job_id);
         }
 
-        $categories = $categories->getQuery()->getArrayResult();
+        $portfolio_service = $this->get("portfolio_service");
+
+        if ($this->get("security.authorization_checker")->isGranted("ROLE_PORTFOLIO_EDIT")) {
+            $categories = $categories->getQuery()->getArrayResult();
+        }
+
         $images = $images->getQuery()->getResult();
+        $images = array_values(array_map(function (PortfolioImage $image) use ($portfolio_service) {
+            return $portfolio_service->toDict($image);
+        }, array_filter($images, function (PortfolioImage $image) {
+            return !is_null($image->getImageName());
+        })));
 
         return $this->render('web/portfolio/portfolio_index.html.twig', [
             'categories' => $categories,
-            'images' =>$images,
+            'images' => $images,
             'job' => $job,
             'form' => $form->createView(),
             'form_name' => $form->getName(),

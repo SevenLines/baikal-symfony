@@ -13,6 +13,9 @@ services:
     basket_service:
         class: AppBundle\Services\BasketService
         arguments: ["@doctrine", '@mailer', '@templating', '@options_service']
+    portfolio_service:
+        class: AppBundle\Services\PortfolioService
+        arguments: ["@vich_uploader.templating.helper.uploader_helper", "@liip_imagine.cache.manager", "@router"]
     cache_invalidator:
         class: AppBundle\EventListener\CacheInvalidator
         arguments: ["@options_service", "@dictionary_manager"]

@@ -5817,7 +5817,9 @@ html, body {
   height: 100%; }
 
 img {
-  background-image: url("../images/rolling.svg"); }
+  background-image: url("../images/rolling.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
 
 .content-block {
   padding: 0 1em 1em 1em;

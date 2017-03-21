@@ -31,13 +31,20 @@ class PortfolioApiController extends Controller
         $form = $this->createForm('AppBundle\Form\PortfolioImageType', $image);
         $form->handleRequest($request);
 
+
+        $portfolio_service = $this->get("portfolio_service");
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->getData();
             $vm = $this->getDoctrine()->getManager();
             $vm->persist($image);
             $vm->flush();
+
+            return new JsonResponse(
+                $portfolio_service->toDict($image)
+            );
         }
-        return new JsonResponse();
+
+        return new JsonResponse($form->getErrors(), 422);
     }
 
     /**

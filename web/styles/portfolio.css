@@ -46,6 +46,8 @@
     .portfolio-image .labels select, .portfolio-image .labels .select2 {
       width: 90%; }
   .portfolio-image .label {
+    display: inline-block;
+    padding: .4em .5em;
     font-size: 0.6em;
     border-radius: 0; }
     .portfolio-image .label.label-primary {
@@ -66,8 +68,7 @@
     .portfolio-image.editable select {
       margin-top: 0.5em; }
     .portfolio-image.editable .labels {
-      padding: 0.5em;
-      font-size: 0.6em; }
+      padding: 0.5em; }
     .portfolio-image.editable:hover .labels {
       opacity: 1; }
 

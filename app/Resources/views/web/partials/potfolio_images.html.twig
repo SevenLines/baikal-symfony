@@ -1,26 +1,42 @@
-{% for image in images %}
-    {% set can_edit = is_granted('ROLE_PORTFOLIO_EDIT') %}
-    {% if image.imageName %}
-        <div class="portfolio-image{% if can_edit %} editable{% endif %}" id="portfolio-image-{{ image.id }}"
-             {% if not can_edit %}@click.prevent="showImage('{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("big_thumb") }}')"{% endif %}>
-            <img src="{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("thumb") }}"
-                 {% if can_edit %}@click.prevent="showImage('{{ vich_uploader_asset(image, 'imageFile') | imagine_filter("big_thumb") }}')"{% endif %}
-            />
-            {% if can_edit %}
-                <button class="btn btn-danger btn-delete"
-                @click.prevent="removeImage('{{ path('api_portfolio_delete', {'id': image.id}) }}', 'portfolio-image-{{ image.id }}', $event)">
+{% set can_edit = is_granted('ROLE_PORTFOLIO_EDIT') %}
+{% if can_edit %}
+    <div>
+        <portfolio-image
+               v-for="(image, index) in images"
+               v-bind:src_big_thumb="image.src_big_thumb"
+               v-bind:src_thumb="image.src_thumb"
+               v-bind:tags="image.categories"
+               v-on:remove="removeImage(index, image)"
+        />
+    </div>
+
+    {% verbatim %}
+    <script type="text/x-template" id="portfolio-image-tag">
+        <span class="label label-primary">{{ title }}</span>
+    </script>
+
+    <script type="text/x-template" id="portfolio-image">
+        <div class="portfolio-image editable">
+            <button class="btn btn-danger btn-delete" @click.prevent="remove()">
                 <i class="fa fa-remove"></i>
-                </button>
-                {#<div class="labels">#}
-                    {#<select multiple="multiple"></select>#}
-                {#</div>#}
-            {% else %}
-                <div class="labels">
-                    {% for c in image.categories %}
-                        <span class="label label-primary">{{ c.title }}</span>
-                    {% endfor %}
-                </div>
-            {% endif %}
+            </button>
+            <img v-bind:src="src_thumb"/>
+            <div class="labels">
+                <portfolio-image-tag v-for="tag in tags" v-bind:id="tag.id" v-bind:title="tag.title"/>
+            </div>
         </div>
-    {% endif %}
-{% endfor %}
+    </script>
+    {% endverbatim %}
+{% else %}
+    {% for image in images %}
+        <div class="portfolio-image"
+             @click.prevent="showImage('{{ image.src_big_thumb }}')">
+            <img src="{{ image.src_thumb }}"/>
+            <div class="labels">
+                {% for c in image.categories %}
+                    <span class="label label-primary">{{ c.title }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

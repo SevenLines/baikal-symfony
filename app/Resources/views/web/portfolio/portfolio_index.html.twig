@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
-{% form_theme form "bootstrap_3_layout.html.twig" %}
+{% if is_granted('ROLE_PORTFOLIO_EDIT') %}
+    {% form_theme form "bootstrap_3_layout.html.twig" %}
+{% endif %}
 
 {% block title %}
     {{ job.title }} - {{ parent() }}
@@ -28,7 +30,8 @@
                 <h1 style="margin-top: 0">{{ job.title }}</h1>
                 <div>{{ job.description|raw }}</div>
                 <p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке
-                    <a style="text-decoration: underline" href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">
+                    <a style="text-decoration: underline"
+                       href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">
                         прейскурант цен
                     </a>
                 <hr style="margin: 0.5em 0">
@@ -52,44 +55,75 @@
     </script>
     {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
         <script>
-            Dropzone.options.imagesDropZone = {
-                url: "{{ path('api_portfolio_upload') }}",
-                paramName: "{{ form_name }}[imageFile]", // The name that will be used to transfer the file
-                maxFilesize: 5, // MB
-                autoProcessQueue: false,
-                parallelUploads: 100,
-                init: function () {
-                    var self = this;
-                    this.on('success', function (file) {
-                        self.removeFile(file);
-                    });
-                }
-            };
-
             new Vue({
                 el: "#portfolio-admin",
                 mixins: [PortfolioMixin],
+                components: {
+                    "portfolio-image": {
+                        components: {
+                            "portfolio-image-tag": {
+                                template: "#portfolio-image-tag",
+                                props: ['id', 'title'],
+                                methods: {
+                                    remove: function () {
+                                        this.$emit("remove");
+                                    }
+                                }
+                            },
+                        },
+                        template: "#portfolio-image",
+                        props: ['src_thumb', 'src_big_thumb', 'tags'],
+                        methods: {
+                            remove: function () {
+                                this.$emit("remove");
+                            }
+                        }
+                    }
+                },
+                data: {
+                    images: {{ images|json_encode|raw }},
+                    imagePreview: '',
+                    visible: false
+                },
                 mounted: function () {
+                    var self = this;
+                    Dropzone.options.imagesDropZone = {
+                        url: "{{ path('api_portfolio_upload') }}",
+                        paramName: "{{ form_name }}[imageFile]", // The name that will be used to transfer the file
+                        maxFilesize: 5, // MB
+                        autoProcessQueue: false,
+                        parallelUploads: 100,
+                        init: function () {
+                            this.on('success', function (file, $data) {
+                                this.removeFile(file);
+                                self.images.unshift($data);
+                            });
+                        }
+                    };
+
                     $('#portfolio_image_categories').select2({
                         tags: true
                     });
 
-                    var selects = $('.portfolio-image select');
-                    selects.select2({
-                        tags: true,
-                        data: {{ categories|json_encode|raw }}
-                    });
+                    {#var selects = $('.portfolio-image select');#}
+                    {#selects.select2({#}
+                    {#tags: true,#}
+                    {#data: {{ categories|json_encode|raw }}#}
+                    {#});#}
                 },
                 methods: {
                     sendImages: function () {
                         var dropzone = Dropzone.forElement("#images-drop-zone");
                         dropzone.processQueue();
                     },
-                    removeImage: function (url, id, event) {
-                        $(event.currentTarget).addClass("disabled");
-                        this.$http.delete(url).then(function () {
-                            $("#" + id).remove();
-                        })
+                    removeImage: function (index, image) {
+                        if (confirm("Подтвердите удаление изображения")) {
+                            this.$http.delete(image.delete_url).then(function () {
+                                this.images.splice(index, 1);
+                            }, function () {
+
+                            });
+                        }
                     },
                     showEdit: function (url, id, event) {
 
