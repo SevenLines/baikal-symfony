@@ -38,3 +38,4 @@ liip_imagine:
         default:
           filesystem:
             data_root: "%kernel.root_dir%/../../../shared/web"
+

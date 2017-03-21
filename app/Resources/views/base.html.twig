@@ -104,15 +104,22 @@
         {% endjavascripts %}
     {% else %}
         <!-- prod -->
-        {% javascripts 'assets/vendor/vue/dist/vue.min.js' '@guest_js' %}
+        {% javascripts 'assets/vendor/vue/dist/vue.min.js' '@guest_js' filter="uglifyjs2" %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endif %}
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {% javascripts '@admin_js' %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+        {% if app.environment == 'dev' %}
+            <!-- dev -->
+            {% javascripts '@admin_js' %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% else %}
+            {% javascripts '@admin_js' filter="uglifyjs2" %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endif %}
     {% endif %}
 
     <script>

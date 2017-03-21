@@ -108,6 +108,8 @@ assetic:
                 - 'assets/vendor/dropzone/dist/min/dropzone.min.js'
     filters:
         cssrewrite: ~
+        uglifyjs2:
+            bin: /usr/local/bin/uglifyjs
 
 
 fos_user:
