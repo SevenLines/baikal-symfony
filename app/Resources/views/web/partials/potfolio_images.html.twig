@@ -9,24 +9,6 @@
                v-on:remove="removeImage(index, image)"
         />
     </div>
-
-    {% verbatim %}
-    <script type="text/x-template" id="portfolio-image-tag">
-        <span class="label label-primary">{{ title }}</span>
-    </script>
-
-    <script type="text/x-template" id="portfolio-image">
-        <div class="portfolio-image editable">
-            <button class="btn btn-danger btn-delete" @click.prevent="remove()">
-                <i class="fa fa-remove"></i>
-            </button>
-            <img v-bind:src="src_thumb"/>
-            <div class="labels">
-                <portfolio-image-tag v-for="tag in tags" v-bind:id="tag.id" v-bind:title="tag.title"/>
-            </div>
-        </div>
-    </script>
-    {% endverbatim %}
 {% else %}
     {% for image in images %}
         <div class="portfolio-image"

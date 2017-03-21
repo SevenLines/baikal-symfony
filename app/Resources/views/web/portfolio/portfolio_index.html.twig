@@ -50,10 +50,27 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script>
 
-    </script>
+
     {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
+        {% verbatim %}
+            <script type="text/x-template" id="portfolio-image-tag">
+                <span class="label label-primary">{{ title }}</span>
+            </script>
+
+            <script type="text/x-template" id="portfolio-image">
+                <div class="portfolio-image editable">
+                    <button class="btn btn-danger btn-delete" @click.prevent="remove()">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                    <img v-bind:src="src_thumb"/>
+                    <div class="labels">
+                        <portfolio-image-tag v-for="tag in tags" v-bind:id="tag.id" v-bind:title="tag.title"/>
+                    </div>
+                </div>
+            </script>
+        {% endverbatim %}
+
         <script>
             new Vue({
                 el: "#portfolio-admin",
@@ -80,10 +97,13 @@
                         }
                     }
                 },
-                data: {
-                    images: {{ images|json_encode|raw }},
-                    imagePreview: '',
-                    visible: false
+                data: function () {
+                    var images = {{ images|json_encode|raw }};
+                    return {
+                        images: images,
+                        imagePreview: '',
+                        visible: false
+                    }
                 },
                 mounted: function () {
                     var self = this;
