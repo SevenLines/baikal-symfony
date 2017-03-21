@@ -23,15 +23,6 @@
 </head>
 <body>
 
-<div class="login">
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {% set url, icon = path('fos_user_security_logout'), "fa-sign-out" %}
-    {% else %}
-        {% set url, icon = path('fos_user_security_login'), "fa-sign-in" %}
-    {% endif %}
-    <a class="login-link" href="{{ url }}"><i class="fa {{icon}}"></i></a>
-</div>
-
 {% block body %}{% endblock %}
 
 {% block menu %}
@@ -137,6 +128,26 @@
         new MenuInterface("#menu");
     </script>
 {% endblock %}
+
+<div class="login" id="login">
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% set url, icon = path('fos_user_security_logout'), "fa-sign-out" %}
+    {% else %}
+        {% set url, icon = path('fos_user_security_login'), "fa-sign-in" %}
+    {% endif %}
+    <a class="login-link" href="{{ url }}"><i class="fa {{icon}}"></i></a>
+    <script>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            $("#login").find("a").on("click", function (event) {
+                var href = $(this).attr('href');
+                event.preventDefault();
+                $.get(href, function (event) {
+                    window.location.reload();
+                });
+            });
+        {% endif %}
+    </script>
+</div>
 
 </body>
 </html>
