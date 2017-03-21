@@ -24,6 +24,8 @@
         </label>
     </div>
 
+    <input type="hidden" name="target_path" value="{{ app.request.headers.get("referer") }}">
+
     <input class="btn btn-primary pull-right" type="submit" id="_submit" name="_submit"
            value="{{ 'security.login.submit'|trans }}"/>
 </form>

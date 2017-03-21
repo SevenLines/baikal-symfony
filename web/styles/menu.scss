@@ -121,6 +121,11 @@
         ul {
           max-height: 0;
         }
+        &:hover {
+          ul {
+            max-height: 60px;
+          }
+        }
       }
 
       ul {

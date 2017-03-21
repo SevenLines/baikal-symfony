@@ -20,6 +20,8 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
                 always_use_default_target_path: false
+                target_path_parameter: target_path
+                use_referer: true
             logout:       true
             anonymous:    true
 

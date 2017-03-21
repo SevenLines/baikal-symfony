@@ -82,6 +82,8 @@
           background-color: #ffdf57; }
       #menu ul li.job.hidden-menu-list ul {
         max-height: 0; }
+      #menu ul li.job.hidden-menu-list:hover ul {
+        max-height: 60px; }
       #menu ul li.job ul {
         -webkit-transition: all .3s;
         -moz-transition: all .3s;

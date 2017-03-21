@@ -14,7 +14,7 @@
         {% stylesheets "@guest_css" %}
             <link rel="stylesheet" href="{{ asset_url }}">
         {% endstylesheets %}
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             {% stylesheets "@admin_css" %}
             <link rel="stylesheet" href="{{ asset_url }}">
             {% endstylesheets %}
@@ -24,9 +24,12 @@
 <body>
 
 <div class="login">
-    <a class="login-link" href="{{ path('fos_user_security_login') }}">
-        <i class="fa fa-download"></i>
-    </a>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% set url, icon = path('fos_user_security_logout'), "fa-sign-out" %}
+    {% else %}
+        {% set url, icon = path('fos_user_security_login'), "fa-sign-in" %}
+    {% endif %}
+    <a class="login-link" href="{{ url }}"><i class="fa {{icon}}"></i></a>
 </div>
 
 {% block body %}{% endblock %}
@@ -115,7 +118,7 @@
         {% endjavascripts %}
     {% endif %}
 
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {% javascripts '@admin_js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
