@@ -3,10 +3,16 @@
     <div>
         <portfolio-image
                v-for="(image, index) in images"
-               v-bind:src_big_thumb="image.src_big_thumb"
-               v-bind:src_thumb="image.src_thumb"
-               v-bind:tags="image.categories"
-               v-on:remove="removeImage(index, image)"
+               :src_big_thumb="image.src_big_thumb"
+               :src_thumb="image.src_thumb"
+               :tags="image.tags"
+               :all_tags="tags"
+               :index="index"
+               :update_url="image.update_url"
+               :delete_url="image.delete_url"
+               @remove="removeImage(index, image)"
+               @image="showImage(image.src_big_thumb)"
+               @tags-changed="updateTags(arguments[0], arguments[1], image)"
         />
     </div>
 {% else %}

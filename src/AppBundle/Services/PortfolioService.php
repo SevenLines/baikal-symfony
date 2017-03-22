@@ -42,6 +42,9 @@ class PortfolioService
             "delete_url" => $this->router->generate("api_portfolio_delete", [
                 "id" => $image->getId(),
             ]),
+            "update_url" => $this->router->generate("api_portfolio_patch", [
+                "id" => $image->getId(),
+            ]),
             "categories" => array_map(function (ProductCategory $category) {
                 return [
                     'id' => $category->getId(),

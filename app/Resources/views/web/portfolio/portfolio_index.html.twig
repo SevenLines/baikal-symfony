@@ -27,86 +27,177 @@
         {% endif %}
         <div class="content-block" id="portfolio-admin">
             <div class="content-block-inner" style="overflow: hidden">
-                <h1 style="margin-top: 0">{{ job.title }}</h1>
-                <div>{{ job.description|raw }}</div>
-                <p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке
-                    <a style="text-decoration: underline"
-                       href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">
-                        прейскурант цен
-                    </a>
-                <hr style="margin: 0.5em 0">
+                {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
+                {% else %}
+                    <h1 style="margin-top: 0">{{ job.title }}</h1>
+                    <div>{{ job.description|raw }}</div>
+                    <p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке
+                        <a style="text-decoration: underline"
+                           href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">
+                            прейскурант цен
+                        </a>
+                    <hr style="margin: 0.5em 0">
+                {% endif %}
                 {% include ":web/partials:potfolio_images.html.twig" %}
             </div>
         </div>
+
 
         <transition name="image-preview">
             <div class="image-preview" @click="hideImagePreview" v-show="visible">
                 <img v-bind:src="imagePreview" alt="">
             </div>
         </transition>
+
     </div>
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-
-
     {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
+
+
         {% verbatim %}
+            <script type="text/x-template" id="select2-template">
+              <select>
+                <slot></slot>
+              </select>
+            </script>
+
             <script type="text/x-template" id="portfolio-image-tag">
                 <span class="label label-primary">{{ title }}</span>
             </script>
 
             <script type="text/x-template" id="portfolio-image">
                 <div class="portfolio-image editable">
-                    <button class="btn btn-danger btn-delete" @click.prevent="remove()">
-                        <i class="fa fa-remove"></i>
-                    </button>
-                    <img v-bind:src="src_thumb"/>
-                    <div class="labels">
-                        <portfolio-image-tag v-for="tag in tags" v-bind:id="tag.id" v-bind:title="tag.title"/>
+                    <div class="btn-group">
+                        <button class="btn btn-save"
+                                :class="{'disabled': changed || saving, 'btn-success': !changed }"
+                                @click="save">
+                            <i class="fa" :class="{'fa-check': !saving, 'fa-cog fa-spin fa-fw': saving }"></i>
+                        </button>
+                        <button class="btn btn-danger btn-delete" @click="remove">
+                            <i class="fa" :class="{'fa-remove': !removing, 'fa-cog fa-spin fa-fw': removing }"></i>
+                        </button>
+                    </div>
+
+                    <img v-bind:src="src_thumb" @click="$emit('image')"/>
+                    <div class="edit-image">
+                    <select2 :options="all_tags" v-model="actualTags" multiple=multiple @input="$emit('tags-changed', arguments[0], arguments[1], this)"></select2>
                     </div>
                 </div>
             </script>
         {% endverbatim %}
 
         <script>
+            Vue.component('select2', {
+                props: ['options', 'value'],
+                template: '#select2-template',
+                mounted: function () {
+                    var vm = this;
+                    $(this.$el)
+                        .select2({data: this.options})
+                        .val(this.value)
+                        .trigger("change")
+                        .on('change', function () {
+                            vm.$emit('input', $(vm.$el).val(), vm.value)
+                        })
+                },
+                watch: {
+                    value: function (value) {
+                        $(this.$el).val(value)
+                    },
+                    options: function (options) {
+                        $(this.$el).select2({data: options})
+                    }
+                },
+                destroyed: function () {
+                    $(this.$el).off().select2('destroy')
+                }
+            });
+
             new Vue({
                 el: "#portfolio-admin",
                 mixins: [PortfolioMixin],
                 components: {
                     "portfolio-image": {
+                        data: function () {
+                            return {
+                                saving: false,
+                                removing: false,
+                                initTags: this.tags.slice(),
+                                actualTags: this.tags
+                            }
+                        },
+                        computed: {
+                            changed: function () {
+                                return _.isEqual(this.initTags, this.actualTags)
+                            }
+                        },
+                        init: function () {
+
+                        },
                         components: {
                             "portfolio-image-tag": {
                                 template: "#portfolio-image-tag",
                                 props: ['id', 'title'],
-                                methods: {
-                                    remove: function () {
-                                        this.$emit("remove");
-                                    }
-                                }
                             },
                         },
                         template: "#portfolio-image",
-                        props: ['src_thumb', 'src_big_thumb', 'tags'],
+                        props: ['src_thumb', 'src_big_thumb', 'tags', 'index', 'all_tags', 'update_url', 'delete_url'],
                         methods: {
+                            edit: function ($el, $event) {
+                                this.$emit('edit', this.index, $el, $event);
+                            },
                             remove: function () {
-                                this.$emit("remove");
+                                if (confirm("Подтвердите удаление изображения")) {
+                                    this.removing = true;
+                                    let self = this;
+                                    this.$http.delete(this.delete_url).then(function () {
+                                        self.removing = false;
+                                        self.$emit('remove')
+                                    });
+                                }
+                            },
+                            save: function () {
+                                let self = this;
+                                let formData = new FormData();
+                                this.saving = true;
+                                this.actualTags.forEach(function (tag) {
+                                    formData.append('{{ form_name }}[{{ form.categories.vars.name }}][]', tag);
+                                });
+                                formData.append('{{ form_name }}[{{ form._token.vars.name }}]', '{{ csrf_token('csrf_portfolio_image', '_token') }}')
+                                this.$http.post(this.update_url, formData).then(function () {
+                                    self.initTags = self.actualTags.slice();
+                                    this.saving = false;
+                                });
                             }
                         }
                     }
                 },
                 data: function () {
-                    var images = {{ images|json_encode|raw }};
+                    let images = {{ images|json_encode|raw }};
+                    let tags = {{ categories|json_encode|raw }};
+
+                    images = images.map(function (item) {
+                        item.tags = item.categories.map(function (c) {
+                            return c.id;
+                        });
+                        item.initTags = item.tags.slice();
+                        return item;
+                    });
+
                     return {
                         images: images,
                         imagePreview: '',
-                        visible: false
+                        visible: false,
+                        editVisible: false,
+                        tags: tags
                     }
                 },
                 mounted: function () {
-                    var self = this;
+                    let self = this;
                     Dropzone.options.imagesDropZone = {
                         url: "{{ path('api_portfolio_upload') }}",
                         paramName: "{{ form_name }}[imageFile]", // The name that will be used to transfer the file
@@ -124,12 +215,6 @@
                     $('#portfolio_image_categories').select2({
                         tags: true
                     });
-
-                    {#var selects = $('.portfolio-image select');#}
-                    {#selects.select2({#}
-                    {#tags: true,#}
-                    {#data: {{ categories|json_encode|raw }}#}
-                    {#});#}
                 },
                 methods: {
                     sendImages: function () {
@@ -137,16 +222,10 @@
                         dropzone.processQueue();
                     },
                     removeImage: function (index, image) {
-                        if (confirm("Подтвердите удаление изображения")) {
-                            this.$http.delete(image.delete_url).then(function () {
-                                this.images.splice(index, 1);
-                            }, function () {
-
-                            });
-                        }
+                        this.images.splice(index, 1);
                     },
-                    showEdit: function (url, id, event) {
-
+                    updateTags: function (new_value, old_value, image) {
+                        image.tags = new_value;
                     }
                 }
             })

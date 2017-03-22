@@ -53,6 +53,15 @@
     white-space: normal; }
     .portfolio-image .label.label-primary {
       background-color: #707070; }
+  .portfolio-image .edit-image {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-size: .65em;
+    max-width: 100%; }
+    .portfolio-image .edit-image select {
+      max-width: 100%; }
   .portfolio-image img {
     max-width: 100%; }
   .portfolio-image:hover {
@@ -61,11 +70,10 @@
       opacity: 0.25; }
   .portfolio-image.editable {
     height: 200px; }
-    .portfolio-image.editable .btn-delete {
+    .portfolio-image.editable .btn-group {
       position: absolute;
       top: -6px;
-      right: -6px;
-      border-radius: 20px; }
+      right: -6px; }
     .portfolio-image.editable select {
       margin-top: 0.5em; }
     .portfolio-image.editable .labels {

@@ -66,7 +66,7 @@ class PortfolioApiController extends Controller
 
     /**
      * @Route("portfolio/{id}", name="api_portfolio_patch")
-     * @Method("PATCH")
+     * @Method("POST")
      */
     public function updatePortfolioImageAction(Request $request, $id)
     {
@@ -74,10 +74,16 @@ class PortfolioApiController extends Controller
 
         $doctrine = $this->getDoctrine();
         $image = $doctrine->getRepository("AppBundle:PortfolioImage")->find($id);
-        $vm = $doctrine->getManager();
-        $vm->remove($image);
-        $vm->flush();
+        $form = $this->createForm('AppBundle\Form\PortfolioImageType', $image);
+        $form->handleRequest($request);
 
-        return new JsonResponse();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->getData();
+            $vm = $this->getDoctrine()->getManager();
+            $vm->persist($image);
+                $vm->flush();
+        }
+
+        return new JsonResponse($form->getErrors());
     }
 }

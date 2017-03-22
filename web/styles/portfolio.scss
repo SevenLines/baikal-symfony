@@ -64,6 +64,18 @@
     }
   }
 
+  .edit-image {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-size: .65em;
+    max-width: 100%;
+    select {
+      max-width: 100%;
+    }
+  }
+
   cursor: pointer;
 
   -webkit-transition: all .3s;
@@ -85,11 +97,12 @@
   }
 
   &.editable {
-    .btn-delete {
+    .btn-group {
       position: absolute;
       top: -6px;
       right: -6px;
-      border-radius: 20px;
+      .btn {
+      }
     }
 
     height: 200px;
