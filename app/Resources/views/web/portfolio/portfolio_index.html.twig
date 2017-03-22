@@ -56,7 +56,11 @@
 {% block javascripts %}
     {{ parent() }}
     {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
-
+        <style>
+            .select2-dropdown {
+                font-size: .85em;
+            }
+        </style>
 
         {% verbatim %}
             <script type="text/x-template" id="select2-template">
