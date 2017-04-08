@@ -18,10 +18,6 @@ class PortfolioController extends Controller
      */
     public function indexAction($job_id)
     {
-        $form = $this->createForm('AppBundle\Form\PortfolioImageType', null, [
-            'job_id' => $job_id
-        ]);
-
         $doctrine = $this->getDoctrine();
         $categories = $doctrine->getRepository("AppBundle:ProductCategory")->createQueryBuilder("c")
             ->select("c.title as text, c.id as id")
@@ -53,11 +49,18 @@ class PortfolioController extends Controller
             return !is_null($image->getImageName());
         })));
 
+        $form = $this->createForm('AppBundle\Form\PortfolioImageType', null, [
+            'job_id' => $job_id
+        ]);
+        $setForm = $this->createForm('AppBundle\Form\PortfolioSetType');
+        $setForm->get("job")->setData($job);
+
         return $this->render('web/portfolio/portfolio_index.html.twig', [
             'categories' => $categories,
             'images' => $images,
             'job' => $job,
             'form' => $form->createView(),
+            'setForm' => $setForm->createView(),
             'form_name' => $form->getName(),
         ]);
     }

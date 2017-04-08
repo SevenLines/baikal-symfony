@@ -10,6 +10,7 @@ namespace AppBundle\Api;
 
 
 use AppBundle\Entity\PortfolioImage;
+use AppBundle\Entity\PortfolioSet;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -85,5 +86,18 @@ class PortfolioApiController extends Controller
         }
 
         return new JsonResponse($form->getErrors());
+    }
+    
+    /**
+     * 
+     */
+    public function createPortfolioSetAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted("ROLE_PORTFOLIO_EDIT");
+
+        $doctrine = $this->getDoctrine();
+        $set = new PortfolioSet();
+
+
     }
 }

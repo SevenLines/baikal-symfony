@@ -57,6 +57,7 @@ easy_admin:
                     - id
                     - {property: 'title', label: "Наименование", sortable: true}
                     - {property: 'job', label: "Вид работ", sortable: true}
+                    - {property: 'visible', label: "Отображать", sortable: true}
                     - {property: 'products', label: "Количество товаров"}
             form:
                 fields:

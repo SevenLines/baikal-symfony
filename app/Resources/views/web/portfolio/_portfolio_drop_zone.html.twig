@@ -1,0 +1,27 @@
+{% form_theme setForm "bootstrap_3_layout.html.twig" %}
+<div class="content-block" style="font-size:1em;">
+    <div class="content-block-inner" style="background-color: white">
+        <div class="col-md-8">
+            <form action="" name="app_bundle_portfolio_image_type" id="images-drop-zone" class="dropzone">
+                {{ form_widget(form._token) }}
+                <div class="content-block-inner">
+                    <div class="input-group">
+                        {{ form_widget(form.categories) }}
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" @click.prevent="sendImages">Сохранить изображения</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4" style="padding: 1em">
+            {{ form_start(setForm) }}
+                {{ form_widget(setForm) }}
+                <div class="input-group" style="width: 100%; overflow: hidden">
+                    <div id="map" style="width: 100%; height: 300px"></div>
+                </div>
+            {{ form_end(setForm) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -48,6 +48,11 @@ class Job implements \JsonSerializable
     private $productCategories;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PortfolioSet", mappedBy="job")
+     */
+    private $portfolioSets;
+
+    /**
      * Get id
      *
      * @return int

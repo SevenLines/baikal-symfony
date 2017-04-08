@@ -48,6 +48,11 @@ class Job implements \JsonSerializable
     private $productCategories;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PortfolioSet", mappedBy="job")
+     */
+    private $portfolioSets;
+
+    /**
      * Get id
      *
      * @return int
@@ -194,4 +199,38 @@ class Job implements \JsonSerializable
     }
 
 
+
+    /**
+     * Add portfolioSet
+     *
+     * @param \AppBundle\Entity\PortfolioSet $portfolioSet
+     *
+     * @return Job
+     */
+    public function addPortfolioSet(\AppBundle\Entity\PortfolioSet $portfolioSet)
+    {
+        $this->portfolioSets[] = $portfolioSet;
+
+        return $this;
+    }
+
+    /**
+     * Remove portfolioSet
+     *
+     * @param \AppBundle\Entity\PortfolioSet $portfolioSet
+     */
+    public function removePortfolioSet(\AppBundle\Entity\PortfolioSet $portfolioSet)
+    {
+        $this->portfolioSets->removeElement($portfolioSet);
+    }
+
+    /**
+     * Get portfolioSets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPortfolioSets()
+    {
+        return $this->portfolioSets;
+    }
 }

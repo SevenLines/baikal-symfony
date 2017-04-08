@@ -34,7 +34,7 @@ class PortfolioImage
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="portfolio_images", fileNameProperty="imageName")
      *
      * @var File
      */
@@ -220,5 +220,29 @@ class PortfolioImage
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     *
+     * @return PortfolioImage
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * Get imageName
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
     }
 }

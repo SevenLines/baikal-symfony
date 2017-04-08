@@ -11,20 +11,9 @@
     <div class="wrapper" id="portfolio-admin">
 
         {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
-            <div class="content-block" style="font-size:1em">
-                <form action="" name="app_bundle_portfolio_image_type" id="images-drop-zone" class="dropzone">
-                    {{ form_widget(form._token) }}
-                    <div class="content-block-inner">
-                        <div class="input-group">
-                            {{ form_widget(form.categories) }}
-                            <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button" @click.prevent="sendImages">Сохранить изображения</button>
-                        </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            {% include "web/portfolio/_portfolio_drop_zone.html.twig" %}
         {% endif %}
+
         <div class="content-block" id="portfolio-admin">
             <div class="content-block-inner" style="overflow: hidden">
                 {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
@@ -56,6 +45,7 @@
 {% block javascripts %}
     {{ parent() }}
     {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         <style>
             .select2-dropdown {
                 font-size: .85em;
@@ -215,6 +205,27 @@
                             });
                         }
                     };
+
+                    ymaps.ready(function () {
+                        let center =  [52.27, 104.28];
+                        let map = new ymaps.Map("map", {
+                            center: center,
+                            zoom: 12
+                        });
+
+                        let marker = new ymaps.GeoObject({
+                            geometry: {
+                                type: "Point",// тип геометрии - точка
+                                coordinates: center
+                            }
+                        });
+
+                        map.events.add('click', function (e) {
+                            var coords = e.get('coords');
+                            map.geoObjects.add(marker);
+                            marker.geometry.setCoordinates(coords);
+                        })
+                    });
 
                     $('#portfolio_image_categories').select2({
                         tags: true

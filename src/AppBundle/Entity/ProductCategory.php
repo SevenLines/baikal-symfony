@@ -40,6 +40,11 @@ class ProductCategory implements \JsonSerializable
      */
     private $products;
 
+    /**
+     * @ORM\Column(name="visible", type="boolean")
+     */
+    private $visible;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -160,4 +165,28 @@ class ProductCategory implements \JsonSerializable
     }
 
 
+
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     *
+     * @return ProductCategory
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * Get visible
+     *
+     * @return boolean
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
 }

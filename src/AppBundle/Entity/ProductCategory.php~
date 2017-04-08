@@ -40,6 +40,11 @@ class ProductCategory implements \JsonSerializable
      */
     private $products;
 
+    /**
+     * @ORM\Column(name="visible", type="boolean")
+     */
+    private $visible;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
