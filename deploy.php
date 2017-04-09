@@ -12,7 +12,6 @@ set('dump_assets', true);
 
 set('repository', 'https://github.com/SevenLines/baikal-symfony.git');
 
-add('shared_files', []);
 set('shared_dirs', ['var/logs', 'var/sessions', 'web/media', 'web/uploads']);
 
 add('writable_dirs', []);
