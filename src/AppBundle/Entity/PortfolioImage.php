@@ -65,6 +65,11 @@ class PortfolioImage
      */
     private $categories;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Job", inversedBy="images")
+     */
+    private $job;
+
 
     /**
      * Get id
@@ -244,5 +249,29 @@ class PortfolioImage
     public function getImageName()
     {
         return $this->imageName;
+    }
+
+    /**
+     * Set job
+     *
+     * @param \AppBundle\Entity\Job $job
+     *
+     * @return PortfolioImage
+     */
+    public function setJob(\AppBundle\Entity\Job $job = null)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    /**
+     * Get job
+     *
+     * @return \AppBundle\Entity\Job
+     */
+    public function getJob()
+    {
+        return $this->job;
     }
 }

@@ -27,12 +27,13 @@ class PortfolioController extends Controller
 
         $images = $doctrine->getRepository("AppBundle:PortfolioImage")->createQueryBuilder("i")
             ->select("i, c")
-            ->innerJoin("i.categories", 'c')
-            ->innerJoin("c.job", 'j')
+            ->leftJoin("i.categories", 'c')
+            ->leftJoin("c.job", 'j')
             ->orderBy("i.updatedAt");
 
         if (!is_null($job_id)) {
-            $images = $images->where("j.id = :job_id")->setParameter("job_id", $job_id);
+            $images = $images->where("j.id = :job_id OR i.job = :job_id")
+                ->setParameter("job_id", $job_id);
             $categories = $categories->where("j.id = :job_id")->setParameter("job_id", $job_id);
         }
 
@@ -50,7 +51,7 @@ class PortfolioController extends Controller
         })));
 
         $form = $this->createForm('AppBundle\Form\PortfolioImageType', null, [
-            'job_id' => $job_id
+            'job' => $job
         ]);
         $setForm = $this->createForm('AppBundle\Form\PortfolioSetType');
         $setForm->get("job")->setData($job);

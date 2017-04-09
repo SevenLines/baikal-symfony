@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,17 +17,24 @@ class PortfolioImageType extends AbstractType
         $builder->add("imageFile", FileType::class)
             ->add("categories", EntityType::class, [
                 'query_builder' => function(EntityRepository $er) use ($options) {
-                    if (!is_null($options['job_id'])) {
+                    if (!is_null($options['job'])) {
                         return $er->createQueryBuilder('c')
                             ->select("c")
                             ->where("c.job = :job_id")
-                            ->setParameter("job_id", $options['job_id']);
+                            ->setParameter("job_id", $options['job']->getId());
                     }
                     return $er->createQueryBuilder('c')->select("c");
                 },
                 'choice_label' => 'title',
                 'multiple' => true,
                 'class' => 'AppBundle\Entity\ProductCategory'
+            ])
+            ->add('job', EntityType::class, [
+                'class' => 'AppBundle\Entity\Job',
+                'data' => $options['job'],
+                'attr' => [
+                    'class' => 'hidden'
+                ]
             ]);
     }
 
@@ -34,7 +42,7 @@ class PortfolioImageType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_token_id' => 'csrf_portfolio_image',
-            'job_id' => null,
+            'job' => null,
         ]);
     }
 

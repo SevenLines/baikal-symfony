@@ -48,6 +48,11 @@ class Job implements \JsonSerializable
     private $productCategories;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PortfolioImage", mappedBy="job")
+     */
+    private $images;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\PortfolioSet", mappedBy="job")
      */
     private $portfolioSets;
@@ -261,5 +266,39 @@ class Job implements \JsonSerializable
     public function getVisible()
     {
         return $this->visible;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \AppBundle\Entity\PortfolioImage $image
+     *
+     * @return Job
+     */
+    public function addImage(\AppBundle\Entity\PortfolioImage $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \AppBundle\Entity\PortfolioImage $image
+     */
+    public function removeImage(\AppBundle\Entity\PortfolioImage $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }
