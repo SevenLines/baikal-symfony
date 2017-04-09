@@ -20,4 +20,4 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    sentry_dsn: "http://key1:key2"@sentry.outer-portfolio.ru/3"
+    sentry_dsn: "http://key1:key2@sentry.outer-portfolio.ru/3"
