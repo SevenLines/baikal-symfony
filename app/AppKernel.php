@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new \Oneup\FlysystemBundle\OneupFlysystemBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new Sentry\SentryBundle\SentryBundle(),
             new AppBundle\AppBundle(),
         ];
 

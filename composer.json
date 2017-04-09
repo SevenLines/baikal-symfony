@@ -44,7 +44,8 @@
         "vich/uploader-bundle": "^1.5",
         "oneup/flysystem-bundle": "^1.11",
         "liip/imagine-bundle": "^1.7",
-        "liuggio/excelbundle": "^2.1"
+        "liuggio/excelbundle": "^2.1",
+        "sentry/sentry-symfony": "^0.7.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
