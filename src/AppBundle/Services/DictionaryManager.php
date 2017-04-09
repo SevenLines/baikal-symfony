@@ -79,7 +79,9 @@ class DictionaryManager
                     ],
                     "active" => false,
                 ];
-            }, $this->doctrine->getRepository("AppBundle:Job")->findAll());
+            }, $this->doctrine->getRepository("AppBundle:Job")->findBy([
+                'visible' => true
+            ]));
 
             $options = $this->optionsService->getOptions();
 

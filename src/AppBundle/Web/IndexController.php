@@ -12,7 +12,9 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        $jobs = $this->getDoctrine()->getRepository("AppBundle:Job")->findAll();
+        $jobs = $this->getDoctrine()->getRepository("AppBundle:Job")->findBy([
+            'visible' => true
+        ]);
 
         return $this->render('web/index.html.twig', [
             'jobs' => $jobs

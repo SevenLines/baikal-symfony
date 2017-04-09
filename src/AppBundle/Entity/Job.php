@@ -53,6 +53,11 @@ class Job implements \JsonSerializable
     private $portfolioSets;
 
     /**
+     * @ORM\Column(name="visible", type="boolean", options={"default": true})
+     */
+    private $visible;
+
+    /**
      * Get id
      *
      * @return int
@@ -232,5 +237,29 @@ class Job implements \JsonSerializable
     public function getPortfolioSets()
     {
         return $this->portfolioSets;
+    }
+
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     *
+     * @return Job
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * Get visible
+     *
+     * @return boolean
+     */
+    public function getVisible()
+    {
+        return $this->visible;
     }
 }

@@ -19,6 +19,7 @@ easy_admin:
                     - 'id'
                     - {property: 'title', label: "Наименование"}
                     - {property: 'short_description', label: "Описание"}
+                    - {property: 'visible', label: "Отображать", sortable: true}
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-3', label: 'Основная информация' }

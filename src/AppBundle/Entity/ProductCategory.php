@@ -41,7 +41,7 @@ class ProductCategory implements \JsonSerializable
     private $products;
 
     /**
-     * @ORM\Column(name="visible", type="boolean")
+     * @ORM\Column(name="visible", type="boolean", options={"default": true})
      */
     private $visible;
 

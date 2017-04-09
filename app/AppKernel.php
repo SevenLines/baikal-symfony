@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new \Vich\UploaderBundle\VichUploaderBundle(),
             new \Oneup\FlysystemBundle\OneupFlysystemBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new AppBundle\AppBundle(),
         ];
 

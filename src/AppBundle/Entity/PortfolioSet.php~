@@ -234,4 +234,28 @@ class PortfolioSet
     {
         return $this->latitude;
     }
+
+    /**
+     * Set job
+     *
+     * @param \AppBundle\Entity\Job $job
+     *
+     * @return PortfolioSet
+     */
+    public function setJob(\AppBundle\Entity\Job $job = null)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    /**
+     * Get job
+     *
+     * @return \AppBundle\Entity\Job
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
 }

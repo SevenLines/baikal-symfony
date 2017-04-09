@@ -165,4 +165,28 @@ class ProductCategory implements \JsonSerializable
     }
 
 
+
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     *
+     * @return ProductCategory
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * Get visible
+     *
+     * @return boolean
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
 }
