@@ -14,7 +14,7 @@ class IndexController extends Controller
     {
         $jobs = $this->getDoctrine()->getRepository("AppBundle:Job")->findBy([
             'visible' => true
-        ]);
+        ], ['order'=> 'ASC', 'title' => 'ASC']);
 
         return $this->render('web/index.html.twig', [
             'jobs' => $jobs

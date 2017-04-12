@@ -50,6 +50,8 @@ class JobController extends Controller
      */
     public function products_list()
     {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
+
         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
         $repo = $this->getDoctrine()->getRepository("AppBundle:Job");
         $jobs = $repo->createQueryBuilder("j")
@@ -75,7 +77,6 @@ class JobController extends Controller
 
                     $sheet->getColumnDimension("B")->setWidth(75);
                     $sheet->getRowDimension($row)->setRowHeight(-1);
-//                    $sheet->getStyle("B$row")->getAlignment()->setWrapText(true);
 
                     $sheet->setCellValue("C$row", $product->getPriceMin());
                     $sheet->setCellValue("D$row", $product->getPriceMax());

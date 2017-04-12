@@ -63,6 +63,11 @@ class Job implements \JsonSerializable
     private $visible;
 
     /**
+     * @ORM\Column(name="order_", type="integer", options={"default": 1})
+     */
+    private $order;
+
+    /**
      * Get id
      *
      * @return int
@@ -300,5 +305,29 @@ class Job implements \JsonSerializable
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     *
+     * @return Job
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

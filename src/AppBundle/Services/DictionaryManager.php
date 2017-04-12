@@ -81,7 +81,7 @@ class DictionaryManager
                 ];
             }, $this->doctrine->getRepository("AppBundle:Job")->findBy([
                 'visible' => true
-            ]));
+            ], ['order'=> 'ASC', 'title' => 'ASC']));
 
             $options = $this->optionsService->getOptions();
 

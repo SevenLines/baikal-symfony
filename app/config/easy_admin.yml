@@ -18,12 +18,16 @@ easy_admin:
                 fields:
                     - 'id'
                     - {property: 'title', label: "Наименование"}
+                    - {property: 'order', label: "Порядок"}
                     - {property: 'short_description', label: "Описание"}
                     - {property: 'visible', label: "Отображать", sortable: true}
+                sort: [ 'order', 'ASC', 'title', 'ASC']
+
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-3', label: 'Основная информация' }
                     - {property: 'title', label: "Наименование", type: text}
+                    - {property: 'order', label: "Порядок"}
                     - { type: 'group', css_class: 'col-sm-9', label: 'Описание' }
                     - {property: 'short_description', label: "Краткое", type: ckeditor}
                     - {property: 'description', label: "Полное", type: ckeditor}
