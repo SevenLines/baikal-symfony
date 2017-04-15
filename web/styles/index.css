@@ -1,6 +1,7 @@
 .index-wrapper {
   padding: 0 4em 4em 4em;
-  background-color: white; }
+  margin: 1em;
+  background-color: rgba(255, 255, 255, 0.5); }
   .index-wrapper .about {
     padding: 1em;
     font-size: 1.5em; }

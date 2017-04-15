@@ -1,57 +1,64 @@
+{%- set menu = dicts.getAll() -%}
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- Theme CSS -->
+    <link href="{{ asset('styles/grayscale.css') }}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+{% endblock %}
+
 {% block body %}
-    <div class="index-wrapper">
-        <div class="index-menu">
-            <div class="pull-left">
-                <div class="title">Байкал Форт АйТи</div>
-                <div class="info">
-                    <div class="phone">Телефон: <span class="data">{{ menu['phone'] }}</span></div>
-                    <div class="email">
-                        Почта: <a href="mailto:{{ menu['email'] }}" class="data">{{ menu['email'] }}</a>
-                    </div>
+<!-- Navigation -->
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-right navbar-main">
+            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+            <a href="callto:{{ menu['phone'] }}">
+                <i class="fa fa-phone"></i> {{ menu['phone'] }}
+            </a>
+            <a href="mailto:{{ menu['email'] }}">
+                <i class="fa fa-envelope"></i> {{ menu['email'] }}
+            </a>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Intro Header -->
+<header class="intro">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="brand-heading">
+                        <img class="icon" src="{{ asset('icon_100_yellow_white.png') }}" alt="">Байкал Форт АйТи
+                    </h1>
+                    <p class="intro-text">
+                        {% for job in jobs %}
+                            <a href="{{ path("portfolio", {"job_id": job.id, "title": job.title}) }}"
+                               class="">{{ job.title }}
+                            </a>
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
-            {#<div class="pull-right">#}
-                {#<div style="">#}
-                    {#<a href="https://vk.com/club101575736">#}
-                        {#<img src="{{ asset("images/vk_64.png") }}" alt="">#}
-                    {#</a>#}
-                {#</div>#}
-            {#</div>#}
-            {#<div class="pull-right">#}
-            {#<div class="navbar-form hidden-md hidden-sm hidden-xs" style="padding-top: 2em">#}
-            {#<div class="input-group input-group-lg">#}
-            {#<input type="text" placeholder="поиск по сайту" class="form-control"#}
-            {#v-model="productQuery">#}
-            {#<div class="input-group-addon">#}
-            {#<i class="fa fa-search"></i>#}
-            {#</div>#}
-            {#</div>#}
-            {#</div>#}
-            {#</div>#}
-            <div class="clearfix"></div>
-            <hr>
         </div>
-        <div class="index-jobs container">
-            {% for job in jobs %}
-                <a href="{{ path("portfolio", {"job_id": job.id, "title": job.title}) }}"
-                   class="index-job-item col-lg-4 col-md-6 col-sm-6 col-xs-12 ">
-                    <div class="inner-2">
-                        <div class="inner">
-                            <div class="title">
-                                {{ job.title }}
-                            </div>
-                            <div class="short-description">
-                                {{ job.shortDescription|raw }}
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-
     </div>
+</header>
 {% endblock %}
 
 {% block menu %}

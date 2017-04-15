@@ -5816,7 +5816,7 @@ body {
 html, body {
   height: 100%; }
 
-img {
+#portfolio-admin img {
   background-image: url("../images/rolling.svg");
   background-repeat: no-repeat;
   background-position: center; }
