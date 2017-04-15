@@ -11,6 +11,10 @@ namespace AppBundle\Web;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class JobController extends Controller
@@ -31,7 +35,7 @@ class JobController extends Controller
             ->addSelect("c", "p")
             ->orderBy("p.title");
 
-        if(!$this->isGranted("ROLE_ADMIN")) {
+        if (!$this->isGranted("ROLE_ADMIN")) {
             $job = $job->andWhere("c.visible = TRUE");
         }
 
@@ -48,7 +52,7 @@ class JobController extends Controller
      * @Route("products.xsl", name="products_xsl")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function products_list()
+    public function productList()
     {
         $this->denyAccessUnlessGranted("ROLE_ADMIN");
 
@@ -103,5 +107,61 @@ class JobController extends Controller
         $response->headers->set('Content-Disposition', $dispositionHeader);
 
         return $response;
+    }
+
+    /**
+     * @Route("products/upload", name="products_xsl_upload")
+     * @return RedirectResponse
+     */
+    public function productListUpload(Request $request)
+    {
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
+
+        $form = $this->createFormBuilder(null, [
+            'csrf_protection' => false
+        ])->add("file", FileType::class)->getForm();
+
+        $doctrine = $this->getDoctrine();
+        $repo = $doctrine->getRepository("AppBundle:Product");
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form['file'];
+            $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject($file->getData()->getRealPath());
+
+            $queries = [];
+            foreach ($phpExcelObject->getAllSheets() as $sheet) {
+                foreach ($sheet->getRowIterator() as $row) {
+                    $index = $row->getRowIndex();
+                    $id = $sheet->getCell("A$index")->getValue();
+                    if (is_numeric($id)) {
+                        $title = $sheet->getCell("B$index")->getValue();
+                        $priceMin = $sheet->getCell("C$index")->getValue();
+                        $priceMax = $sheet->getCell("D$index")->getValue();
+                        $unit = $sheet->getCell("E$index")->getValue();
+                        $qb = $repo->createQueryBuilder("p");
+                        $queries[] = $qb->update("AppBundle:Product", 'p')
+                            ->set("p.title", $qb->expr()->literal($title))
+                            ->set("p.unit", $qb->expr()->literal($unit))
+                            ->set("p.price_min", $qb->expr()->literal($priceMin))
+                            ->set("p.price_max", $qb->expr()->literal($priceMax))
+                            ->where("p.id = :id")
+                            ->setParameter("id", $id)->getQuery();
+                    }
+                }
+            }
+
+            foreach ($queries as $query) {
+                $query->execute();
+            }
+        } else {
+            $errors = array();
+            foreach ($form->getErrors() as $error) {
+                $errors[] = $error;
+            }
+        }
+
+        $referer = $request->headers->get('referer');
+        return new RedirectResponse($referer);
     }
 }

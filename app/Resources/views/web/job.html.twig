@@ -37,6 +37,11 @@
                                     v-bind:in_basket_init="product.in_basket"
                                     v-bind:count_init="product.count"
                                     v-bind:id="product.id"
+                                    {%- if is_granted('ROLE_ADMIN') %}
+                                    @price-changed="price-changed(product)"
+                                    @title-changed="titleChanged(product)"
+                                    @unit-changed="unit-changed(product)"
+                                    {%- endif %}
                                 ></tr>
                                 <div v-if="!filteredProducts.length" style="padding-top: 1em">
                                     {% block empty_message %}к сожалению ничего найти не удалось{% endblock %}

@@ -2,7 +2,7 @@
  * Created by m on 11.02.17.
  */
 (function () {
-    window.ProductsController = function ($productCategories, $element, $products) {
+    window.ProductsController = function ($productCategories, $element, $products, is_admin) {
         new Vue({
             el: $element,
             data: function () {
@@ -136,6 +136,16 @@
                             this.realCategories = [category_id];
                         }
                     }
+                },
+                priceChanged: function (product, $event) {
+
+                },
+                titleChanged: function (product, $event) {
+                    console.log(product);
+                    console.log($event);
+                },
+                unitChanged: function (product, $event) {
+
                 }
             }
         })

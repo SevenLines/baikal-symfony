@@ -1,17 +1,52 @@
 {% extends "@EasyAdmin/default/layout.html.twig" %}
 
-{% block user_menu %}
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+
+{% block header %}
+    <nav class="navbar" role="navigation">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">{{ 'toggle_navigation'|trans(domain = 'EasyAdminBundle') }}</span>
+        </a>
+
+        <div id="header-logo">
+            {% block header_logo %}
+                <a class="logo {{ easyadmin_config('site_name')|length > 14 ? 'logo-long' }}"
+                   title="{{ easyadmin_config('site_name')|striptags }}" href="{{ path('easyadmin') }}">
+                    {{ easyadmin_config('site_name')|raw }}
+                </a>
+            {% endblock header_logo %}
+        </div>
+
+        <a href="{{ path('products_xsl') }}" class="btn btn-default navbar-btn pull-left">Скачать список продуктов</a>
+
+        <form name="form" class="navbar-form pull-left" enctype="multipart/form-data" method="post" action="{{ path('products_xsl_upload') }}">
+            <button type="submit" class="btn btn-default">Обновить список продуктов</button>
+            <div class="form-group">
+                <input type="file" name="form[file]">
+            </div>
+        </form>
+
+
+        <div class="navbar-custom-menu">
+            {% block header_custom_menu %}
+                <ul class="nav navbar-nav">
+                    <li class="user user-menu">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             <span>{% if app.user|default %}
                 {{ app.user.username|default('user.unnamed'|trans(domain = 'EasyAdminBundle')) }}
             {% else %}
-                {{ 'user.anonymous'|trans(domain = 'EasyAdminBundle') }}
-            {% endif %}</span>
-            <i class="hidden-xs fa fa-user"> </i>
-        </button>
-        <ul class="dropdown-menu" style="min-width: auto;">
-            <li><a href="{{path("fos_user_security_logout")}}">Выйти</a></li>
-        </ul>
-    </div>
-{% endblock %}
+                    {{ 'user.anonymous'|trans(domain = 'EasyAdminBundle') }}
+                {% endif %}</span>
+                                <i class="hidden-xs fa fa-user"> </i>
+                            </button>
+                            <ul class="dropdown-menu" style="min-width: auto;">
+                                <li><a href="{{ path("fos_user_security_logout") }}">Выйти</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            {% endblock header_custom_menu %}
+        </div>
+    </nav>
+{% endblock header %}
+

@@ -79,4 +79,5 @@ class JobApiController extends Controller
             "sum_max" => intval($basket_info['sum_max'])
         ]);
     }
+
 }
