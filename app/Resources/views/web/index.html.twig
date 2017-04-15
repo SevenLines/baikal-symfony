@@ -42,7 +42,7 @@
                         </h1>
                         <p class="intro-text">
                             {% for job in jobs %}
-                                <a href="{{ path("portfolio", {"job_id": job.id, "title": job.title}) }}"
+                                <a href="{{ path("job_description", {"job_id": job.id, "title": job.title}) }}"
                                    class="">{{ job.title }}
                                 </a><br>
                             {% endfor %}

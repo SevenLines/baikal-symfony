@@ -7,6 +7,8 @@
     {{ job.title }} - {{ parent() }}
 {% endblock %}
 
+{% block description %}{{ job.shortDescription|raw }}{% endblock %}
+
 {% block body %}
     <div class="wrapper" id="portfolio-admin">
 
@@ -20,11 +22,11 @@
                 {% else %}
                     <h1 style="margin-top: 0">{{ job.title }}</h1>
                     <div style="text-align: justify">{{ job.description|raw }}</div>
-                    <p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке
-                        <a class="price-list-link"
-                           href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">
-                            прейскурант цен
-                        </a>
+                    {#<p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке#}
+                        {#<a class="price-list-link"#}
+                           {#href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">#}
+                            {#прейскурант цен#}
+                        {#</a>#}
                     <hr style="margin: 0.5em 0">
                 {% endif %}
                 {% include ":web/partials:potfolio_images.html.twig" %}
