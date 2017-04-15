@@ -21,7 +21,7 @@
                     <h1 style="margin-top: 0">{{ job.title }}</h1>
                     <div style="text-align: justify">{{ job.description|raw }}</div>
                     <p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке
-                        <a style="text-decoration: underline"
+                        <a class="price-list-link"
                            href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">
                             прейскурант цен
                         </a>

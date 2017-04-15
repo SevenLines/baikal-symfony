@@ -178,3 +178,13 @@
     transform: translate(-50%, -50%);
   }
 }
+
+.price-list-link {
+  display: inline-block;
+  padding: 0.25em;
+  background-color: $menu-color;
+  text-decoration: underline;
+  &:hover {
+    background-color: mix($menu-color, red, 80%);
+  }
+}
