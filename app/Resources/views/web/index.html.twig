@@ -26,7 +26,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-right navbar-main">
             <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-            <a href="callto:{{ menu['phone'] }}">
+            <a>
                 <i class="fa fa-phone"></i> {{ menu['phone'] }}
             </a>
             <a href="mailto:{{ menu['email'] }}">
@@ -51,7 +51,7 @@
                         {% for job in jobs %}
                             <a href="{{ path("portfolio", {"job_id": job.id, "title": job.title}) }}"
                                class="">{{ job.title }}
-                            </a>
+                            </a><br>
                         {% endfor %}
                     </p>
                 </div>

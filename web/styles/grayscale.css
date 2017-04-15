@@ -22,16 +22,6 @@ h6 {
   font-weight: 700;
   letter-spacing: 1px; }
 
-p {
-  margin: 0 0 25px;
-  font-size: 18px;
-  line-height: 1.5; }
-  @media (min-width: 768px) {
-    p {
-      margin: 0 0 35px;
-      font-size: 20px;
-      line-height: 1.6; } }
-
 a {
   color: #f0c200;
   -webkit-transition: all .2s ease-in-out;
@@ -70,27 +60,13 @@ a {
     .navbar-custom a:hover {
       color: #f0c200; }
   .navbar-custom .navbar-main a {
+    float: left;
+    display: block;
     white-space: nowrap;
-    margin-right: 1em; }
+    margin-right: 1em;
+    padding-bottom: 0.25em; }
     .navbar-custom .navbar-main a:last-child {
       margin-right: 0; }
-  .navbar-custom .nav li a {
-    -webkit-transition: background .3s ease-in-out;
-    -moz-transition: background .3s ease-in-out;
-    transition: background .3s ease-in-out; }
-    .navbar-custom .nav li a:hover {
-      color: rgba(255, 255, 255, 0.8);
-      outline: none;
-      background-color: transparent; }
-    .navbar-custom .nav li a:focus, .navbar-custom .nav li a:active {
-      outline: none;
-      background-color: transparent; }
-  .navbar-custom .nav li.active {
-    outline: none; }
-    .navbar-custom .nav li.active a {
-      background-color: rgba(255, 255, 255, 0.3); }
-      .navbar-custom .nav li.active a:hover {
-        color: white; }
   .navbar-custom.top-nav-collapse {
     padding: 0;
     background: black;
@@ -127,17 +103,20 @@ a {
         margin-top: -10px;
         border-radius: 50%;
         margin-right: 10px; }
-    .intro .intro-body .intro-text {
-      font-size: 18px; }
-      .intro .intro-body .intro-text a {
-        display: block;
-        white-space: nowrap;
-        color: white;
-        font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
-        margin-right: 0.5em;
-        padding: 0.25em; }
-        .intro .intro-body .intro-text a:hover {
-          color: #f0c200; }
+    .intro .intro-body .intro-text a {
+      font-size: 24px;
+      background-color: white;
+      margin-bottom: 0.5em;
+      display: inline-block;
+      white-space: nowrap;
+      color: black;
+      box-shadow: 0 0 4px white;
+      font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+      padding: 0.5em 1em;
+      border-radius: 1em; }
+      .intro .intro-body .intro-text a:hover {
+        box-shadow: 0 0 4px #f0c200;
+        background-color: #f0c200; }
   @media (min-width: 768px) {
     .intro {
       padding: 0; }
@@ -150,41 +129,7 @@ a {
           height: 80px;
           padding: 5px;
           margin-top: -10px;
-          border-radius: 50%; }
-      .intro .intro-body .intro-text {
-        font-size: 26px; } }
-
-.btn-circle {
-  width: 70px;
-  height: 70px;
-  margin-top: 15px;
-  padding: 7px 16px;
-  border: 2px solid white;
-  border-radius: 100% !important;
-  font-size: 40px;
-  color: white;
-  background: transparent;
-  -webkit-transition: background .3s ease-in-out;
-  -moz-transition: background .3s ease-in-out;
-  transition: background .3s ease-in-out; }
-  .btn-circle:hover, .btn-circle:focus {
-    outline: none;
-    color: white;
-    background: rgba(255, 255, 255, 0.1); }
-  .btn-circle i.animated {
-    -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 1s;
-    -moz-transition-property: -moz-transform;
-    -moz-transition-duration: 1s; }
-  .btn-circle:hover i.animated {
-    -webkit-animation-name: pulse;
-    -moz-animation-name: pulse;
-    -webkit-animation-duration: 1.5s;
-    -moz-animation-duration: 1.5s;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-timing-function: linear; }
+          border-radius: 50%; } }
 
 @-webkit-keyframes pulse {
   from {

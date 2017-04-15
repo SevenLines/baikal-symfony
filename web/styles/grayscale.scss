@@ -28,16 +28,6 @@ h6 {
     letter-spacing: 1px;
 }
 
-p {
-    margin: 0 0 25px;
-    font-size: 18px;
-    line-height: 1.5;
-    @media(min-width:768px) {
-        margin: 0 0 35px;
-        font-size: 20px;
-        line-height: 1.6;
-    }
-}
 
 a {
     color: $primary;
@@ -83,38 +73,13 @@ a {
     }
     .navbar-main {
         a {
+            float: left;
+            display: block;
             white-space: nowrap;
             margin-right: 1em;
+            padding-bottom: 0.25em;
             &:last-child {
                 margin-right: 0;
-            }
-        }
-    }
-    .nav {
-        li {
-            a {
-                -webkit-transition: background .3s ease-in-out;
-                -moz-transition: background .3s ease-in-out;
-                transition: background .3s ease-in-out;
-                &:hover {
-                    color: rgba(white, 0.8);
-                    outline: none;
-                    background-color: transparent;
-                }
-                &:focus,
-                &:active {
-                    outline: none;
-                    background-color: transparent;
-                }
-            }
-            &.active {
-                outline: none;
-                a {
-                    background-color: rgba(white, 0.3);
-                    &:hover {
-                        color: white;
-                    }
-                }
             }
         }
     }
@@ -168,20 +133,24 @@ a {
             }
         }
         .intro-text {
-            font-size: 18px;
             a {
-                display: block;
+                font-size: 24px;
+
+                background-color: white;
+                margin-bottom: 0.5em;
+
+                display: inline-block;
                 white-space: nowrap;
-                color: white;
+                color: black;
+
+                box-shadow: 0 0 4px white;
                 &:hover {
-                    color: $primary;
+                    box-shadow: 0 0 4px $primary;
+                    background-color: $primary;
                 }
                 font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
-                margin-right: 0.5em;
-                //font-weight: bold;
-                //background-color: rgba(white, 0.5);
-                padding: 0.25em;
-                //text-shadow: 0 0 1px black;
+                padding: 0.5em 1em;
+                border-radius: 1em;
             }
         }
     }
@@ -202,51 +171,11 @@ a {
                     border-radius: 50%;
                 }
             }
-            .intro-text {
-                font-size: 26px;
-            }
         }
     }
+
 }
 
-.btn-circle {
-    width: 70px;
-    height: 70px;
-    margin-top: 15px;
-    padding: 7px 16px;
-    border: 2px solid white;
-    border-radius: 100% !important;
-    font-size: 40px;
-    color: white;
-    background: transparent;
-    -webkit-transition: background .3s ease-in-out;
-    -moz-transition: background .3s ease-in-out;
-    transition: background .3s ease-in-out;
-    &:hover,
-    &:focus {
-        outline: none;
-        color: white;
-        background: rgba(white, 0.1);
-    }
-    i.animated {
-        -webkit-transition-property: -webkit-transform;
-        -webkit-transition-duration: 1s;
-        -moz-transition-property: -moz-transform;
-        -moz-transition-duration: 1s;
-    }
-    &:hover {
-        i.animated {
-            -webkit-animation-name: pulse;
-            -moz-animation-name: pulse;
-            -webkit-animation-duration: 1.5s;
-            -moz-animation-duration: 1.5s;
-            -webkit-animation-iteration-count: infinite;
-            -moz-animation-iteration-count: infinite;
-            -webkit-animation-timing-function: linear;
-            -moz-animation-timing-function: linear;
-        }
-    }
-}
 
 @-webkit-keyframes pulse {
     from {
