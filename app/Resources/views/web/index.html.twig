@@ -3,7 +3,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
     <link href="{{ asset('styles/grayscale.css') }}" rel="stylesheet">
@@ -53,6 +52,10 @@
             </div>
         </div>
     </header>
+
+    <div class="footer-copyright" style="">
+        г. Иркутск, 2010 - {{ "now"|date("Y") }}
+    </div>
 {% endblock %}
 
 {% block menu %}
