@@ -3,11 +3,9 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
-    <!-- Theme CSS -->
     <link href="{{ asset('styles/grayscale.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -18,47 +16,43 @@
     <![endif]-->
 {% endblock %}
 
+{% block description %}Байкал Форт АйТи в Иркутске предлагает услуги по установке систем видеонаблюдения, внутренней отделке квартир коттеджей и офисов, сантехнические и электромонтажные работы{% endblock %}
+
 {% block body %}
-<!-- Navigation -->
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-    <div class="container">
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="navbar-right navbar-main">
-            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-            <a>
-                <i class="fa fa-phone"></i> {{ menu['phone'] }}
-            </a>
-            <a href="mailto:{{ menu['email'] }}">
-                <i class="fa fa-envelope"></i> {{ menu['email'] }}
-            </a>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-
-<!-- Intro Header -->
-<header class="intro">
-    <div class="intro-body">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h1 class="brand-heading">
-                        <img class="icon" src="{{ asset('icon_100_yellow_white.png') }}" alt="">Байкал Форт АйТи
-                    </h1>
-                    <p class="intro-text">
-                        {% for job in jobs %}
-                            <a href="{{ path("portfolio", {"job_id": job.id, "title": job.title}) }}"
-                               class="">{{ job.title }}
-                            </a><br>
-                        {% endfor %}
-                    </p>
+
+            <div class="navbar-right navbar-main">
+                <a>
+                    <i class="fa fa-phone"></i> {{ menu['phone'] }}
+                </a>
+                <a href="mailto:{{ menu['email'] }}">
+                    <i class="fa fa-envelope"></i> {{ menu['email'] }}
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">
+                            <img class="icon" src="{{ asset('icon_100_yellow_white.png') }}" alt="">Байкал Форт АйТи
+                        </h1>
+                        <p class="intro-text">
+                            {% for job in jobs %}
+                                <a href="{{ path("portfolio", {"job_id": job.id, "title": job.title}) }}"
+                                   class="">{{ job.title }}
+                                </a><br>
+                            {% endfor %}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 {% endblock %}
 
 {% block menu %}
