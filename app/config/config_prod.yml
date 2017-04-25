@@ -19,9 +19,9 @@ monolog:
             level: debug
         console:
             type:  console
-        deduplicated:
-            type:    deduplication
-            handler: swift
+#        deduplicated:
+#            type:    deduplication
+#            handler: swift
 #        swift:
 #            type:       swift_mailer
 #            from_email: 'error@baikalfortit.ru'
