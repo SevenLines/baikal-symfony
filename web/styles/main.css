@@ -3730,10 +3730,12 @@ tbody.collapse.in {
         padding-right: 0; } }
 
 .navbar-fixed-top .navbar-collapse,
+.navbar-index-page .navbar-collapse,
 .navbar-fixed-bottom .navbar-collapse {
   max-height: 340px; }
   @media (max-device-width: 480px) and (orientation: landscape) {
     .navbar-fixed-top .navbar-collapse,
+    .navbar-index-page .navbar-collapse,
     .navbar-fixed-bottom .navbar-collapse {
       max-height: 200px; } }
 
