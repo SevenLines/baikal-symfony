@@ -81,6 +81,9 @@
 
                 <!-- VK Widget -->
                 <div id="vk_groups" style="margin-top: 1em"></div>
+                <script type="text/javascript">
+                    VK.Widgets.Group("vk_groups", {mode: 3}, 101575736);
+                </script>
             </div>
         </div>
     </div>
@@ -92,7 +95,7 @@
             <a class="basket" href="{{ path('basket_pre_order') }}">
                 <i class="icon fa fa-3x fa-shopping-cart pull-left"></i>
                 <div class="basket-inner">
-                    {% verbatim %}
+                {% verbatim %}
                 <i class="fa fa-cog fa-spin fa-3x fa-fw" v-bind:class="{'hidden': !updateBasket}"></i>
                 <div class="info" v-bind:class="{'hidden': updateBasket}">
                     <span class="" v-if="count == 0">Корзина пуста</span>
@@ -182,7 +185,6 @@
             'basket_place_oder': '{{ path('api_place_order') }}',
             'basket_order': '{{ path('order') }}',
         };
-        VK.Widgets.Group("vk_groups", {mode: 4, height: "300", width: "290"}, 101575736);
     </script>
 
     <script>
