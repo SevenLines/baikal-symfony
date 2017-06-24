@@ -15,6 +15,17 @@
   transition: all 0.3s; }
   #menu hr {
     margin: 0.5em 0; }
+  #menu .show_on_map_link {
+    border-bottom: 1px dashed black;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s; }
+    #menu .show_on_map_link:hover {
+      text-decoration: none;
+      color: #f0c200; }
   #menu .toggler {
     position: absolute;
     left: 0;

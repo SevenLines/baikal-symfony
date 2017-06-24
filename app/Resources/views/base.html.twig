@@ -6,12 +6,13 @@
     <meta charset="UTF-8">
     <meta name=description content="{% block description %}{% endblock %}">
     <meta name=viewport content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{{ asset('icon_32.png') }}"  type="image/png">
+    <link rel="shortcut icon" href="{{ asset('icon_32.png') }}" type="image/png">
     {% block stylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+        <!-- Latest compiled and minified JS -->
         <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
         {% stylesheets "@guest_css" %}
-            <link rel="stylesheet" href="{{ asset_url }}">
+        <link rel="stylesheet" href="{{ asset_url }}">
         {% endstylesheets %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             {% stylesheets "@admin_css" %}
@@ -69,6 +70,17 @@
                 <div>
                     Телефон: {{ menu['phone'] }}
                 </div>
+
+                <div>
+                    <a class="show_on_map_link"  data-toggle="modal" data-target="#2gismodal">
+                        Показать на карте города
+                    </a>
+                </div>
+
+                <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
+
+                <!-- VK Widget -->
+                <div id="vk_groups" style="margin-top: 1em"></div>
             </div>
         </div>
     </div>
@@ -93,32 +105,74 @@
             <hr>
         </div>
     </script>
+
+
+{% endblock %}
+
+{% block doublegis %}
+{% verbatim %}
+    <div class="modal fade" id="2gismodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Мы на карте города</h4>
+                </div>
+                <div class="modal-body">
+                    <a class="dg-widget-link"
+                       href="http://2gis.ru/irkutsk/firm/70000001026792245/center/104.295551776886,52.28527738699868/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть
+                        на карте Иркутска</a>
+                    <div class="dg-widget-link"><a
+                                href="http://2gis.ru/irkutsk/firm/70000001026792245/photos/70000001026792245/center/104.295551776886,52.28527738699868/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии
+                            компании</a></div>
+                    <div class="dg-widget-link"><a
+                                href="http://2gis.ru/irkutsk/center/104.295549,52.284557/zoom/16/routeTab/rsType/bus/to/104.295549,52.284557╎Байкал Форт АйТи, ООО?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти
+                            проезд до Байкал Форт АйТи, ООО</a></div>
+                    <script charset="utf-8" src="http://widgets.2gis.com/js/DGWidgetLoader.js"></script>
+                    <script charset="utf-8">new DGWidgetLoader({
+                            "width": '100%',
+                            "height": 500,
+                            "borderColor": "#a3a3a3",
+                            "pos": {"lat": 52.28527738699868, "lon": 104.295551776886, "zoom": 15},
+                            "opt": {"city": "irkutsk"},
+                            "org": [{"id": "70000001026792245"}]
+                        });</script>
+                    <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript.
+                        Включите его в настройках вашего браузера.
+                    </noscript>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endverbatim %}
 {% endblock %}
 
 {% block javascripts %}
     {% if app.environment == 'dev' %}
-        <!-- dev -->
-        {% javascripts 'assets/vendor/vue/dist/vue.js' '@guest_js' %}
-            <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+    <!-- dev -->
+    {% javascripts 'assets/vendor/vue/dist/vue.js' '@guest_js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     {% else %}
-        <!-- prod -->
-        {% javascripts 'assets/vendor/vue/dist/vue.min.js' '@guest_js' filter="uglifyjs2" %}
-            <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+    <!-- prod -->
+    {% javascripts 'assets/vendor/vue/dist/vue.min.js' '@guest_js' filter="uglifyjs2" %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     {% endif %}
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {% if app.environment == 'dev' %}
-            <!-- dev -->
-            {% javascripts '@admin_js' %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        {% else %}
-            {% javascripts '@admin_js' filter="uglifyjs2" %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        {% endif %}
+    {% if app.environment == 'dev' %}
+    <!-- dev -->
+    {% javascripts '@admin_js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% else %}
+    {% javascripts '@admin_js' filter="uglifyjs2" %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% endif %}
     {% endif %}
 
     <script>
@@ -127,7 +181,8 @@
             'basket_pre_oder': '{{ path('basket_pre_order') }}',
             'basket_place_oder': '{{ path('api_place_order') }}',
             'basket_order': '{{ path('order') }}',
-        }
+        };
+        VK.Widgets.Group("vk_groups", {mode: 4, height: "300", width: "290"}, 101575736);
     </script>
 
     <script>
@@ -141,21 +196,49 @@
     {% else %}
         {% set url, icon = path('fos_user_security_login'), "fa-sign-in" %}
     {% endif %}
-    <a class="login-link" href="{{ url }}"><i class="fa {{icon}}"></i></a>
+    <a class="login-link" href="{{ url }}"><i class="fa {{ icon }}"></i></a>
     <script>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            $("#login").find("a").on("click", function (event) {
-                var href = $(this).attr('href');
-                event.preventDefault();
-                $.get(href, function (event) {
-                    window.location.reload();
-                });
+        $("#login").find("a").on("click", function (event) {
+            var href = $(this).attr('href');
+            event.preventDefault();
+            $.get(href, function (event) {
+                window.location.reload();
             });
+        });
         {% endif %}
     </script>
 </div>
 
-<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter42254794 = new Ya.Metrika({ id:42254794, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/42254794" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript"> (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter42254794 = new Ya.Metrika({
+                    id: 42254794,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
+                });
+            } catch (e) {
+            }
+        });
+        var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+            n.parentNode.insertBefore(s, n);
+        };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks"); </script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/42254794" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript> <!-- /Yandex.Metrika counter -->
 
 </body>
 </html>
