@@ -65,15 +65,18 @@
             <div>
                 <h2>Контактная информация:</h2>
                 <div>
-                    Почта: <a href="mailto:{{ menu['email'] }}">{{ menu['email'] }}</a>
+                    <a href="mailto:{{ menu['email'] }}"><i class="fa fa-envelope"></i> {{ menu['email'] }}</a>
                 </div>
                 <div>
-                    Телефон: <a href="tel:{{ menu['phone'] }}">{{ menu['phone'] }}</a>
+                    <span>
+                        <a style="margin-right: 0;" href="tel:+73952666469"><i class="fa fa-phone"></i> 7 (3952) 66-64-69,</a>
+                        <a style="margin-right: 1em;" href="tel:+73952667713">66-77-13</a>
+                    </span>
                 </div>
 
                 <div>
                     <a class="show_on_map_link"  data-toggle="modal" data-target="#2gismodal">
-                        Показать на карте города
+                        <i class="fa fa-map-marker"></i> Показать на карте города
                     </a>
                 </div>
 

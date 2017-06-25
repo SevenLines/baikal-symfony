@@ -31,9 +31,12 @@
                     <a style="cursor: pointer;" data-toggle="modal" data-target="#2gismodal">
                         <i class="fa fa-map-marker"></i> <span>Показать на карте города</span>
                     </a>
-                    <a href="tel:{{ menu['phone'] }}">
-                        <i class="fa fa-phone"></i> <span>{{ menu['phone'] }}</span>
-                    </a>
+                    {#<a href="tel:{{ menu['phone'] }}">#}
+                    <span>
+                        <a style="margin-right: 0;" href="tel:+73952666469"><i class="fa fa-phone"></i> 7 (3952) 66-64-69,</a>
+                        <a style="margin-right: 1em;" href="tel:+73952667713">66-77-13</a>
+                    </span>
+                    {#</a>#}
                     <a href="mailto:{{ menu['email'] }}">
                         <i class="fa fa-envelope"></i> <span>{{ menu['email'] }}</span>
                     </a>
