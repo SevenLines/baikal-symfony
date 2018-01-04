@@ -4,14 +4,17 @@
     <div class="wrapper">
         <div class="content-block">
             <div class="content-block-inner">
-                    <h1>Заказ № {{ basket.id }}</h1>
-                    <h2>Указанные контакты</h2>
-                    <b>ФИО: </b>{{ basket.fullName }}<br>
-                    <b>Электронный адрес: </b>{{ basket.email }} <br>
-                    <b>Телефон: </b>{{ basket.phone }}<br>
-                    <b>Комментрий: </b><p>{{ basket.comment }}
+                <h1>{% if basket.products %}Заказ{% else %}Заявка{% endif %} № {{ basket.id }}</h1>
+                <h2>Указанные данные</h2>
+                <b>ФИО: </b>{{ basket.fullName }}<br>
+                <b>Электронный адрес: </b>{{ basket.email }} <br>
+                <b>Телефон: </b>{{ basket.phone }}<br>
+                <b>Комментрий: </b>
+                <p>{{ basket.comment }}
 
-                    {% include ":web/order:_products.html.twig" %}
+                    {% if basket.products %}
+                        {% include ":web/order:_products.html.twig" %}
+                    {% endif %}
             </div>
         </div>
     </div>
@@ -22,9 +25,7 @@
 
     <script>
         $('form[data-toggle="validate-me"]').validator({
-            'errors': {
-
-            }
+            'errors': {}
         })
     </script>
 {% endblock %}

@@ -5,10 +5,10 @@
     <div class="wrapper">
         <div class="content-block">
             <div class="content-block-inner">
-                <h1 style="margin-top: 0">Оформление заявки</h1>
+                <h1 style="margin-top: 0">{% if basket.products|length == 0 %}Оставить заявку{% else %}Оформление заявки{% endif %}</h1>
                 <p>Чтобы мы могли связаться с Вами, пожалуйста, заполните форму:</p>
                 {{ form_start(form, { 'attr': {'data-toggle': 'validate-me'}}) }}
-                <div class="col-md-6">
+                <div class="col-md-6" style="padding-bottom: 1em">
                     {{ form_row(form.full_name) }}
                     {{ form_row(form.email) }}
                     {{ form_row(form.phone) }}
@@ -22,11 +22,23 @@
                 </div>
                 <div class="clearfix"></div>
 
-                {% include ":web/order:_products.html.twig" %}
+                {% if basket.products|length %}
+                    {% include ":web/order:_products.html.twig" %}
+                {% endif %}
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg pull-left">Оформить</button>
+                    <button type="submit" class="btn btn-primary btn-lg pull-left">
+                        {% if basket.products|length == 0 %}
+                        Оставить
+                        {% else %}
+                        Оформить
+                        {% endif %}
+                    </button>
                     <div class="pull-left" style="margin-left: 1em; padding-top: 0.9em">
-                        <small>нажимая на кнопку Оформить вы соглашаетесь с
+                        <small>нажимая на кнопку {% if basket.products|length == 0 %}
+                                Оставить
+                            {% else %}
+                                Оформить
+                            {% endif %} вы соглашаетесь с
                             <a style="text-decoration: underline" target="_blank" href="{{ url('app_privacy') }}">правилами обработки данных</a>
                         </small>
                     </div>

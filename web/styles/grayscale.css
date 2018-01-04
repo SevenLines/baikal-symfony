@@ -133,6 +133,11 @@ a {
       .intro .intro-body .intro-text a:hover {
         box-shadow: 0 0 4px #f0c200;
         background-color: #f0c200; }
+        .intro .intro-body .intro-text a:hover.appointment {
+          background-color: #ff8d00; }
+      .intro .intro-body .intro-text a.appointment {
+        background-color: #f0c200;
+        box-shadow: 0 0 4px #f0c200; }
   @media (min-width: 768px) {
     .intro {
       padding: 0; }
