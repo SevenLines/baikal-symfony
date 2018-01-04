@@ -4,10 +4,10 @@
 {% endif %}
 
 {% block title %}
-    {{ job.title }} - {{ parent() }}
+    {% if job is defined %}{{ job.title }} - {% endif %}{ parent() }}
 {% endblock %}
 
-{% block description %}{{ job.shortDescription|raw }}{% endblock %}
+{% block description %}{% if job is defined %}{{ job.shortDescription|raw }}{% endif %}{% endblock %}
 
 {% block body %}
     <div class="wrapper" id="portfolio-admin">
@@ -20,13 +20,17 @@
             <div class="content-block-inner" style="overflow: hidden">
                 {% if is_granted('ROLE_PORTFOLIO_EDIT') %}
                 {% else %}
-                    <h1 style="margin-top: 0">{{ job.title }}</h1>
-                    <div style="text-align: justify">{{ job.description|raw }}</div>
-                    {#<p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке#}
+                    {% if job is defined %}
+                        <h1 style="margin-top: 0">{{ job.title }}</h1>
+                        <div style="text-align: justify">{{ job.description|raw }}</div>
+                        {#<p style="margin-top: 1em">Вы можете ознакомится с ценами на наши услуги пройдя по ссылке#}
                         {#<a class="price-list-link"#}
-                           {#href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">#}
-                            {#прейскурант цен#}
+                        {#href="{{ path('job_description', {'job_id': job.id, 'title': job.title}) }}">#}
+                        {#прейскурант цен#}
                         {#</a>#}
+                    {% else %}
+                        <h1 style="margin-top: 0">Галерея</h1>
+                    {% endif %}
                     <hr style="margin: 0.5em 0">
                 {% endif %}
                 {% include ":web/partials:potfolio_images.html.twig" %}
@@ -209,7 +213,7 @@
                     };
 
                     ymaps.ready(function () {
-                        let center =  [52.27, 104.28];
+                        let center = [52.27, 104.28];
                         let map = new ymaps.Map("map", {
                             center: center,
                             zoom: 12

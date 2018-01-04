@@ -65,4 +65,39 @@ class PortfolioController extends Controller
             'form_name' => $form->getName(),
         ]);
     }
+
+    /**
+     * @Route("portfolio/full/", name="all_portfolio")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function allAction() {
+        $doctrine = $this->getDoctrine();
+        $categories = $doctrine->getRepository("AppBundle:ProductCategory")->createQueryBuilder("c")
+            ->select("c.title as text, c.id as id")
+            ->innerJoin("c.job", "j");
+
+        $images = $doctrine->getRepository("AppBundle:PortfolioImage")->createQueryBuilder("i")
+            ->select("i, c")
+            ->leftJoin("i.categories", 'c')
+            ->leftJoin("c.job", 'j')
+            ->orderBy("i.updatedAt");
+
+        $portfolio_service = $this->get("portfolio_service");
+
+        if ($this->get("security.authorization_checker")->isGranted("ROLE_PORTFOLIO_EDIT")) {
+            $categories = $categories->getQuery()->getArrayResult();
+        }
+
+        $images = $images->getQuery()->getResult();
+        $images = array_values(array_map(function (PortfolioImage $image) use ($portfolio_service) {
+            return $portfolio_service->toDict($image);
+        }, array_filter($images, function (PortfolioImage $image) {
+            return !is_null($image->getImageName());
+        })));
+
+        return $this->render('web/portfolio/portfolio_index.html.twig', [
+            'categories' => $categories,
+            'images' => $images,
+        ]);
+    }
 }
