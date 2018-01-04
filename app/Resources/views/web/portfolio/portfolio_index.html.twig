@@ -4,7 +4,7 @@
 {% endif %}
 
 {% block title %}
-    {% if job is defined %}{{ job.title }} - {% endif %}{ parent() }}
+    {% if job is defined %}{{ job.title }} - {% endif %}{{ parent() }}
 {% endblock %}
 
 {% block description %}{% if job is defined %}{{ job.shortDescription|raw }}{% endif %}{% endblock %}
