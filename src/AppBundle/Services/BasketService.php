@@ -69,33 +69,33 @@ class BasketService
         # расчитываем суммарные суммы
         $basket->calculateTotalValues();
 
-        # отправляем письмо об успешном заказе клиенту
-        $message = \Swift_Message::newInstance()
-            ->setSubject("Заказ номер: {$basket->getId()}")
-            ->setFrom("robot@baikalfortit.ru")
-            ->setTo("{$basket->getEmail()}")
-            ->setBody(
-                $this->templating->render(
-                    ":emails:email_order.html.twig", [
-                        "basket" => $basket
-                    ]
-                ), 'text/html'
-            );
-        $this->mailer->send($message);
-
-        # отправляем письмо об заказе менеджерам
-        $options = $this->options->getOptions();
-        $message = \Swift_Message::newInstance()
-            ->setSubject("Заказ номер: {$basket->getId()}")
-            ->setFrom("robot@baikalfortit.ru")
-            ->setTo($options->getManagerEmailsArray())
-            ->setBody(
-                $this->templating->render(
-                    ":emails:email_order_manager.html.twig", [
-                        "basket" => $basket
-                    ]
-                ), 'text/html'
-            );
-        $this->mailer->send($message);
+//        # отправляем письмо об успешном заказе клиенту
+//        $message = \Swift_Message::newInstance()
+//            ->setSubject("Заказ номер: {$basket->getId()}")
+//            ->setFrom("robot@baikalfortit.ru")
+//            ->setTo("{$basket->getEmail()}")
+//            ->setBody(
+//                $this->templating->render(
+//                    ":emails:email_order.html.twig", [
+//                        "basket" => $basket
+//                    ]
+//                ), 'text/html'
+//            );
+//        $this->mailer->send($message);
+//
+//        # отправляем письмо об заказе менеджерам
+//        $options = $this->options->getOptions();
+//        $message = \Swift_Message::newInstance()
+//            ->setSubject("Заказ номер: {$basket->getId()}")
+//            ->setFrom("robot@baikalfortit.ru")
+//            ->setTo($options->getManagerEmailsArray())
+//            ->setBody(
+//                $this->templating->render(
+//                    ":emails:email_order_manager.html.twig", [
+//                        "basket" => $basket
+//                    ]
+//                ), 'text/html'
+//            );
+//        $this->mailer->send($message);
     }
 }
